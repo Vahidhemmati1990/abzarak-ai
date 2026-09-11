@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ابزارک | ابزارهای هوشمند آنلاین</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Tahoma,Arial,sans-serif;
+  background:#f5f8fa;
+  color:#17252a;
+  line-height:1.8;
+}
+
+header{
+  background:#087f8c;
+  color:white;
+  padding:18px 7%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-size:27px;
+  font-weight:bold;
+}
+
+nav a{
+  color:white;
+  text-decoration:none;
+  margin-right:20px;
+}
+
+.hero{
+  text-align:center;
+  padding:75px 20px;
+  background:linear-gradient(135deg,#e8fbfd,#ffffff);
+}
+
+.hero h1{
+  font-size:38px;
+  margin-bottom:15px;
+}
+
+.hero p{
+  color:#607277;
+  max-width:650px;
+  margin:0 auto 30px;
+}
+
+.button{
+  display:inline-block;
+  background:#087f8c;
+  color:white;
+  padding:13px 28px;
+  border-radius:12px;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+.tools{
+  padding:55px 7%;
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:35px;
+  font-size:28px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.card{
+  background:white;
+  padding:30px 22px;
+  border-radius:18px;
+  text-align:center;
+  box-shadow:0 5px 25px rgba(0,0,0,.06);
+}
+
+.icon{
+  font-size:45px;
+  margin-bottom:12px;
+}
+
+.card h3{
+  margin-bottom:10px;
+}
+
+.card p{
+  color:#69777b;
+  margin-bottom:20px;
+}
+
+.card a{
+  color:#087f8c;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+footer{
+  text-align:center;
+  padding:30px;
+  background:#17252a;
+  color:white;
+  margin-top:30px;
+}
+
+@media(max-width:750px){
+  header{
+    flex-direction:column;
+    gap:12px;
+  }
+
+  .hero h1{
+    font-size:29px;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  nav a{
+    margin:0 7px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">ابزارک</div>
+
+  <nav>
+    <a href="#">خانه</a>
+    <a href="#tools">ابزارها</a>
+    <a href="#">درباره ما</a>
+  </nav>
+</header>
+
+<section class="hero">
+
+  <h1>ابزارهای هوشمند، ساده و رایگان</h1>
+
+  <p>
+    مجموعه‌ای از ابزارهای کاربردی برای طراحی، تصویر، متن و کارهای روزمره.
+    سریع، ساده و مناسب کاربران فارسی‌زبان.
+  </p>
+
+  <a class="button" href="#tools">
+    مشاهده ابزارها
+  </a>
+
+</section>
+
+<section class="tools" id="tools">
+
+  <h2 class="section-title">ابزارهای محبوب</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <div class="icon">🖼️</div>
+      <h3>حذف پس‌زمینه</h3>
+      <p>
+        پس‌زمینه تصاویر خود را به‌سادگی حذف کنید.
+      </p>
+      <a href="#">شروع استفاده ←</a>
+    </div>
+
+    <div class="card">
+      <div class="icon">✨</div>
+      <h3>افزایش کیفیت عکس</h3>
+      <p>
+        کیفیت و وضوح تصاویر را افزایش دهید.
+      </p>
+      <a href="#">شروع استفاده ←</a>
+    </div>
+
+    <div class="card">
+      <div class="icon">✍️</div>
+      <h3>تولید متن تبلیغاتی</h3>
+      <p>
+        برای کسب‌وکار خود متن تبلیغاتی حرفه‌ای بسازید.
+      </p>
+      <a href="#">شروع استفاده ←</a>
+    </div>
+
+  </div>
+
+</section>
+
+<footer>
+  © 2026 ابزارک — تمامی حقوق محفوظ است.
+</footer>
+
+</body>
+</html>

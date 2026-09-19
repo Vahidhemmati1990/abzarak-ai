@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ابزارک AI | از ایده تا تصویر حرفه‌ای</title>
@@ -828,5 +829,64 @@
     });
   </script>
 
+<script>
+  // ==============================
+  // اتصال ابزارک AI به Supabase
+  // ==============================
+
+  const SUPABASE_URL =
+    "https://jndrwriknenbnrjkckxf.supabase.co";
+
+  const SUPABASE_PUBLISHABLE_KEY =
+    "کلید Publishable خودت را اینجا قرار بده";
+
+  const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+  // ==============================
+  // ورود با Google
+  // ==============================
+
+  async function signInWithGoogle() {
+    const { error } =
+      await supabaseClient.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo: "https://free.abzarak-ai.ir"
+        }
+      });
+
+    if (error) {
+      alert("ورود با Google انجام نشد: " + error.message);
+    }
+  }
+
+  // ==============================
+  // بررسی وضعیت کاربر
+  // ==============================
+
+  supabaseClient.auth.onAuthStateChange(
+    (event, session) => {
+
+      if (session && session.user) {
+
+        console.log(
+          "کاربر وارد شد:",
+          session.user.email
+        );
+
+      }
+
+      if (event === "SIGNED_OUT") {
+
+        console.log("کاربر خارج شد.");
+
+      }
+
+    }
+  );
+</script>  
 </body>
 </html>

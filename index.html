@@ -1559,6 +1559,89 @@
     );
 
   </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<script>
+  // ==============================
+  // اتصال به Supabase
+  // ==============================
+
+  const SUPABASE_URL =
+    "https://jndrwriknenbnrjkckxf.supabase.co";
+
+  const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_vIHPwgfpXl56LSYjYXLBCQ_V7Axq7eB";
+
+  const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+
+  // ==============================
+  // ورود با حساب گوگل
+  // ==============================
+
+  const loginBtn = document.getElementById("loginBtn");
+  const signupBtn = document.getElementById("signupBtn");
+
+
+  async function loginWithGoogle() {
+
+    const { error } =
+      await supabaseClient.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo: window.location.origin
+        }
+      });
+
+    if (error) {
+      console.error("Google Login Error:", error);
+      alert("ورود با گوگل انجام نشد. لطفاً دوباره تلاش کنید.");
+    }
+  }
+
+
+  // دکمه ورود
+  if (loginBtn) {
+    loginBtn.addEventListener("click", loginWithGoogle);
+  }
+
+
+  // دکمه ثبت‌نام
+  if (signupBtn) {
+    signupBtn.addEventListener("click", loginWithGoogle);
+  }
+
+
+  // ==============================
+  // بررسی وضعیت کاربر
+  // ==============================
+
+  supabaseClient.auth.onAuthStateChange(
+    (event, session) => {
+
+      if (session && session.user) {
+
+        console.log(
+          "کاربر وارد شد:",
+          session.user.email
+        );
+
+        if (loginBtn) {
+          loginBtn.textContent = "حساب من";
+        }
+
+        if (signupBtn) {
+          signupBtn.textContent = "وارد شده ✓";
+        }
+
+      }
+
+    }
+  );
+
+</script>
 </body>
 </html>

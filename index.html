@@ -26,11 +26,12 @@
     rel="stylesheet"
   >
 
+
   <style>
 
-    /* =========================
+    /* =====================================================
        RESET
-    ========================== */
+    ====================================================== */
 
     * {
       box-sizing: border-box;
@@ -66,6 +67,10 @@
       line-height: 1.8;
     }
 
+    body.modal-open {
+      overflow: hidden;
+    }
+
     button,
     textarea,
     input {
@@ -97,6 +102,7 @@
       display: flex;
 
       align-items: center;
+
       justify-content: center;
 
       flex-direction: column;
@@ -123,16 +129,11 @@
         visibility .7s ease;
     }
 
-
     #pageLoader.hide {
-
       opacity: 0;
-
       visibility: hidden;
-
       pointer-events: none;
     }
-
 
     .loader-logo {
 
@@ -162,7 +163,6 @@
         loaderFloat 2s ease-in-out infinite;
     }
 
-
     .loader-logo::before {
 
       content: "";
@@ -173,8 +173,7 @@
 
       border-radius: 31px;
 
-      border:
-        2px solid transparent;
+      border: 2px solid transparent;
 
       border-top-color: #a78bfa;
       border-right-color: #60a5fa;
@@ -182,7 +181,6 @@
       animation:
         loaderSpin 1.5s linear infinite;
     }
-
 
     .loader-logo::after {
 
@@ -201,7 +199,6 @@
         0 0 35px rgba(124,58,237,.12);
     }
 
-
     .loader-star {
 
       color: #fff;
@@ -217,7 +214,6 @@
         loaderPulse 1.5s ease-in-out infinite;
     }
 
-
     .loader-title {
 
       margin-top: 28px;
@@ -225,8 +221,6 @@
       font-size: 22px;
 
       font-weight: 900;
-
-      letter-spacing: -.3px;
 
       background:
         linear-gradient(
@@ -237,12 +231,10 @@
         );
 
       -webkit-background-clip: text;
-
       background-clip: text;
 
       color: transparent;
     }
-
 
     .loader-text {
 
@@ -252,7 +244,6 @@
 
       font-size: 12px;
     }
-
 
     .loader-dots {
 
@@ -267,7 +258,6 @@
       margin-top: 17px;
     }
 
-
     .loader-dots span {
 
       width: 6px;
@@ -281,16 +271,13 @@
         loaderDots 1.2s ease-in-out infinite;
     }
 
-
     .loader-dots span:nth-child(2) {
       animation-delay: .15s;
     }
 
-
     .loader-dots span:nth-child(3) {
       animation-delay: .30s;
     }
-
 
     @keyframes loaderSpin {
 
@@ -304,7 +291,6 @@
 
     }
 
-
     @keyframes loaderFloat {
 
       0%,
@@ -317,7 +303,6 @@
       }
 
     }
-
 
     @keyframes loaderPulse {
 
@@ -333,7 +318,6 @@
       }
 
     }
-
 
     @keyframes loaderDots {
 
@@ -351,9 +335,9 @@
     }
 
 
-    /* =========================
+    /* =====================================================
        HEADER
-    ========================== */
+    ====================================================== */
 
     header {
 
@@ -378,7 +362,6 @@
         1px solid rgba(255,255,255,.07);
     }
 
-
     .nav {
 
       width:
@@ -397,7 +380,6 @@
       gap: 20px;
     }
 
-
     .logo {
 
       display: flex;
@@ -410,7 +392,6 @@
 
       font-weight: 900;
     }
-
 
     .logo-icon {
 
@@ -436,7 +417,6 @@
       font-size: 21px;
     }
 
-
     .nav-actions {
 
       display: flex;
@@ -445,7 +425,6 @@
 
       gap: 9px;
     }
-
 
     .nav-btn {
 
@@ -466,7 +445,6 @@
       transition: .25s;
     }
 
-
     .nav-btn:hover {
 
       background:
@@ -475,7 +453,6 @@
       transform:
         translateY(-1px);
     }
-
 
     .nav-btn.primary {
 
@@ -489,7 +466,6 @@
         );
     }
 
-
     .user-info {
 
       display: none;
@@ -497,6 +473,8 @@
       align-items: center;
 
       gap: 8px;
+
+      max-width: 190px;
 
       padding: 7px 11px;
 
@@ -511,17 +489,484 @@
       font-size: 12px;
 
       color: #cbd5e1;
-    }
 
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+
+      white-space: nowrap;
+    }
 
     .user-info.show {
       display: flex;
     }
 
 
-    /* =========================
+    /* =====================================================
+       AUTH MODAL
+    ====================================================== */
+
+    .auth-modal {
+
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 9000;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      padding: 20px;
+
+      background:
+        rgba(0,0,0,.72);
+
+      backdrop-filter:
+        blur(12px);
+
+      -webkit-backdrop-filter:
+        blur(12px);
+
+      opacity: 0;
+
+      visibility: hidden;
+
+      pointer-events: none;
+
+      transition:
+        opacity .25s ease,
+        visibility .25s ease;
+    }
+
+    .auth-modal.active {
+
+      opacity: 1;
+
+      visibility: visible;
+
+      pointer-events: auto;
+    }
+
+    .auth-box {
+
+      position: relative;
+
+      width:
+        min(430px,100%);
+
+      padding: 30px;
+
+      border-radius: 28px;
+
+      border:
+        1px solid rgba(255,255,255,.10);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(18,23,35,.98),
+          rgba(8,11,18,.98)
+        );
+
+      box-shadow:
+        0 35px 100px rgba(0,0,0,.65);
+
+      transform:
+        translateY(15px)
+        scale(.97);
+
+      transition:
+        transform .3s ease;
+    }
+
+    .auth-modal.active .auth-box {
+
+      transform:
+        translateY(0)
+        scale(1);
+    }
+
+    .auth-close {
+
+      position: absolute;
+
+      top: 15px;
+
+      left: 15px;
+
+      width: 34px;
+      height: 34px;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 10px;
+
+      border:
+        1px solid rgba(255,255,255,.08);
+
+      background:
+        rgba(255,255,255,.04);
+
+      color: #cbd5e1;
+
+      font-size: 19px;
+
+      transition: .2s;
+    }
+
+    .auth-close:hover {
+
+      background:
+        rgba(255,255,255,.09);
+
+      color: #fff;
+    }
+
+    .auth-logo {
+
+      width: 58px;
+      height: 58px;
+
+      margin: 0 auto 18px;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 18px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #7c3aed,
+          #2563eb
+        );
+
+      box-shadow:
+        0 12px 35px rgba(79,70,229,.28);
+
+      font-size: 27px;
+    }
+
+    .auth-title {
+
+      text-align: center;
+
+      font-size: 23px;
+
+      font-weight: 900;
+    }
+
+    .auth-subtitle {
+
+      margin-top: 5px;
+
+      text-align: center;
+
+      color: #858e9f;
+
+      font-size: 12px;
+    }
+
+    .auth-tabs {
+
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 5px;
+
+      margin:
+        24px 0 20px;
+
+      padding: 4px;
+
+      border-radius: 14px;
+
+      background:
+        rgba(255,255,255,.04);
+    }
+
+    .auth-tab {
+
+      padding: 9px;
+
+      border: none;
+
+      border-radius: 10px;
+
+      background: transparent;
+
+      color: #7f8999;
+
+      font-size: 13px;
+
+      transition: .2s;
+    }
+
+    .auth-tab.active {
+
+      background:
+        rgba(124,58,237,.18);
+
+      color: #fff;
+
+      box-shadow:
+        0 4px 15px rgba(0,0,0,.15);
+    }
+
+    .auth-form {
+
+      display: none;
+    }
+
+    .auth-form.active {
+      display: block;
+    }
+
+    .field {
+
+      margin-bottom: 14px;
+    }
+
+    .field label {
+
+      display: block;
+
+      margin-bottom: 7px;
+
+      color: #cbd5e1;
+
+      font-size: 12px;
+
+      font-weight: 600;
+    }
+
+    .field input {
+
+      width: 100%;
+
+      height: 48px;
+
+      padding:
+        0 14px;
+
+      border-radius: 13px;
+
+      border:
+        1px solid rgba(255,255,255,.09);
+
+      outline: none;
+
+      background:
+        rgba(0,0,0,.24);
+
+      color: #fff;
+
+      font-size: 13px;
+
+      transition:
+        border-color .2s,
+        box-shadow .2s;
+    }
+
+    .field input:focus {
+
+      border-color:
+        rgba(139,92,246,.65);
+
+      box-shadow:
+        0 0 0 3px rgba(124,58,237,.10);
+    }
+
+    .field input::placeholder {
+      color: #525c6d;
+    }
+
+    .auth-submit {
+
+      width: 100%;
+
+      height: 48px;
+
+      margin-top: 4px;
+
+      border: none;
+
+      border-radius: 13px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #7c3aed,
+          #2563eb
+        );
+
+      color: #fff;
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      box-shadow:
+        0 12px 30px rgba(79,70,229,.22);
+
+      transition: .2s;
+    }
+
+    .auth-submit:hover {
+
+      transform:
+        translateY(-1px);
+
+      box-shadow:
+        0 15px 35px rgba(79,70,229,.30);
+    }
+
+    .auth-submit:disabled {
+
+      opacity: .6;
+
+      cursor: wait;
+
+      transform: none;
+    }
+
+    .divider {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      margin:
+        19px 0;
+    }
+
+    .divider::before,
+    .divider::after {
+
+      content: "";
+
+      flex: 1;
+
+      height: 1px;
+
+      background:
+        rgba(255,255,255,.08);
+    }
+
+    .divider span {
+
+      color: #626c7c;
+
+      font-size: 11px;
+    }
+
+    .google-btn {
+
+      width: 100%;
+
+      height: 48px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 10px;
+
+      border-radius: 13px;
+
+      border:
+        1px solid rgba(255,255,255,.10);
+
+      background:
+        rgba(255,255,255,.045);
+
+      color: #fff;
+
+      font-size: 13px;
+
+      font-weight: 600;
+
+      transition: .2s;
+    }
+
+    .google-btn:hover {
+
+      background:
+        rgba(255,255,255,.08);
+    }
+
+    .google-icon {
+
+      width: 19px;
+      height: 19px;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 50%;
+
+      background: #fff;
+
+      color: #4285f4;
+
+      font-size: 12px;
+
+      font-weight: 900;
+    }
+
+    .auth-message {
+
+      min-height: 20px;
+
+      margin-top: 13px;
+
+      padding: 0 2px;
+
+      text-align: center;
+
+      font-size: 11px;
+
+      line-height: 1.8;
+    }
+
+    .auth-message.error {
+      color: #fca5a5;
+    }
+
+    .auth-message.success {
+      color: #86efac;
+    }
+
+    .auth-note {
+
+      margin-top: 15px;
+
+      text-align: center;
+
+      color: #596273;
+
+      font-size: 10px;
+
+      line-height: 1.8;
+    }
+
+
+    /* =====================================================
        HERO
-    ========================== */
+    ====================================================== */
 
     .hero {
 
@@ -535,7 +980,6 @@
 
       text-align: center;
     }
-
 
     .badge {
 
@@ -562,7 +1006,6 @@
       margin-bottom: 22px;
     }
 
-
     .badge-dot {
 
       width: 8px;
@@ -575,7 +1018,6 @@
       box-shadow:
         0 0 14px #8b5cf6;
     }
-
 
     .hero h1 {
 
@@ -590,7 +1032,6 @@
 
       font-weight: 900;
     }
-
 
     .hero h1 span {
 
@@ -609,7 +1050,6 @@
       color: transparent;
     }
 
-
     .hero-description {
 
       max-width: 720px;
@@ -621,7 +1061,6 @@
 
       font-size: 16px;
     }
-
 
     .hero-button {
 
@@ -658,9 +1097,9 @@
     }
 
 
-    /* =========================
+    /* =====================================================
        SHOWCASE
-    ========================== */
+    ====================================================== */
 
     .showcase {
 
@@ -677,7 +1116,6 @@
 
       gap: 13px;
     }
-
 
     .showcase-card {
 
@@ -698,14 +1136,12 @@
         0 20px 60px rgba(0,0,0,.30);
     }
 
-
     .showcase-card.large {
 
       min-height: 475px;
 
       grid-row: span 2;
     }
-
 
     .showcase-card img {
 
@@ -717,7 +1153,6 @@
 
       object-fit: cover;
     }
-
 
     .showcase-overlay {
 
@@ -738,11 +1173,9 @@
         );
     }
 
-
     .showcase-overlay h3 {
       font-size: 18px;
     }
-
 
     .showcase-overlay p {
 
@@ -752,9 +1185,9 @@
     }
 
 
-    /* =========================
+    /* =====================================================
        SECTION
-    ========================== */
+    ====================================================== */
 
     .section {
 
@@ -764,14 +1197,12 @@
       margin: auto;
     }
 
-
     .section-title {
 
       text-align: center;
 
       margin-bottom: 38px;
     }
-
 
     .section-title small {
 
@@ -780,14 +1211,12 @@
       font-weight: 800;
     }
 
-
     .section-title h2 {
 
       margin-top: 6px;
 
       font-size: 40px;
     }
-
 
     .section-title p {
 
@@ -797,9 +1226,9 @@
     }
 
 
-    /* =========================
+    /* =====================================================
        WORKFLOW
-    ========================== */
+    ====================================================== */
 
     .workflow {
 
@@ -810,7 +1239,6 @@
 
       gap: 14px;
     }
-
 
     .step {
 
@@ -831,14 +1259,12 @@
         );
     }
 
-
     .step-icon {
 
       font-size: 27px;
 
       margin-bottom: 10px;
     }
-
 
     .step-number {
 
@@ -863,14 +1289,12 @@
       font-weight: 900;
     }
 
-
     .step h3 {
 
       margin-bottom: 9px;
 
       font-size: 17px;
     }
-
 
     .step p {
 
@@ -880,9 +1304,9 @@
     }
 
 
-    /* =========================
+    /* =====================================================
        CREATOR
-    ========================== */
+    ====================================================== */
 
     .app {
 
@@ -906,7 +1330,6 @@
         0 30px 100px rgba(0,0,0,.35);
     }
 
-
     .app-head {
 
       display: flex;
@@ -918,11 +1341,9 @@
       margin-bottom: 23px;
     }
 
-
     .app-head h2 {
       font-size: 22px;
     }
-
 
     .app-head p {
 
@@ -930,7 +1351,6 @@
 
       font-size: 12px;
     }
-
 
     .status {
 
@@ -945,7 +1365,6 @@
 
       font-size: 11px;
     }
-
 
     textarea {
 
@@ -973,11 +1392,9 @@
       line-height: 2;
     }
 
-
     textarea::placeholder {
       color: #596171;
     }
-
 
     .generate {
 
@@ -1003,7 +1420,6 @@
       font-weight: 800;
     }
 
-
     .generate:disabled {
 
       opacity: .65;
@@ -1012,9 +1428,9 @@
     }
 
 
-    /* =========================
+    /* =====================================================
        ACCOUNT
-    ========================== */
+    ====================================================== */
 
     .account {
 
@@ -1032,7 +1448,6 @@
       gap: 14px;
     }
 
-
     .account-card {
 
       padding: 25px;
@@ -1046,11 +1461,9 @@
         rgba(255,255,255,.025);
     }
 
-
     .account-card h3 {
       margin-bottom: 9px;
     }
-
 
     .account-card p {
 
@@ -1060,9 +1473,9 @@
     }
 
 
-    /* =========================
+    /* =====================================================
        FOOTER
-    ========================== */
+    ====================================================== */
 
     footer {
 
@@ -1080,7 +1493,6 @@
         rgba(0,0,0,.28);
     }
 
-
     .footer-name {
 
       color: #e5e7eb;
@@ -1092,7 +1504,6 @@
       letter-spacing: 1px;
     }
 
-
     .footer-description {
 
       margin-top: 7px;
@@ -1101,7 +1512,6 @@
 
       font-size: 12px;
     }
-
 
     .footer-copy {
 
@@ -1113,18 +1523,15 @@
     }
 
 
-    /* =========================
+    /* =====================================================
        MOBILE
-    ========================== */
+    ====================================================== */
 
     @media(max-width:800px) {
 
       .showcase {
-
-        grid-template-columns:
-          1fr 1fr;
+        grid-template-columns: 1fr 1fr;
       }
-
 
       .showcase-card.large {
 
@@ -1135,13 +1542,11 @@
         min-height: 320px;
       }
 
-
       .workflow {
 
         grid-template-columns:
           1fr 1fr;
       }
-
 
       .account {
 
@@ -1158,13 +1563,11 @@
         font-size: 17px;
       }
 
-
       .logo-icon {
 
         width: 36px;
         height: 36px;
       }
-
 
       .nav-btn {
 
@@ -1174,30 +1577,21 @@
         font-size: 12px;
       }
 
-
       .hero {
-
         padding-top: 45px;
       }
 
-
       .hero-description {
-
         font-size: 14px;
       }
 
-
       .showcase {
-
         gap: 9px;
       }
 
-
       .showcase-card.large {
-
         min-height: 280px;
       }
-
 
       .showcase-card {
 
@@ -1206,24 +1600,17 @@
         border-radius: 17px;
       }
 
-
       .showcase-overlay {
-
         padding: 13px;
       }
 
-
       .showcase-overlay h3 {
-
         font-size: 13px;
       }
 
-
       .showcase-overlay p {
-
         display: none;
       }
-
 
       .workflow {
 
@@ -1231,12 +1618,9 @@
           1fr;
       }
 
-
       .step {
-
         min-height: auto;
       }
-
 
       .app {
 
@@ -1245,12 +1629,9 @@
         border-radius: 21px;
       }
 
-
       .user-info {
-
         display: none !important;
       }
-
 
       .loader-logo {
 
@@ -1260,10 +1641,20 @@
         border-radius: 24px;
       }
 
-
       .loader-title {
-
         font-size: 20px;
+      }
+
+      .auth-box {
+
+        padding:
+          27px 20px;
+
+        border-radius: 24px;
+      }
+
+      .auth-title {
+        font-size: 21px;
       }
 
     }
@@ -1290,16 +1681,13 @@
 
     </div>
 
-
     <div class="loader-title">
       ابزارک AI
     </div>
 
-
     <div class="loader-text">
       در حال آماده‌سازی...
     </div>
-
 
     <div class="loader-dots">
 
@@ -1312,13 +1700,244 @@
   </div>
 
 
-  <!-- =========================
+  <!-- =====================================================
+       AUTH MODAL
+  ====================================================== -->
+
+  <div
+    class="auth-modal"
+    id="authModal"
+  >
+
+    <div class="auth-box">
+
+
+      <button
+        type="button"
+        class="auth-close"
+        id="authClose"
+        aria-label="بستن"
+      >
+        ×
+      </button>
+
+
+      <div class="auth-logo">
+        ✦
+      </div>
+
+
+      <h2
+        class="auth-title"
+        id="authTitle"
+      >
+        ورود به ابزارک AI
+      </h2>
+
+
+      <p class="auth-subtitle">
+        برای ادامه، وارد حساب کاربری خود شوید.
+      </p>
+
+
+      <!-- TABS -->
+
+      <div class="auth-tabs">
+
+        <button
+          type="button"
+          class="auth-tab active"
+          id="loginTab"
+        >
+          ورود
+        </button>
+
+
+        <button
+          type="button"
+          class="auth-tab"
+          id="signupTab"
+        >
+          ثبت‌نام
+        </button>
+
+      </div>
+
+
+      <!-- =========================
+           LOGIN FORM
+      ========================== -->
+
+      <form
+        class="auth-form active"
+        id="loginForm"
+      >
+
+        <div class="field">
+
+          <label for="loginEmail">
+            ایمیل
+          </label>
+
+          <input
+            type="email"
+            id="loginEmail"
+            placeholder="example@email.com"
+            autocomplete="email"
+            required
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="loginPassword">
+            رمز عبور
+          </label>
+
+          <input
+            type="password"
+            id="loginPassword"
+            placeholder="رمز عبور خود را وارد کنید"
+            autocomplete="current-password"
+            required
+          >
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="auth-submit"
+          id="loginSubmit"
+        >
+          ورود به حساب
+        </button>
+
+      </form>
+
+
+      <!-- =========================
+           SIGNUP FORM
+      ========================== -->
+
+      <form
+        class="auth-form"
+        id="signupForm"
+      >
+
+        <div class="field">
+
+          <label for="signupEmail">
+            ایمیل
+          </label>
+
+          <input
+            type="email"
+            id="signupEmail"
+            placeholder="example@email.com"
+            autocomplete="email"
+            required
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="signupPassword">
+            رمز عبور
+          </label>
+
+          <input
+            type="password"
+            id="signupPassword"
+            placeholder="حداقل ۶ کاراکتر"
+            autocomplete="new-password"
+            minlength="6"
+            required
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="signupPasswordConfirm">
+            تکرار رمز عبور
+          </label>
+
+          <input
+            type="password"
+            id="signupPasswordConfirm"
+            placeholder="رمز عبور را دوباره وارد کنید"
+            autocomplete="new-password"
+            minlength="6"
+            required
+          >
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="auth-submit"
+          id="signupSubmit"
+        >
+          ساخت حساب کاربری
+        </button>
+
+      </form>
+
+
+      <!-- GOOGLE -->
+
+      <div class="divider">
+        <span>یا</span>
+      </div>
+
+
+      <button
+        type="button"
+        class="google-btn"
+        id="googleBtn"
+      >
+
+        <span class="google-icon">
+          G
+        </span>
+
+        ادامه با Google
+
+      </button>
+
+
+      <!-- MESSAGE -->
+
+      <div
+        class="auth-message"
+        id="authMessage"
+      ></div>
+
+
+      <div class="auth-note">
+        با ادامه دادن، حساب کاربری شما در ابزارک AI ایجاد یا وارد می‌شود.
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
        HEADER
-  ========================== -->
+  ====================================================== -->
 
   <header>
 
     <nav class="nav">
+
 
       <a
         href="#"
@@ -1337,6 +1956,7 @@
 
 
       <div class="nav-actions">
+
 
         <span
           class="user-info"
@@ -1368,6 +1988,7 @@
           ثبت‌نام
         </button>
 
+
       </div>
 
     </nav>
@@ -1375,18 +1996,17 @@
   </header>
 
 
-  <!-- =========================
+  <!-- =====================================================
        MAIN
-  ========================== -->
+  ====================================================== -->
 
   <main>
 
 
-    <!-- =========================
-         HERO
-    ========================== -->
+    <!-- HERO -->
 
     <section class="hero">
+
 
       <div class="badge">
 
@@ -1430,12 +2050,11 @@
 
       </a>
 
+
     </section>
 
 
-    <!-- =========================
-         SHOWCASE
-    ========================== -->
+    <!-- SHOWCASE -->
 
     <section class="showcase">
 
@@ -1574,14 +2193,14 @@
 
       </figure>
 
+
     </section>
 
 
-    <!-- =========================
-         WORKFLOW
-    ========================== -->
+    <!-- WORKFLOW -->
 
     <section class="section">
+
 
       <div class="section-title">
 
@@ -1611,16 +2230,13 @@
             💡
           </div>
 
-
           <div class="step-number">
             ۱
           </div>
 
-
           <h3>
             ایده خام
           </h3>
-
 
           <p>
             ایده یا توضیح اولیه خود را وارد کنید.
@@ -1635,16 +2251,13 @@
             ✦
           </div>
 
-
           <div class="step-number">
             ۲
           </div>
 
-
           <h3>
             پرامپت حرفه‌ای
           </h3>
-
 
           <p>
             ایده شما به یک پرامپت دقیق و ساختاریافته تبدیل می‌شود.
@@ -1659,16 +2272,13 @@
             🎨
           </div>
 
-
           <div class="step-number">
             ۳
           </div>
 
-
           <h3>
             تولید و ویرایش
           </h3>
-
 
           <p>
             تصویر ایجاد شده را مشاهده و تغییرات موردنظر را اعمال کنید.
@@ -1683,16 +2293,13 @@
             ⚡
           </div>
 
-
           <div class="step-number">
             ۴
           </div>
 
-
           <h3>
             افزایش کیفیت
           </h3>
-
 
           <p>
             وضوح تصویر را افزایش دهید و خروجی نهایی را دریافت کنید.
@@ -1700,14 +2307,13 @@
 
         </article>
 
+
       </div>
 
     </section>
 
 
-    <!-- =========================
-         CREATOR
-    ========================== -->
+    <!-- CREATOR -->
 
     <section
       id="creator"
@@ -1722,7 +2328,6 @@
           <h2>
             پروژه جدید خود را شروع کنید
           </h2>
-
 
           <p>
             ایده اولیه خود را در کادر زیر بنویسید.
@@ -1752,12 +2357,11 @@
         ✦ ساخت پرامپت حرفه‌ای
       </button>
 
+
     </section>
 
 
-    <!-- =========================
-         ACCOUNT
-    ========================== -->
+    <!-- ACCOUNT -->
 
     <section class="account">
 
@@ -1790,14 +2394,14 @@
 
       </div>
 
+
     </section>
+
 
   </main>
 
 
-  <!-- =========================
-       FOOTER
-  ========================== -->
+  <!-- FOOTER -->
 
   <footer>
 
@@ -1816,19 +2420,19 @@
       © 2026 ابزارک AI — تمامی حقوق محفوظ است.
     </div>
 
+
   </footer>
 
 
   <!-- =====================================================
        JAVASCRIPT
-       SUPABASE + GOOGLE LOGIN
   ====================================================== -->
 
   <script>
 
 
     /* =====================================================
-       1. تنظیمات Supabase
+       1. SUPABASE SETTINGS
     ====================================================== */
 
     const SUPABASE_URL =
@@ -1840,7 +2444,7 @@
 
 
     /* =====================================================
-       2. اتصال Supabase
+       2. SUPABASE CONNECTION
     ====================================================== */
 
     const supabaseClient =
@@ -1851,58 +2455,173 @@
 
 
     /* =====================================================
-       3. عناصر صفحه
+       3. ELEMENTS
     ====================================================== */
 
     const loginBtn =
       document.getElementById("loginBtn");
 
-
     const signupBtn =
       document.getElementById("signupBtn");
 
-
     const logoutBtn =
       document.getElementById("logoutBtn");
-
 
     const userInfo =
       document.getElementById("userInfo");
 
 
+    const authModal =
+      document.getElementById("authModal");
+
+    const authClose =
+      document.getElementById("authClose");
+
+    const loginTab =
+      document.getElementById("loginTab");
+
+    const signupTab =
+      document.getElementById("signupTab");
+
+    const loginForm =
+      document.getElementById("loginForm");
+
+    const signupForm =
+      document.getElementById("signupForm");
+
+    const googleBtn =
+      document.getElementById("googleBtn");
+
+    const authTitle =
+      document.getElementById("authTitle");
+
+    const authMessage =
+      document.getElementById("authMessage");
+
+
     /* =====================================================
-       4. ورود با Google
+       4. AUTH MESSAGE
     ====================================================== */
 
-    async function signInWithGoogle() {
+    function showAuthMessage(
+      message,
+      type = "error"
+    ) {
 
-      const { error } =
-        await supabaseClient.auth.signInWithOAuth({
+      authMessage.textContent =
+        message;
 
-          provider: "google",
+      authMessage.className =
+        "auth-message " + type;
 
-          options: {
-
-            redirectTo:
-              window.location.origin
-
-          }
-
-        });
+    }
 
 
-      if (error) {
+    function clearAuthMessage() {
 
-        console.error(
-          "Google Login Error:",
-          error
+      authMessage.textContent = "";
+
+      authMessage.className =
+        "auth-message";
+
+    }
+
+
+    /* =====================================================
+       5. OPEN AUTH MODAL
+    ====================================================== */
+
+    function openAuthModal(
+      mode = "login"
+    ) {
+
+      authModal.classList.add(
+        "active"
+      );
+
+      document.body.classList.add(
+        "modal-open"
+      );
+
+      clearAuthMessage();
+
+      switchAuthMode(mode);
+
+    }
+
+
+    /* =====================================================
+       6. CLOSE AUTH MODAL
+    ====================================================== */
+
+    function closeAuthModal() {
+
+      authModal.classList.remove(
+        "active"
+      );
+
+      document.body.classList.remove(
+        "modal-open"
+      );
+
+      clearAuthMessage();
+
+    }
+
+
+    /* =====================================================
+       7. SWITCH LOGIN / SIGNUP
+    ====================================================== */
+
+    function switchAuthMode(
+      mode
+    ) {
+
+      clearAuthMessage();
+
+
+      if (mode === "signup") {
+
+        loginTab.classList.remove(
+          "active"
         );
 
-
-        alert(
-          "خطا در ورود با گوگل:\n" +
-          error.message
+        signupTab.classList.add(
+          "active"
         );
+
+        loginForm.classList.remove(
+          "active"
+        );
+
+        signupForm.classList.add(
+          "active"
+        );
+
+        authTitle.textContent =
+          "ساخت حساب در ابزارک AI";
+
+
+      } else {
+
+        signupTab.classList.remove(
+          "active"
+        );
+
+        loginTab.classList.add(
+          "active"
+        );
+
+        signupForm.classList.remove(
+          "active"
+        );
+
+        loginForm.classList.add(
+          "active"
+        );
+
+        authTitle.textContent =
+          "ورود به ابزارک AI";
 
       }
 
@@ -1910,72 +2629,457 @@
 
 
     /* =====================================================
-       5. دکمه ورود
+       8. HEADER BUTTONS
     ====================================================== */
 
-    if (loginBtn) {
+    loginBtn.addEventListener(
+      "click",
+      () => {
 
-      loginBtn.addEventListener(
-        "click",
-        signInWithGoogle
-      );
+        openAuthModal("login");
 
-    }
+      }
+    );
+
+
+    signupBtn.addEventListener(
+      "click",
+      () => {
+
+        openAuthModal("signup");
+
+      }
+    );
+
+
+    loginTab.addEventListener(
+      "click",
+      () => {
+
+        switchAuthMode("login");
+
+      }
+    );
+
+
+    signupTab.addEventListener(
+      "click",
+      () => {
+
+        switchAuthMode("signup");
+
+      }
+    );
+
+
+    authClose.addEventListener(
+      "click",
+      closeAuthModal
+    );
 
 
     /* =====================================================
-       6. دکمه ثبت‌نام
+       9. CLOSE BY BACKDROP
     ====================================================== */
 
-    if (signupBtn) {
+    authModal.addEventListener(
+      "click",
+      (event) => {
 
-      signupBtn.addEventListener(
-        "click",
-        signInWithGoogle
-      );
+        if (
+          event.target ===
+          authModal
+        ) {
 
-    }
-
-
-    /* =====================================================
-       7. خروج
-    ====================================================== */
-
-    if (logoutBtn) {
-
-      logoutBtn.addEventListener(
-        "click",
-        async () => {
-
-          const { error } =
-            await supabaseClient.auth.signOut();
-
-
-          if (error) {
-
-            alert(
-              "خطا در خروج از حساب:\n" +
-              error.message
-            );
-
-            return;
-
-          }
-
-
-          updateUserInterface(null);
+          closeAuthModal();
 
         }
-      );
 
-    }
+      }
+    );
 
 
     /* =====================================================
-       8. وضعیت کاربر
+       10. ESC KEY
     ====================================================== */
 
-    function updateUserInterface(user) {
+    document.addEventListener(
+      "keydown",
+      (event) => {
+
+        if (
+          event.key === "Escape" &&
+          authModal.classList.contains(
+            "active"
+          )
+        ) {
+
+          closeAuthModal();
+
+        }
+
+      }
+    );
+
+
+    /* =====================================================
+       11. LOGIN WITH EMAIL
+    ====================================================== */
+
+    loginForm.addEventListener(
+      "submit",
+      async (event) => {
+
+        event.preventDefault();
+
+
+        const email =
+          document
+            .getElementById("loginEmail")
+            .value
+            .trim();
+
+
+        const password =
+          document
+            .getElementById("loginPassword")
+            .value;
+
+
+        const submitButton =
+          document.getElementById(
+            "loginSubmit"
+          );
+
+
+        if (
+          !email ||
+          !password
+        ) {
+
+          showAuthMessage(
+            "لطفاً ایمیل و رمز عبور را وارد کنید."
+          );
+
+          return;
+
+        }
+
+
+        submitButton.disabled =
+          true;
+
+        submitButton.textContent =
+          "در حال ورود...";
+
+
+        const {
+          error
+        } =
+          await supabaseClient.auth.signInWithPassword({
+
+            email:
+              email,
+
+            password:
+              password
+
+          });
+
+
+        submitButton.disabled =
+          false;
+
+        submitButton.textContent =
+          "ورود به حساب";
+
+
+        if (error) {
+
+          console.error(
+            "Login Error:",
+            error
+          );
+
+
+          showAuthMessage(
+            getAuthErrorMessage(
+              error.message
+            )
+          );
+
+          return;
+
+        }
+
+
+        showAuthMessage(
+          "ورود با موفقیت انجام شد.",
+          "success"
+        );
+
+
+        setTimeout(() => {
+
+          closeAuthModal();
+
+        }, 700);
+
+      }
+    );
+
+
+    /* =====================================================
+       12. SIGN UP WITH EMAIL
+    ====================================================== */
+
+    signupForm.addEventListener(
+      "submit",
+      async (event) => {
+
+        event.preventDefault();
+
+
+        const email =
+          document
+            .getElementById("signupEmail")
+            .value
+            .trim();
+
+
+        const password =
+          document
+            .getElementById("signupPassword")
+            .value;
+
+
+        const confirmPassword =
+          document
+            .getElementById(
+              "signupPasswordConfirm"
+            )
+            .value;
+
+
+        const submitButton =
+          document.getElementById(
+            "signupSubmit"
+          );
+
+
+        if (
+          password !==
+          confirmPassword
+        ) {
+
+          showAuthMessage(
+            "رمز عبور و تکرار آن یکسان نیست."
+          );
+
+          return;
+
+        }
+
+
+        if (
+          password.length < 6
+        ) {
+
+          showAuthMessage(
+            "رمز عبور باید حداقل ۶ کاراکتر باشد."
+          );
+
+          return;
+
+        }
+
+
+        submitButton.disabled =
+          true;
+
+        submitButton.textContent =
+          "در حال ساخت حساب...";
+
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient.auth.signUp({
+
+            email:
+              email,
+
+            password:
+              password
+
+          });
+
+
+        submitButton.disabled =
+          false;
+
+        submitButton.textContent =
+          "ساخت حساب کاربری";
+
+
+        if (error) {
+
+          console.error(
+            "Signup Error:",
+            error
+          );
+
+
+          showAuthMessage(
+            getAuthErrorMessage(
+              error.message
+            )
+          );
+
+          return;
+
+        }
+
+
+        /*
+         * چون Confirm email در Supabase
+         * روشن است، ممکن است کاربر نیاز
+         * داشته باشد ایمیل خود را تأیید کند.
+         */
+
+        if (
+          data.user &&
+          !data.session
+        ) {
+
+          showAuthMessage(
+            "حساب ساخته شد. لطفاً ایمیل خود را برای تأیید حساب بررسی کنید.",
+            "success"
+          );
+
+          return;
+
+        }
+
+
+        showAuthMessage(
+          "حساب شما با موفقیت ساخته شد.",
+          "success"
+        );
+
+
+        setTimeout(() => {
+
+          closeAuthModal();
+
+        }, 700);
+
+      }
+    );
+
+
+    /* =====================================================
+       13. GOOGLE LOGIN
+    ====================================================== */
+
+    googleBtn.addEventListener(
+      "click",
+      async () => {
+
+        googleBtn.disabled =
+          true;
+
+        googleBtn.textContent =
+          "در حال اتصال به Google...";
+
+
+        const {
+          error
+        } =
+          await supabaseClient.auth.signInWithOAuth({
+
+            provider:
+              "google",
+
+            options: {
+
+              redirectTo:
+                window.location.origin
+
+            }
+
+          });
+
+
+        if (error) {
+
+          console.error(
+            "Google Login Error:",
+            error
+          );
+
+
+          googleBtn.disabled =
+            false;
+
+          googleBtn.innerHTML =
+            '<span class="google-icon">G</span> ادامه با Google';
+
+
+          showAuthMessage(
+            getAuthErrorMessage(
+              error.message
+            )
+          );
+
+        }
+
+      }
+    );
+
+
+    /* =====================================================
+       14. LOGOUT
+    ====================================================== */
+
+    logoutBtn.addEventListener(
+      "click",
+      async () => {
+
+        const {
+          error
+        } =
+          await supabaseClient.auth.signOut();
+
+
+        if (error) {
+
+          alert(
+            "خطا در خروج از حساب:\n" +
+            error.message
+          );
+
+          return;
+
+        }
+
+
+        updateUserInterface(
+          null
+        );
+
+      }
+    );
+
+
+    /* =====================================================
+       15. UPDATE USER INTERFACE
+    ====================================================== */
+
+    function updateUserInterface(
+      user
+    ) {
 
       if (user) {
 
@@ -1991,7 +3095,9 @@
           "👤 " + name;
 
 
-        userInfo.classList.add("show");
+        userInfo.classList.add(
+          "show"
+        );
 
 
         loginBtn.style.display =
@@ -2009,10 +3115,13 @@
       } else {
 
 
-        userInfo.textContent = "";
+        userInfo.textContent =
+          "";
 
 
-        userInfo.classList.remove("show");
+        userInfo.classList.remove(
+          "show"
+        );
 
 
         loginBtn.style.display =
@@ -2032,7 +3141,7 @@
 
 
     /* =====================================================
-       9. بررسی کاربر فعلی
+       16. CURRENT USER
     ====================================================== */
 
     async function checkCurrentUser() {
@@ -2046,7 +3155,9 @@
 
       if (error) {
 
-        updateUserInterface(null);
+        updateUserInterface(
+          null
+        );
 
         return;
 
@@ -2061,7 +3172,7 @@
 
 
     /* =====================================================
-       10. تغییر وضعیت احراز هویت
+       17. AUTH STATE CHANGE
     ====================================================== */
 
     supabaseClient.auth.onAuthStateChange(
@@ -2076,14 +3187,96 @@
 
 
     /* =====================================================
-       11. بررسی اولیه
+       18. AUTH ERROR TRANSLATION
+    ====================================================== */
+
+    function getAuthErrorMessage(
+      message
+    ) {
+
+      const text =
+        String(message || "")
+          .toLowerCase();
+
+
+      if (
+        text.includes(
+          "invalid login credentials"
+        )
+      ) {
+
+        return:
+          "ایمیل یا رمز عبور اشتباه است.";
+
+      }
+
+
+      if (
+        text.includes(
+          "email not confirmed"
+        )
+      ) {
+
+        return:
+          "ابتدا ایمیل خود را تأیید کنید.";
+
+      }
+
+
+      if (
+        text.includes(
+          "user already registered"
+        )
+      ) {
+
+        return:
+          "این ایمیل قبلاً ثبت‌نام کرده است. وارد حساب شوید.";
+
+      }
+
+
+      if (
+        text.includes(
+          "password"
+        ) &&
+        text.includes(
+          "6"
+        )
+      ) {
+
+        return:
+          "رمز عبور باید حداقل ۶ کاراکتر باشد.";
+
+      }
+
+
+      if (
+        text.includes(
+          "rate limit"
+        )
+      ) {
+
+        return:
+          "تعداد درخواست‌ها زیاد است. کمی بعد دوباره تلاش کنید.";
+
+      }
+
+
+      return:
+        "عملیات انجام نشد. لطفاً دوباره تلاش کنید.";
+
+    }
+
+
+    /* =====================================================
+       19. CHECK CURRENT USER
     ====================================================== */
 
     checkCurrentUser();
 
 
     /* =====================================================
-       12. ساخت پرامپت
+       20. GENERATE PROMPT
     ====================================================== */
 
     const generateButton =
@@ -2098,65 +3291,59 @@
       );
 
 
-    if (generateButton) {
-
-      generateButton.addEventListener(
-        "click",
-        async () => {
+    generateButton.addEventListener(
+      "click",
+      async () => {
 
 
-          const idea =
-            ideaInput.value.trim();
+        const idea =
+          ideaInput.value.trim();
 
 
-          if (!idea) {
+        if (!idea) {
 
-            ideaInput.focus();
+          ideaInput.focus();
+
+          ideaInput.placeholder =
+            "لطفاً ابتدا ایده خود را بنویسید.";
+
+          return;
+
+        }
 
 
-            ideaInput.placeholder =
-              "لطفاً ابتدا ایده خود را بنویسید.";
+        generateButton.disabled =
+          true;
 
 
-            return;
+        generateButton.textContent =
+          "در حال آماده‌سازی...";
 
-          }
+
+        setTimeout(() => {
 
 
           generateButton.disabled =
-            true;
+            false;
 
 
           generateButton.textContent =
-            "در حال آماده‌سازی...";
+            "✦ ساخت پرامپت حرفه‌ای";
 
 
-          setTimeout(() => {
+          alert(
+            "اتصال موتور واقعی هوش مصنوعی را در مرحله بعد انجام می‌دهیم."
+          );
 
 
-            generateButton.disabled =
-              false;
+        }, 900);
 
-
-            generateButton.textContent =
-              "✦ ساخت پرامپت حرفه‌ای";
-
-
-            alert(
-              "اتصال موتور واقعی هوش مصنوعی را در مرحله بعد انجام می‌دهیم."
-            );
-
-
-          }, 900);
-
-        }
-      );
-
-    }
+      }
+    );
 
 
     /* =====================================================
-       13. حذف لودر
+       21. HIDE LOADER
     ====================================================== */
 
     window.addEventListener(
@@ -2186,7 +3373,6 @@
 
 
   </script>
-
 
 </body>
 </html>

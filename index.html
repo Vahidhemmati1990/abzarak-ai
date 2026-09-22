@@ -28,6 +28,10 @@
 
   <style>
 
+    /* =========================
+       RESET
+    ========================== */
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -77,13 +81,286 @@
       text-decoration: none;
     }
 
+
+    /* =====================================================
+       LOADING SCREEN
+    ====================================================== */
+
+    #pageLoader {
+
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 99999;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      flex-direction: column;
+
+      background:
+        radial-gradient(
+          circle at 50% 40%,
+          rgba(124,58,237,.16),
+          transparent 32%
+        ),
+        radial-gradient(
+          circle at 50% 100%,
+          rgba(37,99,235,.10),
+          transparent 45%
+        ),
+        #05070c;
+
+      opacity: 1;
+
+      visibility: visible;
+
+      transition:
+        opacity .7s ease,
+        visibility .7s ease;
+    }
+
+
+    #pageLoader.hide {
+
+      opacity: 0;
+
+      visibility: hidden;
+
+      pointer-events: none;
+    }
+
+
+    .loader-logo {
+
+      position: relative;
+
+      width: 86px;
+      height: 86px;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 27px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #7c3aed,
+          #2563eb
+        );
+
+      box-shadow:
+        0 0 35px rgba(124,58,237,.35),
+        0 0 70px rgba(37,99,235,.16);
+
+      animation:
+        loaderFloat 2s ease-in-out infinite;
+    }
+
+
+    .loader-logo::before {
+
+      content: "";
+
+      position: absolute;
+
+      inset: -7px;
+
+      border-radius: 31px;
+
+      border:
+        2px solid transparent;
+
+      border-top-color: #a78bfa;
+      border-right-color: #60a5fa;
+
+      animation:
+        loaderSpin 1.5s linear infinite;
+    }
+
+
+    .loader-logo::after {
+
+      content: "";
+
+      position: absolute;
+
+      inset: -18px;
+
+      border-radius: 38px;
+
+      border:
+        1px solid rgba(139,92,246,.14);
+
+      box-shadow:
+        0 0 35px rgba(124,58,237,.12);
+    }
+
+
+    .loader-star {
+
+      color: #fff;
+
+      font-size: 38px;
+
+      line-height: 1;
+
+      text-shadow:
+        0 0 18px rgba(255,255,255,.55);
+
+      animation:
+        loaderPulse 1.5s ease-in-out infinite;
+    }
+
+
+    .loader-title {
+
+      margin-top: 28px;
+
+      font-size: 22px;
+
+      font-weight: 900;
+
+      letter-spacing: -.3px;
+
+      background:
+        linear-gradient(
+          90deg,
+          #a78bfa,
+          #60a5fa,
+          #c084fc
+        );
+
+      -webkit-background-clip: text;
+
+      background-clip: text;
+
+      color: transparent;
+    }
+
+
+    .loader-text {
+
+      margin-top: 5px;
+
+      color: #8992a3;
+
+      font-size: 12px;
+    }
+
+
+    .loader-dots {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 6px;
+
+      margin-top: 17px;
+    }
+
+
+    .loader-dots span {
+
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background: #8b5cf6;
+
+      animation:
+        loaderDots 1.2s ease-in-out infinite;
+    }
+
+
+    .loader-dots span:nth-child(2) {
+      animation-delay: .15s;
+    }
+
+
+    .loader-dots span:nth-child(3) {
+      animation-delay: .30s;
+    }
+
+
+    @keyframes loaderSpin {
+
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+
+    }
+
+
+    @keyframes loaderFloat {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-7px);
+      }
+
+    }
+
+
+    @keyframes loaderPulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: .9;
+      }
+
+      50% {
+        transform: scale(1.08);
+        opacity: 1;
+      }
+
+    }
+
+
+    @keyframes loaderDots {
+
+      0%,
+      100% {
+        transform: translateY(0);
+        opacity: .35;
+      }
+
+      50% {
+        transform: translateY(-4px);
+        opacity: 1;
+      }
+
+    }
+
+
     /* =========================
        HEADER
     ========================== */
 
     header {
+
       position: sticky;
+
       top: 0;
+
       z-index: 1000;
 
       width: 100%;
@@ -91,39 +368,57 @@
       background:
         rgba(5,7,12,.84);
 
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+      backdrop-filter:
+        blur(18px);
+
+      -webkit-backdrop-filter:
+        blur(18px);
 
       border-bottom:
         1px solid rgba(255,255,255,.07);
     }
 
+
     .nav {
-      width: min(1150px,92%);
+
+      width:
+        min(1150px,92%);
+
       min-height: 72px;
+
       margin: auto;
 
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
 
       gap: 20px;
     }
 
+
     .logo {
+
       display: flex;
+
       align-items: center;
+
       gap: 10px;
 
       font-size: 21px;
+
       font-weight: 900;
     }
 
+
     .logo-icon {
+
       width: 42px;
       height: 42px;
 
       display: grid;
+
       place-items: center;
 
       border-radius: 14px;
@@ -141,13 +436,19 @@
       font-size: 21px;
     }
 
+
     .nav-actions {
+
       display: flex;
+
       align-items: center;
+
       gap: 9px;
     }
 
+
     .nav-btn {
+
       padding: 9px 16px;
 
       border-radius: 12px;
@@ -165,7 +466,9 @@
       transition: .25s;
     }
 
+
     .nav-btn:hover {
+
       background:
         rgba(255,255,255,.09);
 
@@ -173,7 +476,9 @@
         translateY(-1px);
     }
 
+
     .nav-btn.primary {
+
       border: none;
 
       background:
@@ -184,10 +489,13 @@
         );
     }
 
+
     .user-info {
+
       display: none;
 
       align-items: center;
+
       gap: 8px;
 
       padding: 7px 11px;
@@ -201,19 +509,25 @@
         1px solid rgba(255,255,255,.08);
 
       font-size: 12px;
+
       color: #cbd5e1;
     }
+
 
     .user-info.show {
       display: flex;
     }
+
 
     /* =========================
        HERO
     ========================== */
 
     .hero {
-      width: min(950px,92%);
+
+      width:
+        min(950px,92%);
+
       margin: auto;
 
       padding:
@@ -222,9 +536,13 @@
       text-align: center;
     }
 
+
     .badge {
+
       display: inline-flex;
+
       align-items: center;
+
       gap: 9px;
 
       padding: 7px 15px;
@@ -244,7 +562,9 @@
       margin-bottom: 22px;
     }
 
+
     .badge-dot {
+
       width: 8px;
       height: 8px;
 
@@ -256,8 +576,11 @@
         0 0 14px #8b5cf6;
     }
 
+
     .hero h1 {
+
       max-width: 850px;
+
       margin: auto;
 
       font-size:
@@ -268,7 +591,9 @@
       font-weight: 900;
     }
 
+
     .hero h1 span {
+
       background:
         linear-gradient(
           90deg,
@@ -278,12 +603,15 @@
         );
 
       -webkit-background-clip: text;
+
       background-clip: text;
 
       color: transparent;
     }
 
+
     .hero-description {
+
       max-width: 720px;
 
       margin:
@@ -294,10 +622,13 @@
       font-size: 16px;
     }
 
+
     .hero-button {
+
       display: inline-flex;
 
       align-items: center;
+
       justify-content: center;
 
       gap: 10px;
@@ -319,19 +650,25 @@
         );
 
       font-size: 15px;
+
       font-weight: 800;
 
       box-shadow:
         0 15px 40px rgba(79,70,229,.28);
     }
 
+
     /* =========================
        SHOWCASE
     ========================== */
 
     .showcase {
-      width: min(1100px,92%);
-      margin: 15px auto 80px;
+
+      width:
+        min(1100px,92%);
+
+      margin:
+        15px auto 80px;
 
       display: grid;
 
@@ -341,7 +678,9 @@
       gap: 13px;
     }
 
+
     .showcase-card {
+
       position: relative;
 
       min-height: 230px;
@@ -359,13 +698,19 @@
         0 20px 60px rgba(0,0,0,.30);
     }
 
+
     .showcase-card.large {
+
       min-height: 475px;
+
       grid-row: span 2;
     }
 
+
     .showcase-card img {
+
       width: 100%;
+
       height: 100%;
 
       display: block;
@@ -373,11 +718,15 @@
       object-fit: cover;
     }
 
+
     .showcase-overlay {
+
       position: absolute;
+
       inset: 0;
 
       display: flex;
+
       align-items: flex-end;
 
       padding: 22px;
@@ -389,49 +738,71 @@
         );
     }
 
+
     .showcase-overlay h3 {
       font-size: 18px;
     }
 
+
     .showcase-overlay p {
+
       color: #d1d5db;
+
       font-size: 12px;
     }
+
 
     /* =========================
        SECTION
     ========================== */
 
     .section {
-      width: min(1050px,92%);
+
+      width:
+        min(1050px,92%);
+
       margin: auto;
     }
 
+
     .section-title {
+
       text-align: center;
+
       margin-bottom: 38px;
     }
 
+
     .section-title small {
+
       color: #a78bfa;
+
       font-weight: 800;
     }
 
+
     .section-title h2 {
+
       margin-top: 6px;
+
       font-size: 40px;
     }
 
+
     .section-title p {
+
       color: #8f97a6;
+
       font-size: 14px;
     }
+
 
     /* =========================
        WORKFLOW
     ========================== */
 
     .workflow {
+
       display: grid;
 
       grid-template-columns:
@@ -440,7 +811,9 @@
       gap: 14px;
     }
 
+
     .step {
+
       min-height: 270px;
 
       padding: 23px 20px;
@@ -458,16 +831,22 @@
         );
     }
 
+
     .step-icon {
+
       font-size: 27px;
+
       margin-bottom: 10px;
     }
 
+
     .step-number {
+
       width: 43px;
       height: 43px;
 
       display: grid;
+
       place-items: center;
 
       margin-bottom: 17px;
@@ -484,22 +863,31 @@
       font-weight: 900;
     }
 
+
     .step h3 {
+
       margin-bottom: 9px;
+
       font-size: 17px;
     }
 
+
     .step p {
+
       color: #9299a8;
+
       font-size: 13px;
     }
+
 
     /* =========================
        CREATOR
     ========================== */
 
     .app {
-      width: min(850px,92%);
+
+      width:
+        min(850px,92%);
 
       margin:
         90px auto 0;
@@ -518,25 +906,34 @@
         0 30px 100px rgba(0,0,0,.35);
     }
 
+
     .app-head {
+
       display: flex;
 
       align-items: center;
+
       justify-content: space-between;
 
       margin-bottom: 23px;
     }
 
+
     .app-head h2 {
       font-size: 22px;
     }
 
+
     .app-head p {
+
       color: #818999;
+
       font-size: 12px;
     }
 
+
     .status {
+
       padding: 5px 11px;
 
       border-radius: 20px;
@@ -549,7 +946,9 @@
       font-size: 11px;
     }
 
+
     textarea {
+
       width: 100%;
 
       min-height: 150px;
@@ -574,11 +973,14 @@
       line-height: 2;
     }
 
+
     textarea::placeholder {
       color: #596171;
     }
 
+
     .generate {
+
       width: 100%;
 
       margin-top: 13px;
@@ -601,12 +1003,23 @@
       font-weight: 800;
     }
 
+
+    .generate:disabled {
+
+      opacity: .65;
+
+      cursor: wait;
+    }
+
+
     /* =========================
        ACCOUNT
     ========================== */
 
     .account {
-      width: min(850px,92%);
+
+      width:
+        min(850px,92%);
 
       margin:
         50px auto;
@@ -619,7 +1032,9 @@
       gap: 14px;
     }
 
+
     .account-card {
+
       padding: 25px;
 
       border-radius: 22px;
@@ -631,20 +1046,26 @@
         rgba(255,255,255,.025);
     }
 
+
     .account-card h3 {
       margin-bottom: 9px;
     }
 
+
     .account-card p {
+
       color: #858d9d;
+
       font-size: 13px;
     }
+
 
     /* =========================
        FOOTER
     ========================== */
 
     footer {
+
       margin-top: 105px;
 
       padding:
@@ -659,7 +1080,9 @@
         rgba(0,0,0,.28);
     }
 
+
     .footer-name {
+
       color: #e5e7eb;
 
       font-size: 16px;
@@ -669,7 +1092,9 @@
       letter-spacing: 1px;
     }
 
+
     .footer-description {
+
       margin-top: 7px;
 
       color: #687181;
@@ -677,13 +1102,16 @@
       font-size: 12px;
     }
 
+
     .footer-copy {
+
       margin-top: 12px;
 
       color: #4f5663;
 
       font-size: 11px;
     }
+
 
     /* =========================
        MOBILE
@@ -692,23 +1120,37 @@
     @media(max-width:800px) {
 
       .showcase {
-        grid-template-columns: 1fr 1fr;
+
+        grid-template-columns:
+          1fr 1fr;
       }
 
+
       .showcase-card.large {
+
         grid-column: span 2;
+
         grid-row: auto;
+
         min-height: 320px;
       }
 
+
       .workflow {
-        grid-template-columns: 1fr 1fr;
+
+        grid-template-columns:
+          1fr 1fr;
       }
 
+
       .account {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+          1fr;
       }
+
     }
+
 
     @media(max-width:520px) {
 
@@ -716,71 +1158,159 @@
         font-size: 17px;
       }
 
+
       .logo-icon {
+
         width: 36px;
         height: 36px;
       }
 
+
       .nav-btn {
-        padding: 8px 11px;
+
+        padding:
+          8px 11px;
+
         font-size: 12px;
       }
 
+
       .hero {
+
         padding-top: 45px;
       }
 
+
       .hero-description {
+
         font-size: 14px;
       }
 
+
       .showcase {
+
         gap: 9px;
       }
 
+
       .showcase-card.large {
+
         min-height: 280px;
       }
 
+
       .showcase-card {
+
         min-height: 145px;
+
         border-radius: 17px;
       }
 
+
       .showcase-overlay {
+
         padding: 13px;
       }
 
+
       .showcase-overlay h3 {
+
         font-size: 13px;
       }
 
+
       .showcase-overlay p {
+
         display: none;
       }
 
+
       .workflow {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+          1fr;
       }
 
+
       .step {
+
         min-height: auto;
       }
 
+
       .app {
+
         padding: 18px;
+
         border-radius: 21px;
       }
 
+
       .user-info {
+
         display: none !important;
       }
+
+
+      .loader-logo {
+
+        width: 76px;
+        height: 76px;
+
+        border-radius: 24px;
+      }
+
+
+      .loader-title {
+
+        font-size: 20px;
+      }
+
     }
 
   </style>
+
 </head>
 
+
 <body>
+
+
+  <!-- =====================================================
+       LOADING SCREEN
+  ====================================================== -->
+
+  <div id="pageLoader">
+
+    <div class="loader-logo">
+
+      <span class="loader-star">
+        ✦
+      </span>
+
+    </div>
+
+
+    <div class="loader-title">
+      ابزارک AI
+    </div>
+
+
+    <div class="loader-text">
+      در حال آماده‌سازی...
+    </div>
+
+
+    <div class="loader-dots">
+
+      <span></span>
+      <span></span>
+      <span></span>
+
+    </div>
+
+  </div>
+
 
   <!-- =========================
        HEADER
@@ -790,13 +1320,21 @@
 
     <nav class="nav">
 
-      <a href="#" class="logo">
+      <a
+        href="#"
+        class="logo"
+      >
 
-        <span class="logo-icon">✦</span>
+        <span class="logo-icon">
+          ✦
+        </span>
 
-        <span>ابزارک AI</span>
+        <span>
+          ابزارک AI
+        </span>
 
       </a>
+
 
       <div class="nav-actions">
 
@@ -804,6 +1342,7 @@
           class="user-info"
           id="userInfo"
         ></span>
+
 
         <button
           class="nav-btn"
@@ -813,12 +1352,14 @@
           خروج
         </button>
 
+
         <button
           class="nav-btn"
           id="loginBtn"
         >
           ورود
         </button>
+
 
         <button
           class="nav-btn primary"
@@ -840,6 +1381,11 @@
 
   <main>
 
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
     <section class="hero">
 
       <div class="badge">
@@ -850,13 +1396,17 @@
 
       </div>
 
+
       <h1>
 
         از یک ایده خام
         تا یک
-        <span>تصویر حرفه‌ای</span>
+        <span>
+          تصویر حرفه‌ای
+        </span>
 
       </h1>
+
 
       <p class="hero-description">
 
@@ -866,12 +1416,18 @@
 
       </p>
 
+
       <a
         href="#creator"
         class="hero-button"
       >
+
         شروع ساخت تصویر
-        <span>←</span>
+
+        <span>
+          ←
+        </span>
+
       </a>
 
     </section>
@@ -883,12 +1439,14 @@
 
     <section class="showcase">
 
+
       <figure class="showcase-card large">
 
         <img
           src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=85"
           alt="فناوری و هوش مصنوعی"
         >
+
 
         <figcaption class="showcase-overlay">
 
@@ -916,6 +1474,7 @@
           alt="پرامپت حرفه‌ای"
         >
 
+
         <figcaption class="showcase-overlay">
 
           <div>
@@ -941,6 +1500,7 @@
           src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=900&q=85"
           alt="هنر دیجیتال"
         >
+
 
         <figcaption class="showcase-overlay">
 
@@ -968,6 +1528,7 @@
           alt="ویرایش تصویر"
         >
 
+
         <figcaption class="showcase-overlay">
 
           <div>
@@ -993,6 +1554,7 @@
           src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=900&q=85"
           alt="خروجی باکیفیت"
         >
+
 
         <figcaption class="showcase-overlay">
 
@@ -1027,9 +1589,11 @@
           چهار مرحله اصلی
         </small>
 
+
         <h2>
           از ایده تا خروجی نهایی
         </h2>
+
 
         <p>
           همه مراحل در یک مسیر ساده
@@ -1040,19 +1604,23 @@
 
       <div class="workflow">
 
+
         <article class="step">
 
           <div class="step-icon">
             💡
           </div>
 
+
           <div class="step-number">
             ۱
           </div>
 
+
           <h3>
             ایده خام
           </h3>
+
 
           <p>
             ایده یا توضیح اولیه خود را وارد کنید.
@@ -1067,13 +1635,16 @@
             ✦
           </div>
 
+
           <div class="step-number">
             ۲
           </div>
 
+
           <h3>
             پرامپت حرفه‌ای
           </h3>
+
 
           <p>
             ایده شما به یک پرامپت دقیق و ساختاریافته تبدیل می‌شود.
@@ -1088,13 +1659,16 @@
             🎨
           </div>
 
+
           <div class="step-number">
             ۳
           </div>
 
+
           <h3>
             تولید و ویرایش
           </h3>
+
 
           <p>
             تصویر ایجاد شده را مشاهده و تغییرات موردنظر را اعمال کنید.
@@ -1109,13 +1683,16 @@
             ⚡
           </div>
 
+
           <div class="step-number">
             ۴
           </div>
 
+
           <h3>
             افزایش کیفیت
           </h3>
+
 
           <p>
             وضوح تصویر را افزایش دهید و خروجی نهایی را دریافت کنید.
@@ -1137,6 +1714,7 @@
       class="app"
     >
 
+
       <div class="app-head">
 
         <div>
@@ -1145,11 +1723,13 @@
             پروژه جدید خود را شروع کنید
           </h2>
 
+
           <p>
             ایده اولیه خود را در کادر زیر بنویسید.
           </p>
 
         </div>
+
 
         <span class="status">
           ● آماده
@@ -1181,11 +1761,13 @@
 
     <section class="account">
 
+
       <div class="account-card">
 
         <h3>
           👤 حساب کاربری
         </h3>
+
 
         <p>
           برای ذخیره پروژه‌ها و ادامه کار،
@@ -1200,6 +1782,7 @@
         <h3>
           ☁️ پروژه‌های من
         </h3>
+
 
         <p>
           پروژه‌های شما در حساب کاربری ذخیره خواهند شد.
@@ -1218,13 +1801,16 @@
 
   <footer>
 
+
     <div class="footer-name">
       Vahid.Hemmati
     </div>
 
+
     <div class="footer-description">
       ابزارک AI؛ مسیری ساده برای تبدیل ایده‌های شما به تصاویر خلاقانه و حرفه‌ای.
     </div>
+
 
     <div class="footer-copy">
       © 2026 ابزارک AI — تمامی حقوق محفوظ است.
@@ -1240,33 +1826,22 @@
 
   <script>
 
-    /*
-     * =====================================================
-     * 1. تنظیمات Supabase
-     * =====================================================
-     */
+
+    /* =====================================================
+       1. تنظیمات Supabase
+    ====================================================== */
 
     const SUPABASE_URL =
       "https://jndrwriknenbnrjkckxf.supabase.co";
 
 
-    /*
-     * =====================================================
-     * 2. اینجا Publishable Key خودت را قرار بده
-     *
-     * فقط مقدار داخل کوتیشن را عوض کن.
-     * =====================================================
-     */
-
     const SUPABASE_PUBLISHABLE_KEY =
       "sb_publishable_vIHPwgfpXl56LSYjYXLBCQ_V7Axq7eB";
 
 
-    /*
-     * =====================================================
-     * 3. ساخت اتصال Supabase
-     * =====================================================
-     */
+    /* =====================================================
+       2. اتصال Supabase
+    ====================================================== */
 
     const supabaseClient =
       window.supabase.createClient(
@@ -1275,30 +1850,29 @@
       );
 
 
-    /*
-     * =====================================================
-     * 4. عناصر صفحه
-     * =====================================================
-     */
+    /* =====================================================
+       3. عناصر صفحه
+    ====================================================== */
 
     const loginBtn =
       document.getElementById("loginBtn");
 
+
     const signupBtn =
       document.getElementById("signupBtn");
 
+
     const logoutBtn =
       document.getElementById("logoutBtn");
+
 
     const userInfo =
       document.getElementById("userInfo");
 
 
-    /*
-     * =====================================================
-     * 5. ورود با Google
-     * =====================================================
-     */
+    /* =====================================================
+       4. ورود با Google
+    ====================================================== */
 
     async function signInWithGoogle() {
 
@@ -1319,8 +1893,14 @@
 
       if (error) {
 
+        console.error(
+          "Google Login Error:",
+          error
+        );
+
+
         alert(
-          "خطا در ورود با Google:\n" +
+          "خطا در ورود با گوگل:\n" +
           error.message
         );
 
@@ -1329,68 +1909,76 @@
     }
 
 
-    /*
-     * =====================================================
-     * 6. دکمه ورود
-     * =====================================================
-     */
+    /* =====================================================
+       5. دکمه ورود
+    ====================================================== */
 
-    loginBtn.addEventListener(
-      "click",
-      signInWithGoogle
-    );
+    if (loginBtn) {
 
+      loginBtn.addEventListener(
+        "click",
+        signInWithGoogle
+      );
 
-    /*
-     * =====================================================
-     * 7. دکمه ثبت‌نام
-     * =====================================================
-     */
-
-    signupBtn.addEventListener(
-      "click",
-      signInWithGoogle
-    );
+    }
 
 
-    /*
-     * =====================================================
-     * 8. خروج از حساب
-     * =====================================================
-     */
+    /* =====================================================
+       6. دکمه ثبت‌نام
+    ====================================================== */
 
-    logoutBtn.addEventListener(
-      "click",
-      async () => {
+    if (signupBtn) {
 
-        const { error } =
-          await supabaseClient.auth.signOut();
+      signupBtn.addEventListener(
+        "click",
+        signInWithGoogle
+      );
 
-        if (error) {
+    }
 
-          alert(
-            "خطا در خروج از حساب:\n" +
-            error.message
-          );
 
-          return;
+    /* =====================================================
+       7. خروج
+    ====================================================== */
+
+    if (logoutBtn) {
+
+      logoutBtn.addEventListener(
+        "click",
+        async () => {
+
+          const { error } =
+            await supabaseClient.auth.signOut();
+
+
+          if (error) {
+
+            alert(
+              "خطا در خروج از حساب:\n" +
+              error.message
+            );
+
+            return;
+
+          }
+
+
+          updateUserInterface(null);
+
         }
+      );
 
-        updateUserInterface(null);
-
-      }
-    );
+    }
 
 
-    /*
-     * =====================================================
-     * 9. به‌روزرسانی وضعیت کاربر
-     * =====================================================
-     */
+    /* =====================================================
+       8. وضعیت کاربر
+    ====================================================== */
 
     function updateUserInterface(user) {
 
       if (user) {
+
 
         const name =
           user.user_metadata?.full_name ||
@@ -1405,26 +1993,35 @@
 
         userInfo.classList.add("show");
 
+
         loginBtn.style.display =
           "none";
 
+
         signupBtn.style.display =
           "none";
+
 
         logoutBtn.style.display =
           "block";
 
+
       } else {
+
 
         userInfo.textContent = "";
 
+
         userInfo.classList.remove("show");
+
 
         loginBtn.style.display =
           "block";
 
+
         signupBtn.style.display =
           "block";
+
 
         logoutBtn.style.display =
           "none";
@@ -1434,18 +2031,17 @@
     }
 
 
-    /*
-     * =====================================================
-     * 10. بررسی وضعیت فعلی ورود
-     * =====================================================
-     */
+    /* =====================================================
+       9. بررسی کاربر فعلی
+    ====================================================== */
 
     async function checkCurrentUser() {
 
       const {
         data,
         error
-      } = await supabaseClient.auth.getUser();
+      } =
+        await supabaseClient.auth.getUser();
 
 
       if (error) {
@@ -1453,6 +2049,7 @@
         updateUserInterface(null);
 
         return;
+
       }
 
 
@@ -1463,11 +2060,9 @@
     }
 
 
-    /*
-     * =====================================================
-     * 11. بررسی تغییر وضعیت احراز هویت
-     * =====================================================
-     */
+    /* =====================================================
+       10. تغییر وضعیت احراز هویت
+    ====================================================== */
 
     supabaseClient.auth.onAuthStateChange(
       (event, session) => {
@@ -1480,25 +2075,22 @@
     );
 
 
-    /*
-     * =====================================================
-     * 12. اجرای بررسی کاربر
-     * =====================================================
-     */
+    /* =====================================================
+       11. بررسی اولیه
+    ====================================================== */
 
     checkCurrentUser();
 
 
-    /*
-     * =====================================================
-     * 13. دکمه ساخت پرامپت
-     * =====================================================
-     */
+    /* =====================================================
+       12. ساخت پرامپت
+    ====================================================== */
 
     const generateButton =
       document.getElementById(
         "generateButton"
       );
+
 
     const ideaInput =
       document.getElementById(
@@ -1506,142 +2098,95 @@
       );
 
 
-    generateButton.addEventListener(
-      "click",
-      async () => {
+    if (generateButton) {
 
-        const idea =
-          ideaInput.value.trim();
+      generateButton.addEventListener(
+        "click",
+        async () => {
 
 
-        if (!idea) {
+          const idea =
+            ideaInput.value.trim();
 
-          ideaInput.focus();
 
-          ideaInput.placeholder =
-            "لطفاً ابتدا ایده خود را بنویسید.";
+          if (!idea) {
 
-          return;
+            ideaInput.focus();
+
+
+            ideaInput.placeholder =
+              "لطفاً ابتدا ایده خود را بنویسید.";
+
+
+            return;
+
+          }
+
+
+          generateButton.disabled =
+            true;
+
+
+          generateButton.textContent =
+            "در حال آماده‌سازی...";
+
+
+          setTimeout(() => {
+
+
+            generateButton.disabled =
+              false;
+
+
+            generateButton.textContent =
+              "✦ ساخت پرامپت حرفه‌ای";
+
+
+            alert(
+              "اتصال موتور واقعی هوش مصنوعی را در مرحله بعد انجام می‌دهیم."
+            );
+
+
+          }, 900);
 
         }
+      );
+
+    }
 
 
-        /*
-         * فعلاً فقط آزمایشی است.
-         * در مرحله بعد این قسمت را
-         * به موتور واقعی تولید پرامپت
-         * متصل می‌کنیم.
-         */
+    /* =====================================================
+       13. حذف لودر
+    ====================================================== */
 
-        generateButton.disabled =
-          true;
-
-        generateButton.textContent =
-          "در حال آماده‌سازی...";
-
+    window.addEventListener(
+      "load",
+      () => {
 
         setTimeout(() => {
 
-          generateButton.disabled =
-            false;
+          const loader =
+            document.getElementById(
+              "pageLoader"
+            );
 
-          generateButton.textContent =
-            "✦ ساخت پرامپت حرفه‌ای";
 
+          if (loader) {
 
-          alert(
-            "اتصال موتور واقعی هوش مصنوعی را در مرحله بعد انجام می‌دهیم."
-          );
+            loader.classList.add(
+              "hide"
+            );
 
-        }, 900);
+          }
+
+        }, 500);
 
       }
     );
 
+
   </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-  // ==============================
-  // اتصال به Supabase
-  // ==============================
-
-  const SUPABASE_URL =
-    "https://jndrwriknenbnrjkckxf.supabase.co";
-
-  const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_vIHPwgfpXl56LSYjYXLBCQ_V7Axq7eB";
-
-  const supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-  );
 
 
-  // ==============================
-  // ورود با حساب گوگل
-  // ==============================
-
-  const loginBtn = document.getElementById("loginBtn");
-  const signupBtn = document.getElementById("signupBtn");
-
-
-  async function loginWithGoogle() {
-
-    const { error } =
-      await supabaseClient.auth.signInWithOAuth({
-        provider: "google",
-        options: {
-          redirectTo: window.location.origin
-        }
-      });
-
-    if (error) {
-      console.error("Google Login Error:", error);
-      alert("ورود با گوگل انجام نشد. لطفاً دوباره تلاش کنید.");
-    }
-  }
-
-
-  // دکمه ورود
-  if (loginBtn) {
-    loginBtn.addEventListener("click", loginWithGoogle);
-  }
-
-
-  // دکمه ثبت‌نام
-  if (signupBtn) {
-    signupBtn.addEventListener("click", loginWithGoogle);
-  }
-
-
-  // ==============================
-  // بررسی وضعیت کاربر
-  // ==============================
-
-  supabaseClient.auth.onAuthStateChange(
-    (event, session) => {
-
-      if (session && session.user) {
-
-        console.log(
-          "کاربر وارد شد:",
-          session.user.email
-        );
-
-        if (loginBtn) {
-          loginBtn.textContent = "حساب من";
-        }
-
-        if (signupBtn) {
-          signupBtn.textContent = "وارد شده ✓";
-        }
-
-      }
-
-    }
-  );
-
-</script>
 </body>
 </html>

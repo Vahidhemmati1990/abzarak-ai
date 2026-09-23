@@ -19,10 +19,6 @@ content="ابزارک AI؛ ایده خود را به پرامپت حرفه‌ا�
 
 <style>
 
-/* =========================
-   GLOBAL
-========================= */
-
 *{
 box-sizing:border-box;
 margin:0;
@@ -72,6 +68,10 @@ button{
 cursor:pointer;
 }
 
+button:disabled{
+cursor:not-allowed;
+}
+
 a{
 color:inherit;
 text-decoration:none;
@@ -79,7 +79,7 @@ text-decoration:none;
 
 
 /* =========================
-   HEADER
+HEADER
 ========================= */
 
 header{
@@ -201,7 +201,7 @@ rgba(255,255,255,.06);
 
 
 /* =========================
-   HERO
+HERO
 ========================= */
 
 .hero{
@@ -285,7 +285,7 @@ font-size:15px;
 
 
 /* =========================
-   SHOWCASE
+SHOWCASE
 ========================= */
 
 .showcase{
@@ -354,7 +354,7 @@ font-size:16px;
 
 
 /* =========================
-   SECTION
+SECTION
 ========================= */
 
 .section{
@@ -384,7 +384,7 @@ margin-top:5px;
 
 
 /* =========================
-   WORKFLOW
+WORKFLOW
 ========================= */
 
 .workflow{
@@ -450,7 +450,7 @@ margin-top:6px;
 
 
 /* =========================
-   APP
+APP
 ========================= */
 
 .app{
@@ -570,7 +570,7 @@ font-size:14px;
 transition:.2s;
 }
 
-.generate:hover{
+.generate:hover:not(:disabled){
 transform:translateY(-1px);
 }
 
@@ -582,7 +582,7 @@ color:#737b89;
 
 
 /* =========================
-   LOGIN NOTICE
+LOGIN NOTICE
 ========================= */
 
 .notice{
@@ -682,7 +682,127 @@ transform:translateY(0);
 
 
 /* =========================
-   ACCOUNT
+PROMPT RESULT
+========================= */
+
+.result{
+display:none;
+
+margin-top:18px;
+
+padding:20px;
+
+border-radius:18px;
+
+background:
+linear-gradient(
+145deg,
+rgba(124,58,237,.10),
+rgba(5,5,8,.95)
+);
+
+border:
+1px solid rgba(139,92,246,.22);
+
+animation:
+resultIn .3s ease;
+}
+
+.result.show{
+display:block;
+}
+
+.result-head{
+display:flex;
+
+align-items:center;
+justify-content:space-between;
+
+gap:10px;
+
+margin-bottom:12px;
+}
+
+.result-title{
+font-size:15px;
+
+font-weight:800;
+}
+
+.copy-btn{
+border:1px solid rgba(255,255,255,.10);
+
+background:
+rgba(255,255,255,.06);
+
+color:#fff;
+
+padding:7px 12px;
+
+border-radius:9px;
+
+font-size:11px;
+}
+
+.copy-btn:hover{
+background:
+rgba(255,255,255,.10);
+}
+
+.prompt-text{
+white-space:pre-wrap;
+
+direction:ltr;
+
+text-align:left;
+
+background:#030305;
+
+border:
+1px solid rgba(255,255,255,.08);
+
+border-radius:13px;
+
+padding:16px;
+
+color:#e5e7eb;
+
+font-family:Arial,sans-serif;
+
+font-size:13px;
+
+line-height:1.8;
+
+max-height:500px;
+
+overflow:auto;
+}
+
+.result-message{
+color:#a5b4fc;
+
+font-size:12px;
+
+margin-top:10px;
+}
+
+@keyframes resultIn{
+
+from{
+opacity:0;
+transform:translateY(8px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+
+/* =========================
+ACCOUNT
 ========================= */
 
 .account{
@@ -723,7 +843,7 @@ font-size:13px;
 
 
 /* =========================
-   MODAL
+MODAL
 ========================= */
 
 .modal{
@@ -848,7 +968,7 @@ margin-top:10px;
 
 
 /* =========================
-   LUXURY FOOTER
+LUXURY FOOTER
 ========================= */
 
 footer{
@@ -882,9 +1002,6 @@ box-shadow:
 isolation:isolate;
 }
 
-
-/* هاله بنفش بزرگ و مورب */
-
 footer::before{
 content:"";
 
@@ -916,9 +1033,6 @@ pointer-events:none;
 z-index:-1;
 }
 
-
-/* هاله بنفش دوم برای امتداد مورب */
-
 footer::after{
 content:"";
 
@@ -949,9 +1063,6 @@ pointer-events:none;
 
 z-index:-1;
 }
-
-
-/* درخشش بسیار ظریف سمت چپ */
 
 .footer-glow{
 position:absolute;
@@ -1013,7 +1124,137 @@ font-size:11px;
 
 
 /* =========================
-   MOBILE
+LOADING SCREEN
+========================= */
+
+#pageLoader{
+position:fixed;
+
+inset:0;
+
+z-index:99999;
+
+display:flex;
+
+align-items:center;
+justify-content:center;
+
+background:
+radial-gradient(
+circle at center,
+#120b20 0%,
+#050407 45%,
+#000 100%
+);
+
+transition:
+opacity .5s ease,
+visibility .5s ease;
+}
+
+#pageLoader.hide{
+opacity:0;
+visibility:hidden;
+}
+
+.loaderBox{
+text-align:center;
+}
+
+.loaderLogo{
+width:65px;
+height:65px;
+
+margin:auto;
+
+display:grid;
+place-items:center;
+
+border-radius:20px;
+
+background:
+linear-gradient(
+135deg,
+#7c3aed,
+#2563eb
+);
+
+font-size:28px;
+
+box-shadow:
+0 0 35px rgba(124,58,237,.55);
+
+animation:
+loaderPulse 1.5s ease-in-out infinite;
+}
+
+.loaderText{
+margin-top:17px;
+
+color:#cbd5e1;
+
+font-size:13px;
+}
+
+.loaderDots{
+display:flex;
+
+justify-content:center;
+
+gap:5px;
+
+margin-top:10px;
+}
+
+.loaderDots span{
+width:6px;
+height:6px;
+
+border-radius:50%;
+
+background:#8b5cf6;
+
+animation:
+loaderDot 1s infinite;
+}
+
+.loaderDots span:nth-child(2){
+animation-delay:.15s;
+}
+
+.loaderDots span:nth-child(3){
+animation-delay:.3s;
+}
+
+@keyframes loaderPulse{
+
+0%,100%{
+transform:scale(1);
+}
+
+50%{
+transform:scale(1.08);
+}
+
+}
+
+@keyframes loaderDot{
+
+0%,80%,100%{
+opacity:.25;
+transform:translateY(0);
+}
+
+40%{
+opacity:1;
+transform:translateY(-4px);
+}
+
+}
+
+
+/* =========================
+MOBILE
 ========================= */
 
 @media(max-width:800px){
@@ -1106,6 +1347,15 @@ grid-template-columns:
 padding:18px;
 }
 
+.result-head{
+align-items:flex-start;
+flex-direction:column;
+}
+
+.copy-btn{
+width:100%;
+}
+
 footer{
 padding:
 48px 18px 30px;
@@ -1132,6 +1382,33 @@ right:-300px;
 
 
 <body>
+
+
+<!-- =========================
+PAGE LOADER
+========================= -->
+
+<div id="pageLoader">
+
+<div class="loaderBox">
+
+<div class="loaderLogo">
+✦
+</div>
+
+<div class="loaderText">
+در حال آماده‌سازی ابزارک AI
+</div>
+
+<div class="loaderDots">
+<span></span>
+<span></span>
+<span></span>
+</div>
+
+</div>
+
+</div>
 
 
 <!-- =========================
@@ -1193,8 +1470,6 @@ MAIN
 
 <main>
 
-
-<!-- HERO -->
 
 <section class="hero">
 
@@ -1480,20 +1755,17 @@ id="generateButton">
 class="notice"
 id="notice">
 
-
 <strong>
 
 کاربر گرامی، برای استفاده از خدمات سایت لطفاً وارد حساب کاربری خود شوید
 
 </strong>
 
-
 <span>
 
 برای ادامه، ابتدا وارد حساب خود شوید یا یک حساب کاربری ایجاد کنید.
 
 </span>
-
 
 <div class="notice-actions">
 
@@ -1504,7 +1776,6 @@ id="noticeLogin">
 
 </button>
 
-
 <button
 class="second"
 id="noticeSignup">
@@ -1513,6 +1784,41 @@ id="noticeSignup">
 
 </button>
 
+</div>
+
+</div>
+
+
+<!-- PROMPT RESULT -->
+
+<div
+class="result"
+id="resultBox">
+
+<div class="result-head">
+
+<div class="result-title">
+✨ پرامپت حرفه‌ای شما
+</div>
+
+<button
+type="button"
+class="copy-btn"
+id="copyPrompt">
+
+کپی پرامپت
+</button>
+
+</div>
+
+<div
+class="prompt-text"
+id="promptResult">
+</div>
+
+<div
+class="result-message"
+id="resultMessage">
 </div>
 
 </div>
@@ -1555,19 +1861,15 @@ id="noticeSignup">
 </main>
 
 
-<!-- =========================
-FOOTER
-========================= -->
+<!-- FOOTER -->
 
 <footer>
 
 <div class="footer-glow"></div>
 
-
 <div class="footer-name">
 Vahid.Hemmati
 </div>
-
 
 <div class="footer-description">
 
@@ -1575,7 +1877,6 @@ Vahid.Hemmati
 به تصاویر خلاقانه و حرفه‌ای.
 
 </div>
-
 
 <div
 class="footer-copy">
@@ -1587,34 +1888,29 @@ class="footer-copy">
 </footer>
 
 
-<!-- =========================
-LOGIN MODAL
-========================= -->
+<!-- LOGIN MODAL -->
 
 <div
 class="modal"
 id="modal">
 
-
 <div class="box">
-
 
 <h2 id="modalTitle">
 ورود به ابزارک AI
 </h2>
 
-
 <input
 id="email"
 type="email"
+autocomplete="email"
 placeholder="ایمیل">
-
 
 <input
 id="password"
 type="password"
+autocomplete="current-password"
 placeholder="رمز عبور">
-
 
 <button
 id="emailAction">
@@ -1622,7 +1918,6 @@ id="emailAction">
 ورود با ایمیل
 
 </button>
-
 
 <button
 class="google"
@@ -1632,7 +1927,6 @@ id="googleAction">
 
 </button>
 
-
 <button
 class="close"
 id="closeModal">
@@ -1641,32 +1935,27 @@ id="closeModal">
 
 </button>
 
-
 <div
 class="msg"
 id="msg">
 </div>
 
-
 </div>
 
 </div>
 
-
-<!-- =========================
-JAVASCRIPT
-========================= -->
 
 <script>
 
+/* =====================================================
+   SUPABASE
+===================================================== */
 
 const SUPABASE_URL =
 "https://jndrwriknenbnrjkckxf.supabase.co";
 
-
 const SUPABASE_KEY =
 "sb_publishable_vIHPwgfpXl56LSYjYXLBCQ_V7Axq7eB";
-
 
 const sb =
 window.supabase.createClient(
@@ -1675,7 +1964,9 @@ SUPABASE_KEY
 );
 
 
-/* ELEMENTS */
+/* =====================================================
+   ELEMENTS
+===================================================== */
 
 const loginBtn =
 document.getElementById("loginBtn");
@@ -1725,10 +2016,27 @@ document.getElementById("closeModal");
 const msg =
 document.getElementById("msg");
 
+const resultBox =
+document.getElementById("resultBox");
+
+const promptResult =
+document.getElementById("promptResult");
+
+const resultMessage =
+document.getElementById("resultMessage");
+
+const copyPrompt =
+document.getElementById("copyPrompt");
+
+const pageLoader =
+document.getElementById("pageLoader");
+
 let mode="login";
 
 
-/* OPEN MODAL */
+/* =====================================================
+   MODAL
+===================================================== */
 
 function openModal(type){
 
@@ -1741,14 +2049,12 @@ type==="login"
 :
 "ساخت حساب کاربری";
 
-
 emailAction.textContent=
 type==="login"
 ?
 "ورود با ایمیل"
 :
 "ثبت‌نام با ایمیل";
-
 
 msg.textContent="";
 
@@ -1760,26 +2066,28 @@ modal.classList.add("show");
 }
 
 
-/* HEADER */
+/* =====================================================
+   HEADER BUTTONS
+===================================================== */
 
 loginBtn.onclick=()=>{
 openModal("login");
 };
-
 
 signupBtn.onclick=()=>{
 openModal("signup");
 };
 
 
-/* NOTICE */
+/* =====================================================
+   NOTICE BUTTONS
+===================================================== */
 
 document.getElementById(
 "noticeLogin"
 ).onclick=()=>{
 openModal("login");
 };
-
 
 document.getElementById(
 "noticeSignup"
@@ -1788,14 +2096,18 @@ openModal("signup");
 };
 
 
-/* CLOSE */
+/* =====================================================
+   CLOSE MODAL
+===================================================== */
 
 closeModal.onclick=()=>{
 modal.classList.remove("show");
 };
 
 
-/* GOOGLE */
+/* =====================================================
+   GOOGLE LOGIN
+===================================================== */
 
 googleAction.onclick=
 async function(){
@@ -1803,6 +2115,7 @@ async function(){
 msg.textContent=
 "در حال انتقال به Google...";
 
+googleAction.disabled=true;
 
 const {error}=
 await sb.auth.signInWithOAuth({
@@ -1816,7 +2129,6 @@ window.location.origin
 
 });
 
-
 if(error){
 
 console.error(error);
@@ -1824,12 +2136,16 @@ console.error(error);
 msg.textContent=
 "ورود با Google انجام نشد.";
 
+googleAction.disabled=false;
+
 }
 
 };
 
 
-/* EMAIL */
+/* =====================================================
+   EMAIL LOGIN / SIGNUP
+===================================================== */
 
 emailAction.onclick=
 async function(){
@@ -1840,7 +2156,6 @@ email.value.trim();
 const p=
 password.value;
 
-
 if(!e||!p){
 
 msg.textContent=
@@ -1850,6 +2165,14 @@ return;
 
 }
 
+if(p.length<6){
+
+msg.textContent=
+"رمز عبور باید حداقل ۶ کاراکتر باشد.";
+
+return;
+
+}
 
 emailAction.disabled=true;
 
@@ -1857,18 +2180,23 @@ emailAction.textContent=
 "در حال بررسی...";
 
 
+/* SIGN UP */
+
 if(mode==="signup"){
 
 const {data,error}=
 await sb.auth.signUp({
 
 email:e,
+
 password:p
 
 });
 
 
 if(error){
+
+console.error(error);
 
 msg.textContent=
 error.message;
@@ -1883,30 +2211,48 @@ return;
 }
 
 
-if(data.session){
+/*
+اگر Confirm Email روشن باشد،
+Supabase معمولاً session را بلافاصله
+برنمی‌گرداند.
+*/
 
-modal.classList.remove("show");
-
-}else{
+if(!data.session){
 
 msg.textContent=
 "ثبت‌نام انجام شد. لطفاً ایمیل خود را برای تأیید حساب بررسی کنید.";
 
+emailAction.disabled=false;
+
+emailAction.textContent=
+"ثبت‌نام با ایمیل";
+
+return;
+
 }
 
-}else{
+modal.classList.remove("show");
 
+}
+
+
+/* LOGIN */
+
+else{
 
 const {error}=
 await sb.auth.signInWithPassword({
 
 email:e,
+
 password:p
 
 });
 
 
 if(error){
+
+console.error(error);
 
 msg.textContent=
 error.message;
@@ -1920,18 +2266,18 @@ return;
 
 }
 
-
 modal.classList.remove("show");
 
 }
-
 
 emailAction.disabled=false;
 
 };
 
 
-/* LOGOUT */
+/* =====================================================
+   LOGOUT
+===================================================== */
 
 logoutBtn.onclick=
 async function(){
@@ -1948,7 +2294,9 @@ console.error(error);
 };
 
 
-/* UPDATE UI */
+/* =====================================================
+   UPDATE USER INTERFACE
+===================================================== */
 
 function updateUI(user){
 
@@ -1960,13 +2308,11 @@ user.user_metadata?.name ||
 user.email ||
 "کاربر";
 
-
 userInfo.textContent=
 "👤 "+name;
 
 userInfo.style.display=
 "flex";
-
 
 loginBtn.style.display=
 "none";
@@ -1977,13 +2323,11 @@ signupBtn.style.display=
 logoutBtn.style.display=
 "block";
 
-
 status.textContent=
 "● فعال";
 
 status.style.color=
 "#86efac";
-
 
 generate.classList.remove(
 "locked"
@@ -1992,14 +2336,11 @@ generate.classList.remove(
 generate.textContent=
 "✦ ساخت پرامپت حرفه‌ای";
 
-
 notice.classList.remove(
 "show"
 );
 
-
 }else{
-
 
 userInfo.style.display=
 "none";
@@ -2013,13 +2354,11 @@ signupBtn.style.display=
 logoutBtn.style.display=
 "none";
 
-
 status.textContent=
 "مهمان";
 
 status.style.color=
 "#cbd5e1";
-
 
 generate.classList.add(
 "locked"
@@ -2033,7 +2372,9 @@ generate.textContent=
 }
 
 
-/* CHECK USER */
+/* =====================================================
+   CHECK USER
+===================================================== */
 
 async function checkUser(){
 
@@ -2055,7 +2396,9 @@ data?.user||null
 }
 
 
-/* AUTH STATE */
+/* =====================================================
+   AUTH STATE
+===================================================== */
 
 sb.auth.onAuthStateChange(
 (event,session)=>{
@@ -2068,21 +2411,33 @@ session?.user||null
 );
 
 
-/* START */
+/* =====================================================
+   START
+===================================================== */
 
 checkUser();
 
 
-/* GENERATE */
+/* =====================================================
+   GENERATE PROFESSIONAL PROMPT
+===================================================== */
 
 generate.onclick=
 async function(){
 
-const {data}=
+/*
+بررسی دوباره کاربر
+تا حتی اگر دکمه از UI باز شده باشد،
+کاربر مهمان نتواند Function را اجرا کند.
+*/
+
+const {data:userData,error:userError}=
 await sb.auth.getUser();
 
-
-if(!data?.user){
+if(
+userError ||
+!userData?.user
+){
 
 notice.classList.add(
 "show"
@@ -2098,9 +2453,10 @@ return;
 }
 
 
+/* دریافت ایده */
+
 const idea=
 ideaInput.value.trim();
-
 
 if(!idea){
 
@@ -2114,30 +2470,216 @@ return;
 }
 
 
+/* وضعیت پردازش */
+
 generate.disabled=true;
 
 generate.textContent=
-"در حال آماده‌سازی...";
+"✦ در حال ساخت پرامپت...";
+
+notice.classList.remove(
+"show"
+);
+
+resultBox.classList.remove(
+"show"
+);
+
+resultMessage.textContent="";
 
 
-setTimeout(function(){
+try{
+
+/*
+اتصال مستقیم به Edge Function
+*/
+
+const {data,error}=
+await sb.functions.invoke(
+"generate-prompt",
+{
+body:{
+idea:idea
+}
+}
+);
+
+
+if(error){
+
+console.error(
+"Generate Prompt Error:",
+error
+);
+
+throw new Error(
+error.message ||
+"خطا در ارتباط با سرور"
+);
+
+}
+
+
+/*
+پشتیبانی از چند ساختار رایج
+برای پاسخ Function
+*/
+
+let generatedPrompt="";
+
+if(typeof data==="string"){
+
+generatedPrompt=data;
+
+}
+
+else if(data){
+
+generatedPrompt=
+data.prompt ||
+data.generatedPrompt ||
+data.result ||
+data.output ||
+data.text ||
+"";
+
+}
+
+
+/*
+اگر پاسخ داخل data قرار گرفته باشد
+*/
+
+if(
+!generatedPrompt &&
+data?.data
+){
+
+generatedPrompt=
+data.data.prompt ||
+data.data.generatedPrompt ||
+data.data.result ||
+data.data.output ||
+data.data.text ||
+"";
+
+}
+
+
+/*
+اگر Function پاسخ نامعتبر داده باشد
+*/
+
+if(!generatedPrompt){
+
+console.error(
+"Unexpected Function Response:",
+data
+);
+
+throw new Error(
+"پاسخ معتبری از موتور هوش مصنوعی دریافت نشد."
+);
+
+}
+
+
+/*
+نمایش نتیجه
+*/
+
+promptResult.textContent=
+generatedPrompt;
+
+resultMessage.textContent=
+"پرامپت حرفه‌ای با موفقیت ساخته شد.";
+
+resultBox.classList.add(
+"show"
+);
+
+resultBox.scrollIntoView({
+behavior:"smooth",
+block:"nearest"
+});
+
+
+}
+catch(error){
+
+console.error(error);
+
+resultBox.classList.add(
+"show"
+);
+
+promptResult.textContent=
+"";
+
+resultMessage.textContent=
+"متأسفانه در ساخت پرامپت خطایی رخ داد. لطفاً دوباره تلاش کنید.";
+
+}
+finally{
 
 generate.disabled=false;
 
 generate.textContent=
 "✦ ساخت پرامپت حرفه‌ای";
 
-
-alert(
-"اتصال موتور واقعی هوش مصنوعی را در مرحله بعد انجام می‌دهیم."
-);
-
-},900);
+}
 
 };
 
 
-/* CLOSE OUTSIDE */
+/* =====================================================
+   COPY PROMPT
+===================================================== */
+
+copyPrompt.onclick=
+async function(){
+
+const text=
+promptResult.textContent.trim();
+
+if(!text){
+
+return;
+
+}
+
+try{
+
+await navigator.clipboard.writeText(
+text
+);
+
+copyPrompt.textContent=
+"✓ کپی شد";
+
+setTimeout(()=>{
+
+copyPrompt.textContent=
+"کپی پرامپت";
+
+},1600);
+
+}
+catch(error){
+
+console.error(error);
+
+resultMessage.textContent=
+"کپی خودکار انجام نشد؛ متن را دستی انتخاب کنید.";
+
+}
+
+};
+
+
+/* =====================================================
+   CLOSE MODAL OUTSIDE
+===================================================== */
 
 modal.addEventListener(
 "click",
@@ -2150,6 +2692,28 @@ modal.classList.remove(
 );
 
 }
+
+});
+
+
+/* =====================================================
+   PAGE LOADER
+===================================================== */
+
+window.addEventListener(
+"load",
+function(){
+
+setTimeout(
+function(){
+
+pageLoader.classList.add(
+"hide"
+);
+
+},
+450
+);
 
 });
 

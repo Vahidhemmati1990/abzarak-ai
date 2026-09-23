@@ -1,3066 +1,1571 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-
 <head>
-
-  <meta charset="UTF-8">
-
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
-  <title>ابزارک AI | از ایده تا تصویر حرفه‌ای</title>
-
-  <meta
-    name="description"
-    content="ابزارک AI؛ ایده خود را به پرامپت حرفه‌ای، تصویر خلاقانه و خروجی باکیفیت تبدیل کنید."
-  >
-
-  <!-- =========================
-       SUPABASE
-  ========================== -->
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-
-  <!-- =========================
-       FONT
-  ========================== -->
-
-  <link rel="preconnect"
-        href="https://fonts.googleapis.com">
-
-  <link rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet"
-  >
-
-
-  <style>
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family:
-        'Vazirmatn',
-        Arial,
-        sans-serif;
-
-      background:
-        radial-gradient(
-          circle at 50% -10%,
-          rgba(80,70,180,.25),
-          transparent 38%
-        ),
-        linear-gradient(
-          180deg,
-          #05070c 0%,
-          #080b12 50%,
-          #05070c 100%
-        );
-
-      color: #f5f7fb;
-
-      min-height: 100vh;
-
-      line-height: 1.8;
-    }
-
-    body.modal-open {
-      overflow: hidden;
-    }
-
-    button,
-    textarea,
-    input {
-      font-family: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-
-    /* =========================
-       LOADER
-    ========================== */
-
-    #siteLoader {
-      position: fixed;
-
-      inset: 0;
-
-      z-index: 99999;
-
-      display: flex;
-
-      align-items: center;
-      justify-content: center;
-
-      background:
-        radial-gradient(
-          circle at center,
-          rgba(124,58,237,.15),
-          transparent 45%
-        ),
-        #05070c;
-
-      transition:
-        opacity .5s ease,
-        visibility .5s ease;
-    }
-
-    #siteLoader.hide {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    .loader-box {
-      text-align: center;
-    }
-
-    .loader-logo {
-      width: 72px;
-      height: 72px;
-
-      margin: auto;
-
-      display: grid;
-      place-items: center;
-
-      border-radius: 22px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #7c3aed,
-          #2563eb
-        );
-
-      box-shadow:
-        0 0 45px rgba(124,58,237,.45);
-
-      font-size: 35px;
-
-      animation:
-        loaderPulse 1.5s ease-in-out infinite;
-    }
-
-    .loader-text {
-      margin-top: 18px;
-
-      color: #e5e7eb;
-
-      font-size: 15px;
-
-      font-weight: 700;
-    }
-
-    .loader-sub {
-      margin-top: 5px;
-
-      color: #71798a;
-
-      font-size: 11px;
-    }
-
-    @keyframes loaderPulse {
-
-      0%,100% {
-        transform: scale(1);
-        box-shadow:
-          0 0 35px rgba(124,58,237,.35);
-      }
-
-      50% {
-        transform: scale(1.06);
-        box-shadow:
-          0 0 60px rgba(37,99,235,.55);
-      }
-
-    }
-
-
-    /* =========================
-       HEADER
-    ========================== */
-
-    header {
-      position: sticky;
-
-      top: 0;
-
-      z-index: 1000;
-
-      width: 100%;
-
-      background:
-        rgba(5,7,12,.84);
-
-      backdrop-filter: blur(18px);
-
-      -webkit-backdrop-filter: blur(18px);
-
-      border-bottom:
-        1px solid rgba(255,255,255,.07);
-    }
-
-    .nav {
-      width: min(1150px,92%);
-
-      min-height: 72px;
-
-      margin: auto;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: space-between;
-
-      gap: 20px;
-    }
-
-    .logo {
-      display: flex;
-
-      align-items: center;
-
-      gap: 10px;
-
-      font-size: 21px;
-
-      font-weight: 900;
-    }
-
-    .logo-icon {
-      width: 42px;
-      height: 42px;
-
-      display: grid;
-
-      place-items: center;
-
-      border-radius: 14px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #7c3aed,
-          #2563eb
-        );
-
-      box-shadow:
-        0 8px 30px rgba(79,70,229,.35);
-
-      font-size: 21px;
-    }
-
-    .nav-actions {
-      display: flex;
-
-      align-items: center;
-
-      gap: 9px;
-    }
-
-    .nav-btn {
-      padding: 9px 16px;
-
-      border-radius: 12px;
-
-      border:
-        1px solid rgba(255,255,255,.10);
-
-      background:
-        rgba(255,255,255,.04);
-
-      color: #fff;
-
-      font-size: 13px;
-
-      transition: .25s;
-    }
-
-    .nav-btn:hover {
-      background:
-        rgba(255,255,255,.09);
-
-      transform:
-        translateY(-1px);
-    }
-
-    .nav-btn.primary {
-      border: none;
-
-      background:
-        linear-gradient(
-          135deg,
-          #7c3aed,
-          #2563eb
-        );
-    }
-
-    .user-info {
-      display: none;
-
-      align-items: center;
-
-      gap: 8px;
-
-      padding: 7px 11px;
-
-      max-width: 180px;
-
-      overflow: hidden;
-
-      white-space: nowrap;
-
-      text-overflow: ellipsis;
-
-      border-radius: 12px;
-
-      background:
-        rgba(255,255,255,.05);
-
-      border:
-        1px solid rgba(255,255,255,.08);
-
-      font-size: 12px;
-
-      color: #cbd5e1;
-    }
-
-    .user-info.show {
-      display: flex;
-    }
-
-
-    /* =========================
-       HERO
-    ========================== */
-
-    .hero {
-      width: min(950px,92%);
-
-      margin: auto;
-
-      padding:
-        75px 0 45px;
-
-      text-align: center;
-    }
-
-    .badge {
-      display: inline-flex;
-
-      align-items: center;
-
-      gap: 9px;
-
-      padding: 7px 15px;
-
-      border-radius: 50px;
-
-      border:
-        1px solid rgba(139,92,246,.30);
-
-      background:
-        rgba(124,58,237,.09);
-
-      color: #c4b5fd;
-
-      font-size: 13px;
-
-      margin-bottom: 22px;
-    }
-
-    .badge-dot {
-      width: 8px;
-      height: 8px;
-
-      border-radius: 50%;
-
-      background: #8b5cf6;
-
-      box-shadow:
-        0 0 14px #8b5cf6;
-    }
-
-    .hero h1 {
-      max-width: 850px;
-
-      margin: auto;
-
-      font-size:
-        clamp(34px,6vw,68px);
-
-      line-height: 1.3;
-
-      font-weight: 900;
-    }
-
-    .hero h1 span {
-      background:
-        linear-gradient(
-          90deg,
-          #a78bfa,
-          #60a5fa,
-          #c084fc
-        );
-
-      -webkit-background-clip: text;
-
-      background-clip: text;
-
-      color: transparent;
-    }
-
-    .hero-description {
-      max-width: 720px;
-
-      margin:
-        23px auto 30px;
-
-      color: #a1a8b5;
-
-      font-size: 16px;
-    }
-
-    .hero-button {
-      display: inline-flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      gap: 10px;
-
-      padding:
-        14px 26px;
-
-      border: none;
-
-      border-radius: 15px;
-
-      color: #fff;
-
-      background:
-        linear-gradient(
-          135deg,
-          #7c3aed,
-          #2563eb
-        );
-
-      font-size: 15px;
-
-      font-weight: 800;
-
-      box-shadow:
-        0 15px 40px rgba(79,70,229,.28);
-    }
-
-
-    /* =========================
-       SHOWCASE
-    ========================== */
-
-    .showcase {
-      width: min(1100px,92%);
-
-      margin:
-        15px auto 80px;
-
-      display: grid;
-
-      grid-template-columns:
-        1.45fr 1fr 1fr;
-
-      gap: 13px;
-    }
-
-    .showcase-card {
-      position: relative;
-
-      min-height: 230px;
-
-      overflow: hidden;
-
-      border-radius: 23px;
-
-      border:
-        1px solid rgba(255,255,255,.09);
-
-      background: #10141d;
-
-      box-shadow:
-        0 20px 60px rgba(0,0,0,.30);
-    }
-
-    .showcase-card.large {
-      min-height: 475px;
-
-      grid-row: span 2;
-    }
-
-    .showcase-card img {
-      width: 100%;
-      height: 100%;
-
-      display: block;
-
-      object-fit: cover;
-    }
-
-    .showcase-overlay {
-      position: absolute;
-
-      inset: 0;
-
-      display: flex;
-
-      align-items: flex-end;
-
-      padding: 22px;
-
-      background:
-        linear-gradient(
-          transparent 30%,
-          rgba(0,0,0,.82)
-        );
-    }
-
-    .showcase-overlay h3 {
-      font-size: 18px;
-    }
-
-    .showcase-overlay p {
-      color: #d1d5db;
-
-      font-size: 12px;
-    }
-
-
-    /* =========================
-       SECTION
-    ========================== */
-
-    .section {
-      width: min(1050px,92%);
-
-      margin: auto;
-    }
-
-    .section-title {
-      text-align: center;
-
-      margin-bottom: 38px;
-    }
-
-    .section-title small {
-      color: #a78bfa;
-
-      font-weight: 800;
-    }
-
-    .section-title h2 {
-      margin-top: 6px;
-
-      font-size: 40px;
-    }
-
-    .section-title p {
-      color: #8f97a6;
-
-      font-size: 14px;
-    }
-
-
-    /* =========================
-       WORKFLOW
-    ========================== */
-
-    .workflow {
-      display: grid;
-
-      grid-template-columns:
-        repeat(4,1fr);
-
-      gap: 14px;
-    }
-
-    .step {
-      min-height: 270px;
-
-      padding: 23px 20px;
-
-      border-radius: 22px;
-
-      border:
-        1px solid rgba(255,255,255,.08);
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(255,255,255,.055),
-          rgba(255,255,255,.018)
-        );
-    }
-
-    .step-icon {
-      font-size: 27px;
-
-      margin-bottom: 10px;
-    }
-
-    .step-number {
-      width: 43px;
-      height: 43px;
-
-      display: grid;
-
-      place-items: center;
-
-      margin-bottom: 17px;
-
-      border-radius: 14px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #7c3aed,
-          #2563eb
-        );
-
-      font-weight: 900;
-    }
-
-    .step h3 {
-      margin-bottom: 9px;
-
-      font-size: 17px;
-    }
-
-    .step p {
-      color: #9299a8;
-
-      font-size: 13px;
-    }
-
-
-    /* =========================
-       CREATOR
-    ========================== */
-
-    .app {
-      width: min(850px,92%);
-
-      margin:
-        90px auto 0;
-
-      padding: 27px;
-
-      border-radius: 28px;
-
-      border:
-        1px solid rgba(255,255,255,.08);
-
-      background:
-        rgba(12,16,25,.88);
-
-      box-shadow:
-        0 30px 100px rgba(0,0,0,.35);
-
-      position: relative;
-    }
-
-    .app.locked {
-      border-color:
-        rgba(124,58,237,.22);
-    }
-
-    .app-head {
-      display: flex;
-
-      align-items: center;
-
-      justify-content: space-between;
-
-      margin-bottom: 23px;
-
-      gap: 15px;
-    }
-
-    .app-head h2 {
-      font-size: 22px;
-    }
-
-    .app-head p {
-      color: #818999;
-
-      font-size: 12px;
-    }
-
-    .status {
-      padding: 5px 11px;
-
-      border-radius: 20px;
-
-      background:
-        rgba(34,197,94,.08);
-
-      color: #86efac;
-
-      font-size: 11px;
-
-      white-space: nowrap;
-    }
-
-    .status.locked-status {
-      background:
-        rgba(245,158,11,.09);
-
-      color: #fbbf24;
-    }
-
-    .creator-lock {
-      display: none;
-
-      position: absolute;
-
-      inset: 0;
-
-      z-index: 10;
-
-      align-items: center;
-
-      justify-content: center;
-
-      padding: 20px;
-
-      border-radius: 28px;
-
-      background:
-        rgba(5,7,12,.74);
-
-      backdrop-filter: blur(5px);
-    }
-
-    .creator-lock.show {
-      display: flex;
-    }
-
-    .lock-box {
-      max-width: 380px;
-
-      text-align: center;
-
-      padding: 28px;
-
-      border-radius: 22px;
-
-      background:
-        rgba(15,19,30,.96);
-
-      border:
-        1px solid rgba(139,92,246,.22);
-
-      box-shadow:
-        0 25px 80px rgba(0,0,0,.45);
-    }
-
-    .lock-icon {
-      font-size: 35px;
-
-      margin-bottom: 10px;
-    }
-
-    .lock-box h3 {
-      margin-bottom: 7px;
-    }
-
-    .lock-box p {
-      color: #9299a8;
-
-      font-size: 13px;
-
-      margin-bottom: 17px;
-    }
-
-    .lock-login {
-      width: 100%;
-
-      padding: 12px;
-
-      border: none;
-
-      border-radius: 13px;
-
-      color: #fff;
-
-      background:
-        linear-gradient(
-          135deg,
-          #7c3aed,
-          #2563eb
-        );
-
-      font-weight: 800;
-    }
-
-    textarea {
-      width: 100%;
-
-      min-height: 150px;
-
-      padding: 17px;
-
-      resize: vertical;
-
-      border-radius: 17px;
-
-      border:
-        1px solid rgba(255,255,255,.09);
-
-      outline: none;
-
-      background: #080b12;
-
-      color: #fff;
-
-      font-size: 14px;
-
-      line-height: 2;
-    }
-
-    textarea::placeholder {
-      color: #596171;
-    }
-
-    .generate {
-      width: 100%;
-
-      margin-top: 13px;
-
-      padding: 15px;
-
-      border: none;
-
-      border-radius: 15px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #7c3aed,
-          #2563eb
-        );
-
-      color: #fff;
-
-      font-weight: 800;
-    }
-
-    .generate:disabled {
-      opacity: .65;
-
-      cursor: not-allowed;
-    }
-
-
-    /* =========================
-       ACCOUNT
-    ========================== */
-
-    .account {
-      width: min(850px,92%);
-
-      margin:
-        50px auto;
-
-      display: grid;
-
-      grid-template-columns:
-        1fr 1fr;
-
-      gap: 14px;
-    }
-
-    .account-card {
-      padding: 25px;
-
-      border-radius: 22px;
-
-      border:
-        1px solid rgba(255,255,255,.08);
-
-      background:
-        rgba(255,255,255,.025);
-    }
-
-    .account-card h3 {
-      margin-bottom: 9px;
-    }
-
-    .account-card p {
-      color: #858d9d;
-
-      font-size: 13px;
-    }
-
-
-    /* =========================
-       FOOTER
-    ========================== */
-
-    footer {
-      margin-top: 105px;
-
-      padding:
-        38px 20px 30px;
-
-      text-align: center;
-
-      border-top:
-        1px solid rgba(255,255,255,.07);
-
-      background:
-        rgba(0,0,0,.28);
-    }
-
-    .footer-name {
-      color: #e5e7eb;
-
-      font-size: 16px;
-
-      font-weight: 800;
-
-      letter-spacing: 1px;
-    }
-
-    .footer-description {
-      margin-top: 7px;
-
-      color: #687181;
-
-      font-size: 12px;
-    }
-
-    .footer-copy {
-      margin-top: 12px;
-
-      color: #4f5663;
-
-      font-size: 11px;
-    }
-
-
-    /* =========================
-       AUTH MODAL
-    ========================== */
-
-    .auth-modal {
-      position: fixed;
-
-      inset: 0;
-
-      z-index: 5000;
-
-      display: none;
-
-      align-items: center;
-
-      justify-content: center;
-
-      padding: 20px;
-
-      background:
-        rgba(0,0,0,.72);
-
-      backdrop-filter: blur(10px);
-    }
-
-    .auth-modal.show {
-      display: flex;
-    }
-
-    .auth-box {
-      position: relative;
-
-      width: min(430px,100%);
-
-      max-height: 90vh;
-
-      overflow-y: auto;
-
-      padding: 28px;
-
-      border-radius: 26px;
-
-      border:
-        1px solid rgba(255,255,255,.10);
-
-      background:
-        linear-gradient(
-          145deg,
-          #111624,
-          #080b12
-        );
-
-      box-shadow:
-        0 35px 120px rgba(0,0,0,.60);
-    }
-
-    .auth-close {
-      position: absolute;
-
-      top: 14px;
-
-      left: 14px;
-
-      width: 34px;
-      height: 34px;
-
-      display: grid;
-
-      place-items: center;
-
-      border: none;
-
-      border-radius: 10px;
-
-      background:
-        rgba(255,255,255,.06);
-
-      color: #fff;
-
-      font-size: 20px;
-    }
-
-    .auth-logo {
-      width: 52px;
-      height: 52px;
-
-      display: grid;
-
-      place-items: center;
-
-      margin: 0 auto 14px;
-
-      border-radius: 16px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #7c3aed,
-          #2563eb
-        );
-
-      font-size: 24px;
-
-      box-shadow:
-        0 10px 35px rgba(79,70,229,.30);
-    }
-
-    .auth-title {
-      text-align: center;
-
-      font-size: 23px;
-
-      font-weight: 900;
-    }
-
-    .auth-subtitle {
-      margin:
-        7px 0 22px;
-
-      text-align: center;
-
-      color: #818999;
-
-      font-size: 12px;
-    }
-
-    .auth-tabs {
-      display: grid;
-
-      grid-template-columns: 1fr 1fr;
-
-      gap: 7px;
-
-      padding: 5px;
-
-      margin-bottom: 20px;
-
-      border-radius: 13px;
-
-      background:
-        rgba(255,255,255,.04);
-    }
-
-    .auth-tab {
-      padding: 10px;
-
-      border: none;
-
-      border-radius: 10px;
-
-      background: transparent;
-
-      color: #8d96a7;
-
-      font-size: 13px;
-
-      font-weight: 700;
-    }
-
-    .auth-tab.active {
-      background:
-        rgba(124,58,237,.18);
-
-      color: #fff;
-    }
-
-    .auth-form {
-      display: none;
-    }
-
-    .auth-form.active {
-      display: block;
-    }
-
-    .field {
-      margin-bottom: 13px;
-    }
-
-    .field label {
-      display: block;
-
-      margin-bottom: 6px;
-
-      color: #cbd5e1;
-
-      font-size: 12px;
-    }
-
-    .field input {
-      width: 100%;
-
-      padding: 12px 13px;
-
-      outline: none;
-
-      border-radius: 12px;
-
-      border:
-        1px solid rgba(255,255,255,.09);
-
-      background:
-        #080b12;
-
-      color: #fff;
-
-      direction: rtl;
-
-      font-size: 13px;
-
-      transition: .2s;
-    }
-
-    .field input:focus {
-      border-color:
-        rgba(139,92,246,.65);
-
-      box-shadow:
-        0 0 0 3px rgba(139,92,246,.08);
-    }
-
-    .auth-submit {
-      width: 100%;
-
-      padding: 13px;
-
-      border: none;
-
-      border-radius: 13px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #7c3aed,
-          #2563eb
-        );
-
-      color: #fff;
-
-      font-weight: 800;
-
-      margin-top: 4px;
-    }
-
-    .auth-submit:disabled {
-      opacity: .6;
-
-      cursor: wait;
-    }
-
-    .divider {
-      display: flex;
-
-      align-items: center;
-
-      gap: 10px;
-
-      margin: 18px 0;
-    }
-
-    .divider::before,
-    .divider::after {
-      content: "";
-
-      flex: 1;
-
-      height: 1px;
-
-      background:
-        rgba(255,255,255,.08);
-    }
-
-    .divider span {
-      color: #687181;
-
-      font-size: 11px;
-    }
-
-    .google-btn {
-      width: 100%;
-
-      padding: 12px;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      gap: 9px;
-
-      border-radius: 13px;
-
-      border:
-        1px solid rgba(255,255,255,.10);
-
-      background:
-        rgba(255,255,255,.045);
-
-      color: #fff;
-
-      font-size: 13px;
-
-      font-weight: 700;
-    }
-
-    .google-icon {
-      width: 19px;
-      height: 19px;
-
-      display: grid;
-
-      place-items: center;
-
-      border-radius: 50%;
-
-      background: #fff;
-
-      color: #4285f4;
-
-      font-size: 12px;
-
-      font-weight: 900;
-    }
-
-    .auth-message {
-      display: none;
-
-      margin-top: 13px;
-
-      padding: 10px 12px;
-
-      border-radius: 11px;
-
-      background:
-        rgba(124,58,237,.10);
-
-      border:
-        1px solid rgba(124,58,237,.18);
-
-      color: #c4b5fd;
-
-      font-size: 12px;
-
-      text-align: center;
-    }
-
-    .auth-message.show {
-      display: block;
-    }
-
-    .auth-message.error {
-      background:
-        rgba(239,68,68,.08);
-
-      border-color:
-        rgba(239,68,68,.20);
-
-      color: #fca5a5;
-    }
-
-
-    /* =========================
-       MOBILE
-    ========================== */
-
-    @media(max-width:800px) {
-
-      .showcase {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .showcase-card.large {
-        grid-column: span 2;
-
-        grid-row: auto;
-
-        min-height: 320px;
-      }
-
-      .workflow {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .account {
-        grid-template-columns: 1fr;
-      }
-
-    }
-
-
-    @media(max-width:520px) {
-
-      .logo {
-        font-size: 17px;
-      }
-
-      .logo-icon {
-        width: 36px;
-        height: 36px;
-      }
-
-      .nav-btn {
-        padding: 8px 11px;
-
-        font-size: 12px;
-      }
-
-      .user-info {
-        max-width: 105px;
-      }
-
-      .hero {
-        padding-top: 45px;
-      }
-
-      .hero-description {
-        font-size: 14px;
-      }
-
-      .showcase {
-        gap: 9px;
-      }
-
-      .showcase-card.large {
-        min-height: 280px;
-      }
-
-      .showcase-card {
-        min-height: 145px;
-
-        border-radius: 17px;
-      }
-
-      .showcase-overlay {
-        padding: 13px;
-      }
-
-      .showcase-overlay h3 {
-        font-size: 13px;
-      }
-
-      .showcase-overlay p {
-        display: none;
-      }
-
-      .workflow {
-        grid-template-columns: 1fr;
-      }
-
-      .step {
-        min-height: auto;
-      }
-
-      .app {
-        padding: 18px;
-
-        border-radius: 21px;
-      }
-
-      .auth-box {
-        padding: 23px 18px;
-      }
-
-    }
-
-  </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>ابزارک AI | از ایده تا تصویر حرفه‌ای</title>
+
+<meta name="description"
+content="ابزارک AI؛ ایده خود را به پرامپت حرفه‌ای، تصویر خلاقانه و خروجی باکیفیت تبدیل کنید.">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:'Vazirmatn',Arial,sans-serif;
+background:
+radial-gradient(circle at 50% -10%,rgba(80,60,180,.24),transparent 36%),
+radial-gradient(circle at 10% 50%,rgba(37,99,235,.08),transparent 30%),
+linear-gradient(180deg,#000 0%,#05070c 48%,#000 100%);
+color:#f5f7fb;
+min-height:100vh;
+line-height:1.8;
+}
+
+button,
+textarea,
+input{
+font-family:inherit;
+}
+
+button{
+cursor:pointer;
+}
+
+a{
+color:inherit;
+text-decoration:none;
+}
+
+/* HEADER */
+
+header{
+position:sticky;
+top:0;
+z-index:1000;
+background:rgba(0,0,0,.88);
+backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
+border-bottom:1px solid rgba(255,255,255,.07);
+}
+
+.nav{
+width:min(1100px,92%);
+min-height:72px;
+margin:auto;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:15px;
+}
+
+.logo{
+font-size:20px;
+font-weight:900;
+display:flex;
+align-items:center;
+}
+
+.logo-icon{
+width:41px;
+height:41px;
+display:grid;
+place-items:center;
+border-radius:13px;
+margin-left:8px;
+background:linear-gradient(135deg,#7c3aed,#2563eb);
+box-shadow:0 8px 28px rgba(79,70,229,.35);
+font-size:20px;
+}
+
+.actions{
+display:flex;
+align-items:center;
+gap:8px;
+}
+
+.btn{
+padding:9px 14px;
+border-radius:11px;
+border:1px solid rgba(255,255,255,.10);
+background:rgba(255,255,255,.04);
+color:#fff;
+font-size:13px;
+}
+
+.btn:hover{
+background:rgba(255,255,255,.09);
+}
+
+.btn.primary{
+border:none;
+background:linear-gradient(135deg,#7c3aed,#2563eb);
+}
+
+.user{
+display:none;
+align-items:center;
+color:#cbd5e1;
+font-size:12px;
+padding:7px 10px;
+border-radius:11px;
+background:rgba(255,255,255,.06);
+}
+
+/* HERO */
+
+.hero{
+width:min(900px,92%);
+margin:auto;
+text-align:center;
+padding:75px 0 48px;
+}
+
+.badge{
+display:inline-flex;
+align-items:center;
+gap:8px;
+padding:7px 14px;
+border-radius:30px;
+background:rgba(124,58,237,.09);
+border:1px solid rgba(139,92,246,.28);
+color:#c4b5fd;
+font-size:13px;
+}
+
+.badge-dot{
+width:8px;
+height:8px;
+border-radius:50%;
+background:#8b5cf6;
+box-shadow:0 0 14px #8b5cf6;
+}
+
+.hero h1{
+font-size:clamp(35px,6vw,65px);
+line-height:1.4;
+margin:20px 0;
+font-weight:900;
+}
+
+.hero h1 span{
+background:linear-gradient(90deg,#a78bfa,#60a5fa,#c084fc);
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
+}
+
+.desc{
+max-width:700px;
+margin:auto;
+color:#9ca3af;
+font-size:15px;
+}
+
+/* SHOWCASE */
+
+.showcase{
+width:min(1050px,92%);
+margin:15px auto 75px;
+display:grid;
+grid-template-columns:1.4fr 1fr 1fr;
+gap:12px;
+}
+
+.card{
+height:220px;
+overflow:hidden;
+position:relative;
+border-radius:20px;
+border:1px solid rgba(255,255,255,.09);
+background:#080808;
+}
+
+.card.big{
+height:452px;
+grid-row:span 2;
+}
+
+.card img{
+width:100%;
+height:100%;
+display:block;
+object-fit:cover;
+}
+
+.overlay{
+position:absolute;
+inset:0;
+display:flex;
+align-items:flex-end;
+padding:18px;
+background:linear-gradient(transparent,rgba(0,0,0,.85));
+}
+
+.overlay h3{
+font-size:16px;
+}
+
+/* SECTION */
+
+.section{
+width:min(1050px,92%);
+margin:80px auto;
+}
+
+.title{
+text-align:center;
+margin-bottom:35px;
+}
+
+.title small{
+color:#a78bfa;
+font-weight:800;
+}
+
+.title h2{
+font-size:35px;
+margin-top:5px;
+}
+
+/* WORKFLOW */
+
+.workflow{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:13px;
+}
+
+.step{
+min-height:220px;
+padding:22px;
+border-radius:20px;
+background:linear-gradient(145deg,#11131a,#030303);
+border:1px solid rgba(255,255,255,.08);
+}
+
+.step-icon{
+font-size:25px;
+}
+
+.stepnum{
+width:42px;
+height:42px;
+display:grid;
+place-items:center;
+border-radius:13px;
+margin:12px 0;
+background:linear-gradient(135deg,#7c3aed,#2563eb);
+font-weight:900;
+}
+
+.step p{
+color:#8d96a7;
+font-size:13px;
+margin-top:6px;
+}
+
+/* APP */
+
+.app{
+width:min(850px,92%);
+margin:70px auto 0;
+padding:26px;
+border-radius:25px;
+background:linear-gradient(145deg,#11131a,#020202);
+border:1px solid rgba(255,255,255,.09);
+box-shadow:0 30px 90px rgba(0,0,0,.55);
+}
+
+.apphead{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+}
+
+.apphead h2{
+font-size:21px;
+}
+
+.apphead p{
+color:#858e9f;
+font-size:12px;
+}
+
+.status{
+font-size:11px;
+padding:5px 10px;
+border-radius:20px;
+background:rgba(255,255,255,.06);
+color:#cbd5e1;
+}
+
+textarea{
+width:100%;
+min-height:150px;
+padding:15px;
+background:#000;
+color:#fff;
+border:1px solid rgba(255,255,255,.12);
+border-radius:15px;
+outline:none;
+resize:vertical;
+font-size:14px;
+line-height:2;
+}
+
+textarea:focus{
+border-color:rgba(124,58,237,.55);
+}
+
+textarea::placeholder{
+color:#596171;
+}
+
+.generate{
+width:100%;
+margin-top:12px;
+padding:15px;
+border:0;
+border-radius:14px;
+background:linear-gradient(135deg,#7c3aed,#2563eb);
+color:#fff;
+font-weight:800;
+font-size:14px;
+transition:.2s;
+}
+
+.generate:hover{
+transform:translateY(-1px);
+}
+
+.generate.locked{
+background:#15171d;
+color:#737b89;
+}
+
+/* LOGIN NOTICE */
+
+.notice{
+display:none;
+margin-top:15px;
+padding:18px;
+border-radius:16px;
+background:linear-gradient(145deg,#080808,#15151b);
+border:1px solid rgba(255,255,255,.10);
+text-align:center;
+animation:noticeIn .25s ease;
+}
+
+.notice.show{
+display:block;
+}
+
+.notice strong{
+display:block;
+color:#fff;
+font-size:14px;
+margin-bottom:8px;
+}
+
+.notice span{
+color:#9ca3af;
+font-size:12px;
+}
+
+.notice-actions{
+display:flex;
+justify-content:center;
+gap:8px;
+margin-top:14px;
+}
+
+.notice-actions button{
+padding:9px 18px;
+border:0;
+border-radius:10px;
+color:#fff;
+background:linear-gradient(135deg,#7c3aed,#2563eb);
+}
+
+.notice-actions .second{
+background:rgba(255,255,255,.07);
+border:1px solid rgba(255,255,255,.10);
+}
+
+@keyframes noticeIn{
+from{
+opacity:0;
+transform:translateY(-5px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* ACCOUNT */
+
+.account{
+width:min(850px,92%);
+margin:30px auto;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+}
+
+.account-card{
+padding:22px;
+border-radius:18px;
+background:rgba(255,255,255,.025);
+border:1px solid rgba(255,255,255,.08);
+}
+
+.account-card h3{
+margin-bottom:6px;
+}
+
+.account-card p{
+color:#858e9f;
+font-size:13px;
+}
+
+/* MODAL */
+
+.modal{
+display:none;
+position:fixed;
+inset:0;
+z-index:2000;
+background:rgba(0,0,0,.82);
+backdrop-filter:blur(10px);
+-webkit-backdrop-filter:blur(10px);
+align-items:center;
+justify-content:center;
+padding:20px;
+}
+
+.modal.show{
+display:flex;
+}
+
+.box{
+width:min(390px,100%);
+padding:25px;
+border-radius:22px;
+background:linear-gradient(145deg,#151820,#030303);
+border:1px solid rgba(255,255,255,.12);
+box-shadow:0 30px 90px rgba(0,0,0,.7);
+}
+
+.box h2{
+text-align:center;
+margin-bottom:17px;
+font-size:21px;
+}
+
+.box input{
+width:100%;
+padding:13px;
+margin:5px 0;
+background:#000;
+color:#fff;
+border:1px solid rgba(255,255,255,.12);
+border-radius:11px;
+outline:none;
+}
+
+.box button{
+width:100%;
+padding:12px;
+margin-top:8px;
+border:0;
+border-radius:11px;
+background:linear-gradient(135deg,#7c3aed,#2563eb);
+color:#fff;
+font-weight:700;
+}
+
+.box .google{
+background:#fff;
+color:#111;
+}
+
+.box .close{
+background:rgba(255,255,255,.07);
+color:#fff;
+}
+
+.msg{
+text-align:center;
+color:#a5b4fc;
+font-size:12px;
+margin-top:10px;
+}
+
+/* FOOTER */
+
+footer{
+margin-top:90px;
+padding:35px 20px 30px;
+text-align:center;
+border-top:1px solid rgba(255,255,255,.08);
+background:#000;
+}
+
+.footer-name{
+font-weight:800;
+color:#e5e7eb;
+font-size:16px;
+letter-spacing:1px;
+}
+
+.footer-description{
+color:#687181;
+font-size:12px;
+margin-top:6px;
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+.showcase{
+grid-template-columns:1fr 1fr;
+}
+
+.card.big{
+grid-column:span 2;
+grid-row:auto;
+height:300px;
+}
+
+.workflow{
+grid-template-columns:1fr 1fr;
+}
+
+.account{
+grid-template-columns:1fr;
+}
+
+}
+
+@media(max-width:520px){
+
+.nav{
+min-height:65px;
+}
+
+.logo{
+font-size:17px;
+}
+
+.logo-icon{
+width:36px;
+height:36px;
+}
+
+.btn{
+padding:8px 10px;
+font-size:12px;
+}
+
+.hero{
+padding-top:45px;
+}
+
+.hero h1{
+font-size:34px;
+}
+
+.desc{
+font-size:14px;
+}
+
+.showcase{
+gap:8px;
+}
+
+.card{
+height:145px;
+border-radius:16px;
+}
+
+.card.big{
+height:270px;
+}
+
+.overlay{
+font-size:12px;
+padding:12px;
+}
+
+.workflow{
+grid-template-columns:1fr;
+}
+
+.app{
+padding:18px;
+}
+
+}
+
+</style>
 </head>
-
 
 <body>
 
+<!-- HEADER -->
 
-  <!-- =========================
-       SITE LOADER
-  ========================== -->
+<header>
 
-  <div id="siteLoader">
+<nav class="nav">
 
-    <div class="loader-box">
+<a href="#" class="logo">
 
-      <div class="loader-logo">
-        ✦
-      </div>
+<span class="logo-icon">✦</span>
 
-      <div class="loader-text">
-        ابزارک AI
-      </div>
+<span>ابزارک AI</span>
 
-      <div class="loader-sub">
-        در حال آماده‌سازی...
-      </div>
+</a>
 
-    </div>
+<div class="actions">
 
-  </div>
+<span
+class="user"
+id="userInfo">
+</span>
 
+<button
+class="btn"
+id="loginBtn">
+ورود
+</button>
 
-  <!-- =========================
-       HEADER
-  ========================== -->
+<button
+class="btn primary"
+id="signupBtn">
+ثبت‌نام
+</button>
 
-  <header>
+<button
+class="btn"
+id="logoutBtn"
+style="display:none">
+خروج
+</button>
 
-    <nav class="nav">
+</div>
 
-      <a href="#" class="logo">
+</nav>
 
-        <span class="logo-icon">
-          ✦
-        </span>
+</header>
 
-        <span>
-          ابزارک AI
-        </span>
 
-      </a>
+<main>
 
+<!-- HERO -->
 
-      <div class="nav-actions">
+<section class="hero">
 
-        <span
-          class="user-info"
-          id="userInfo">
-        </span>
+<div class="badge">
 
+<span class="badge-dot"></span>
 
-        <button
-          class="nav-btn"
-          id="logoutBtn"
-          style="display:none;">
-          خروج
-        </button>
+ابزار هوش مصنوعی برای خلق تصاویر حرفه‌ای
 
+</div>
 
-        <button
-          class="nav-btn"
-          id="loginBtn">
-          ورود
-        </button>
+<h1>
 
+از یک ایده خام تا یک
+<span>تصویر حرفه‌ای</span>
 
-        <button
-          class="nav-btn primary"
-          id="signupBtn">
-          ثبت‌نام
-        </button>
+</h1>
 
-      </div>
+<p class="desc">
 
-    </nav>
+ایده خود را وارد کنید، پرامپت حرفه‌ای بسازید،
+تصویر ایجاد و ویرایش کنید و خروجی باکیفیت دریافت کنید.
 
-  </header>
+</p>
 
+</section>
 
-  <!-- =========================
-       MAIN
-  ========================== -->
 
-  <main>
+<!-- SHOWCASE -->
 
+<section class="showcase">
 
-    <!-- HERO -->
+<div class="card big">
 
-    <section class="hero">
+<img
+src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=85"
+alt="فناوری و هوش مصنوعی">
 
-      <div class="badge">
+<div class="overlay">
 
-        <span class="badge-dot"></span>
+<h3>
+ایده خود را به تصویر تبدیل کنید
+</h3>
 
-        ابزار هوش مصنوعی برای خلق تصاویر حرفه‌ای
+</div>
 
-      </div>
+</div>
 
 
-      <h1>
+<div class="card">
 
-        از یک ایده خام
-        تا یک
-        <span>تصویر حرفه‌ای</span>
+<img
+src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=900&q=85"
+alt="پرامپت حرفه‌ای">
 
-      </h1>
+<div class="overlay">
+<h3>پرامپت حرفه‌ای</h3>
+</div>
 
+</div>
 
-      <p class="hero-description">
 
-        ایده خود را وارد کنید، پرامپت حرفه‌ای بسازید،
-        تصویر ایجاد و ویرایش کنید و در نهایت
-        خروجی باکیفیت دریافت کنید.
+<div class="card">
 
-      </p>
+<img
+src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=900&q=85"
+alt="هنر دیجیتال">
 
+<div class="overlay">
+<h3>خلق تصاویر خلاقانه</h3>
+</div>
 
-      <a
-        href="#creator"
-        class="hero-button">
+</div>
 
-        شروع ساخت تصویر
 
-        <span>
-          ←
-        </span>
+<div class="card">
 
-      </a>
+<img
+src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=900&q=85"
+alt="ویرایش تصویر">
 
-    </section>
+<div class="overlay">
+<h3>ویرایش و بهبود</h3>
+</div>
 
+</div>
 
-    <!-- SHOWCASE -->
 
-    <section class="showcase">
+<div class="card">
 
+<img
+src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=900&q=85"
+alt="خروجی باکیفیت">
 
-      <figure class="showcase-card large">
+<div class="overlay">
+<h3>افزایش کیفیت</h3>
+</div>
 
-        <img
-          src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=85"
-          alt="فناوری و هوش مصنوعی">
+</div>
 
-        <figcaption class="showcase-overlay">
+</section>
 
-          <div>
 
-            <h3>
-              ایده خود را به تصویر تبدیل کنید
-            </h3>
+<!-- WORKFLOW -->
 
-            <p>
-              شروع فرایند خلق تصویر با یک ایده ساده
-            </p>
+<section class="section">
 
-          </div>
+<div class="title">
 
-        </figcaption>
+<small>
+چهار مرحله اصلی
+</small>
 
-      </figure>
+<h2>
+از ایده تا خروجی نهایی
+</h2>
 
+</div>
 
-      <figure class="showcase-card">
 
-        <img
-          src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=900&q=85"
-          alt="پرامپت حرفه‌ای">
+<div class="workflow">
 
-        <figcaption class="showcase-overlay">
+<article class="step">
 
-          <div>
+<div class="step-icon">
+💡
+</div>
 
-            <h3>
-              پرامپت حرفه‌ای
-            </h3>
+<div class="stepnum">
+۱
+</div>
 
-            <p>
-              تبدیل ایده به دستور دقیق
-            </p>
+<h3>
+ایده خام
+</h3>
 
-          </div>
+<p>
+ایده اولیه خود را وارد کنید.
+</p>
 
-        </figcaption>
+</article>
 
-      </figure>
 
+<article class="step">
 
-      <figure class="showcase-card">
+<div class="step-icon">
+✦
+</div>
 
-        <img
-          src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=900&q=85"
-          alt="هنر دیجیتال">
+<div class="stepnum">
+۲
+</div>
 
-        <figcaption class="showcase-overlay">
+<h3>
+پرامپت حرفه‌ای
+</h3>
 
-          <div>
+<p>
+ایده شما به یک پرامپت دقیق و ساختاریافته تبدیل می‌شود.
+</p>
 
-            <h3>
-              خلق تصاویر خلاقانه
-            </h3>
+</article>
 
-            <p>
-              تبدیل پرامپت به تصویر
-            </p>
 
-          </div>
+<article class="step">
 
-        </figcaption>
+<div class="step-icon">
+🎨
+</div>
 
-      </figure>
+<div class="stepnum">
+۳
+</div>
 
+<h3>
+تولید و ویرایش
+</h3>
 
-      <figure class="showcase-card">
+<p>
+تصویر را ایجاد و تغییرات موردنظر را اعمال کنید.
+</p>
 
-        <img
-          src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&w=900&q=85"
-          alt="ویرایش تصویر">
+</article>
 
-        <figcaption class="showcase-overlay">
 
-          <div>
+<article class="step">
 
-            <h3>
-              ویرایش و بهبود
-            </h3>
+<div class="step-icon">
+⚡
+</div>
 
-            <p>
-              اصلاح تصویر و اعمال تغییرات
-            </p>
+<div class="stepnum">
+۴
+</div>
 
-          </div>
+<h3>
+افزایش کیفیت
+</h3>
 
-        </figcaption>
+<p>
+وضوح تصویر را افزایش دهید و خروجی نهایی را دریافت کنید.
+</p>
 
-      </figure>
+</article>
 
+</div>
 
-      <figure class="showcase-card">
+</section>
 
-        <img
-          src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=900&q=85"
-          alt="خروجی باکیفیت">
 
-        <figcaption class="showcase-overlay">
+<!-- CREATOR -->
 
-          <div>
+<section
+class="app"
+id="creator">
 
-            <h3>
-              افزایش کیفیت
-            </h3>
+<div class="apphead">
 
-            <p>
-              آماده‌سازی خروجی نهایی
-            </p>
+<div>
 
-          </div>
+<h2>
+پروژه جدید خود را شروع کنید
+</h2>
 
-        </figcaption>
+<p>
+ایده اولیه خود را در کادر زیر بنویسید.
+</p>
 
-      </figure>
+</div>
 
-    </section>
+<span
+class="status"
+id="status">
+مهمان
+</span>
 
+</div>
 
-    <!-- WORKFLOW -->
 
-    <section class="section">
+<textarea
+id="ideaInput"
+placeholder="مثلاً: یک لوگوی مینیمال و لوکس برای یک کافه مدرن...">
+</textarea>
 
-      <div class="section-title">
 
-        <small>
-          چهار مرحله اصلی
-        </small>
+<button
+type="button"
+class="generate locked"
+id="generateButton">
 
-        <h2>
-          از ایده تا خروجی نهایی
-        </h2>
+🔒 ساخت پرامپت حرفه‌ای
 
-        <p>
-          همه مراحل در یک مسیر ساده
-        </p>
+</button>
 
-      </div>
 
+<!-- پیام ورود -->
 
-      <div class="workflow">
+<div
+class="notice"
+id="notice">
 
+<strong>
 
-        <article class="step">
+کاربر گرامی، برای استفاده از خدمات سایت لطفاً وارد حساب کاربری خود شوید
 
-          <div class="step-icon">
-            💡
-          </div>
+</strong>
 
-          <div class="step-number">
-            ۱
-          </div>
+<span>
 
-          <h3>
-            ایده خام
-          </h3>
+برای ادامه، ابتدا وارد حساب خود شوید یا یک حساب کاربری ایجاد کنید.
 
-          <p>
-            ایده یا توضیح اولیه خود را وارد کنید.
-          </p>
+</span>
 
-        </article>
+<div class="notice-actions">
 
+<button id="noticeLogin">
+ورود
+</button>
 
-        <article class="step">
+<button
+class="second"
+id="noticeSignup">
+ثبت‌نام
+</button>
 
-          <div class="step-icon">
-            ✦
-          </div>
+</div>
 
-          <div class="step-number">
-            ۲
-          </div>
+</div>
 
-          <h3>
-            پرامپت حرفه‌ای
-          </h3>
+</section>
 
-          <p>
-            ایده شما به یک پرامپت دقیق و ساختاریافته تبدیل می‌شود.
-          </p>
 
-        </article>
+<!-- ACCOUNT -->
 
+<section class="account">
 
-        <article class="step">
+<div class="account-card">
 
-          <div class="step-icon">
-            🎨
-          </div>
+<h3>
+👤 حساب کاربری
+</h3>
 
-          <div class="step-number">
-            ۳
-          </div>
+<p>
+برای ذخیره پروژه‌ها و ادامه کار، وارد حساب خود شوید.
+</p>
 
-          <h3>
-            تولید و ویرایش
-          </h3>
+</div>
 
-          <p>
-            تصویر ایجاد شده را مشاهده و تغییرات موردنظر را اعمال کنید.
-          </p>
 
-        </article>
+<div class="account-card">
 
+<h3>
+☁️ پروژه‌های من
+</h3>
 
-        <article class="step">
+<p>
+پروژه‌های شما در حساب کاربری ذخیره خواهند شد.
+</p>
 
-          <div class="step-icon">
-            ⚡
-          </div>
+</div>
 
-          <div class="step-number">
-            ۴
-          </div>
+</section>
 
-          <h3>
-            افزایش کیفیت
-          </h3>
+</main>
 
-          <p>
-            وضوح تصویر را افزایش دهید و خروجی نهایی را دریافت کنید.
-          </p>
 
-        </article>
+<!-- FOOTER -->
 
-      </div>
+<footer>
 
-    </section>
+<div class="footer-name">
+Vahid.Hemmati
+</div>
 
+<div class="footer-description">
+ابزارک AI؛ مسیری ساده برای تبدیل ایده‌های شما به تصاویر خلاقانه و حرفه‌ای.
+</div>
 
-    <!-- CREATOR -->
+<div style="margin-top:10px;color:#4f5663;font-size:11px">
+© 2026 ابزارک AI — تمامی حقوق محفوظ است.
+</div>
 
-    <section
-      id="creator"
-      class="app"
-      >
+</footer>
 
-      <div class="app-head">
 
-        <div>
+<!-- LOGIN MODAL -->
 
-          <h2>
-            پروژه جدید خود را شروع کنید
-          </h2>
+<div
+class="modal"
+id="modal">
 
-          <p>
-            ایده اولیه خود را در کادر زیر بنویسید.
-          </p>
+<div class="box">
 
-        </div>
+<h2 id="modalTitle">
+ورود به ابزارک AI
+</h2>
 
+<input
+id="email"
+type="email"
+placeholder="ایمیل">
 
-        <span
-          class="status"
-          id="creatorStatus">
+<input
+id="password"
+type="password"
+placeholder="رمز عبور">
 
-          🔒 ورود لازم است
+<button id="emailAction">
+ورود با ایمیل
+</button>
 
-        </span>
+<button
+class="google"
+id="googleAction">
 
-      </div>
+🔵 ورود با Google
 
+</button>
 
-      <textarea
-        id="ideaInput"
-        placeholder="مثلاً: یک لوگوی مینیمال و لوکس برای یک کافه مدرن..."
-        disabled>
-      </textarea>
+<button
+class="close"
+id="closeModal">
 
+بستن
 
-      <button
-        type="button"
-        class="generate"
-        id="generateButton"
-        disabled>
+</button>
 
-        🔒 ابتدا وارد حساب شوید
+<div
+class="msg"
+id="msg">
+</div>
 
-      </button>
+</div>
 
+</div>
 
-      <!-- LOCK -->
 
-      <div
-        class="creator-lock show"
-        id="creatorLock">
+<!-- JAVASCRIPT -->
 
-        <div class="lock-box">
+<script>
 
-          <div class="lock-icon">
-            🔐
-          </div>
+const SUPABASE_URL =
+"https://jndrwriknenbnrjkckxf.supabase.co";
 
-          <h3>
-            این ابزار مخصوص کاربران ثبت‌نام‌شده است
-          </h3>
+const SUPABASE_KEY =
+"sb_publishable_vIHPwgfpXl56LSYjYXLBCQ_V7Axq7eB";
 
-          <p>
-            برای ساخت پرامپت حرفه‌ای ابتدا وارد حساب خود شوید یا یک حساب جدید ایجاد کنید.
-          </p>
 
-          <button
-            class="lock-login"
-            id="lockLoginBtn">
+const sb =
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
 
-            ورود / ثبت‌نام
 
-          </button>
+/* ELEMENTS */
 
-        </div>
+const loginBtn =
+document.getElementById("loginBtn");
 
-      </div>
+const signupBtn =
+document.getElementById("signupBtn");
 
-    </section>
+const logoutBtn =
+document.getElementById("logoutBtn");
 
+const userInfo =
+document.getElementById("userInfo");
 
-    <!-- ACCOUNT -->
+const status =
+document.getElementById("status");
 
-    <section class="account">
+const generate =
+document.getElementById("generateButton");
 
+const notice =
+document.getElementById("notice");
 
-      <div class="account-card">
+const ideaInput =
+document.getElementById("ideaInput");
 
-        <h3>
-          👤 حساب کاربری
-        </h3>
+const modal =
+document.getElementById("modal");
 
-        <p>
-          برای ذخیره پروژه‌ها و ادامه کار،
-          حساب کاربری خود را ایجاد کنید.
-        </p>
+const modalTitle =
+document.getElementById("modalTitle");
 
-      </div>
+const email =
+document.getElementById("email");
 
+const password =
+document.getElementById("password");
 
-      <div class="account-card">
+const emailAction =
+document.getElementById("emailAction");
 
-        <h3>
-          ☁️ پروژه‌های من
-        </h3>
+const googleAction =
+document.getElementById("googleAction");
 
-        <p>
-          پروژه‌های شما در حساب کاربری ذخیره خواهند شد.
-        </p>
+const closeModal =
+document.getElementById("closeModal");
 
-      </div>
+const msg =
+document.getElementById("msg");
 
-    </section>
+let mode = "login";
 
-  </main>
 
+/* OPEN LOGIN */
 
-  <!-- =========================
-       FOOTER
-  ========================== -->
+function openModal(type){
 
-  <footer>
+mode = type;
 
-    <div class="footer-name">
-      Vahid.Hemmati
-    </div>
+modalTitle.textContent =
+type === "login"
+? "ورود به ابزارک AI"
+: "ساخت حساب کاربری";
 
-    <div class="footer-description">
-      ابزارک AI؛ مسیری ساده برای تبدیل ایده‌های شما به تصاویر خلاقانه و حرفه‌ای.
-    </div>
+emailAction.textContent =
+type === "login"
+? "ورود با ایمیل"
+: "ثبت‌نام با ایمیل";
 
-    <div class="footer-copy">
-      © 2026 ابزارک AI — تمامی حقوق محفوظ است.
-    </div>
+msg.textContent = "";
 
-  </footer>
+email.value = "";
+password.value = "";
 
+modal.classList.add("show");
 
-  <!-- =========================
-       AUTH MODAL
-  ========================== -->
+}
 
-  <div
-    class="auth-modal"
-    id="authModal">
 
-    <div class="auth-box">
+/* HEADER BUTTONS */
 
+loginBtn.onclick = () =>
+openModal("login");
 
-      <button
-        class="auth-close"
-        id="authCloseBtn"
-        type="button">
+signupBtn.onclick = () =>
+openModal("signup");
 
-        ×
 
-      </button>
+/* NOTICE BUTTONS */
 
+document.getElementById(
+"noticeLogin"
+).onclick = () =>
+openModal("login");
 
-      <div class="auth-logo">
-        ✦
-      </div>
 
+document.getElementById(
+"noticeSignup"
+).onclick = () =>
+openModal("signup");
 
-      <div class="auth-title">
-        ابزارک AI
-      </div>
 
+/* CLOSE */
 
-      <div class="auth-subtitle">
-        برای ادامه وارد حساب خود شوید
-      </div>
+closeModal.onclick = () =>
+modal.classList.remove("show");
 
 
-      <!-- TABS -->
+/* GOOGLE LOGIN */
 
-      <div class="auth-tabs">
+googleAction.onclick =
+async function(){
 
-        <button
-          class="auth-tab active"
-          id="loginTab"
-          type="button">
+msg.textContent =
+"در حال انتقال به Google...";
 
-          ورود
+const {error} =
+await sb.auth.signInWithOAuth({
 
-        </button>
+provider:"google",
 
+options:{
+redirectTo:
+window.location.origin
+}
 
-        <button
-          class="auth-tab"
-          id="signupTab"
-          type="button">
+});
 
-          ثبت‌نام
+if(error){
 
-        </button>
+msg.textContent =
+"ورود با Google انجام نشد.";
 
-      </div>
+console.error(error);
 
+}
 
-      <!-- LOGIN FORM -->
+};
 
-      <form
-        class="auth-form active"
-        id="loginForm">
 
-        <div class="field">
+/* EMAIL LOGIN / SIGNUP */
 
-          <label>
-            ایمیل
-          </label>
+emailAction.onclick =
+async function(){
 
-          <input
-            type="email"
-            id="loginEmail"
-            placeholder="example@email.com"
-            required>
+const e =
+email.value.trim();
 
-        </div>
+const p =
+password.value;
 
+if(!e || !p){
 
-        <div class="field">
+msg.textContent =
+"لطفاً ایمیل و رمز عبور را وارد کنید.";
 
-          <label>
-            رمز عبور
-          </label>
+return;
 
-          <input
-            type="password"
-            id="loginPassword"
-            placeholder="رمز عبور"
-            required>
+}
 
-        </div>
 
+emailAction.disabled = true;
 
-        <button
-          class="auth-submit"
-          id="loginSubmit"
-          type="submit">
+emailAction.textContent =
+"در حال بررسی...";
 
-          ورود به حساب
 
-        </button>
+if(mode === "signup"){
 
+const {data,error} =
+await sb.auth.signUp({
 
-        <div class="divider">
-          <span>
-            یا
-          </span>
-        </div>
+email:e,
+password:p
 
+});
 
-        <button
-          class="google-btn"
-          id="googleLoginBtn"
-          type="button">
 
-          <span class="google-icon">
-            G
-          </span>
+if(error){
 
-          ورود با Google
+msg.textContent =
+error.message;
 
-        </button>
+emailAction.disabled = false;
+emailAction.textContent =
+"ثبت‌نام با ایمیل";
 
-      </form>
+return;
 
+}
 
-      <!-- SIGNUP FORM -->
 
-      <form
-        class="auth-form"
-        id="signupForm">
+if(data.session){
 
-        <div class="field">
+modal.classList.remove("show");
 
-          <label>
-            نام
-          </label>
+}else{
 
-          <input
-            type="text"
-            id="signupName"
-            placeholder="نام شما"
-            required>
+msg.textContent =
+"ثبت‌نام انجام شد. لطفاً ایمیل خود را برای تأیید حساب بررسی کنید.";
 
-        </div>
+}
 
+}else{
 
-        <div class="field">
 
-          <label>
-            ایمیل
-          </label>
+const {error} =
+await sb.auth.signInWithPassword({
 
-          <input
-            type="email"
-            id="signupEmail"
-            placeholder="example@email.com"
-            required>
+email:e,
+password:p
 
-        </div>
+});
 
 
-        <div class="field">
+if(error){
 
-          <label>
-            رمز عبور
-          </label>
+msg.textContent =
+error.message;
 
-          <input
-            type="password"
-            id="signupPassword"
-            placeholder="حداقل ۶ کاراکتر"
-            minlength="6"
-            required>
+emailAction.disabled = false;
+emailAction.textContent =
+"ورود با ایمیل";
 
-        </div>
+return;
 
+}
 
-        <button
-          class="auth-submit"
-          id="signupSubmit"
-          type="submit">
 
-          ایجاد حساب
+modal.classList.remove("show");
 
-        </button>
+}
 
+emailAction.disabled = false;
 
-        <div class="divider">
-          <span>
-            یا
-          </span>
-        </div>
+};
 
 
-        <button
-          class="google-btn"
-          id="googleSignupBtn"
-          type="button">
+/* LOGOUT */
 
-          <span class="google-icon">
-            G
-          </span>
+logoutBtn.onclick =
+async function(){
 
-          ثبت‌نام با Google
+const {error} =
+await sb.auth.signOut();
 
-        </button>
+if(error){
 
-      </form>
+console.error(error);
 
+}
 
-      <div
-        class="auth-message"
-        id="authMessage">
-      </div>
+};
 
-    </div>
 
-  </div>
+/* UPDATE UI */
 
+function updateUI(user){
 
-  <!-- =========================
-       JAVASCRIPT
-  ========================== -->
+if(user){
 
-  <script>
+const name =
+user.user_metadata?.full_name ||
+user.user_metadata?.name ||
+user.email ||
+"کاربر";
 
-    /* =========================================
-       SUPABASE CONFIG
-    ========================================= */
 
-    const SUPABASE_URL =
-      "https://jndrwriknenbnrjkckxf.supabase.co";
+userInfo.textContent =
+"👤 " + name;
 
-    const SUPABASE_PUBLISHABLE_KEY =
-      "sb_publishable_vIHPwgfpXl56LSYjYXLBCQ_V7Axq7eB";
+userInfo.style.display =
+"flex";
 
 
-    const supabaseClient =
-      window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
-      );
+loginBtn.style.display =
+"none";
 
+signupBtn.style.display =
+"none";
 
-    /* =========================================
-       ELEMENTS
-    ========================================= */
+logoutBtn.style.display =
+"block";
 
-    const siteLoader =
-      document.getElementById("siteLoader");
 
-    const loginBtn =
-      document.getElementById("loginBtn");
+status.textContent =
+"● فعال";
 
-    const signupBtn =
-      document.getElementById("signupBtn");
+status.style.color =
+"#86efac";
 
-    const logoutBtn =
-      document.getElementById("logoutBtn");
 
-    const userInfo =
-      document.getElementById("userInfo");
+generate.classList.remove(
+"locked"
+);
 
-    const authModal =
-      document.getElementById("authModal");
+generate.textContent =
+"✦ ساخت پرامپت حرفه‌ای";
 
-    const authCloseBtn =
-      document.getElementById("authCloseBtn");
 
-    const loginTab =
-      document.getElementById("loginTab");
+notice.classList.remove(
+"show"
+);
 
-    const signupTab =
-      document.getElementById("signupTab");
 
-    const loginForm =
-      document.getElementById("loginForm");
+}else{
 
-    const signupForm =
-      document.getElementById("signupForm");
 
-    const authMessage =
-      document.getElementById("authMessage");
+userInfo.style.display =
+"none";
 
-    const googleLoginBtn =
-      document.getElementById("googleLoginBtn");
+loginBtn.style.display =
+"block";
 
-    const googleSignupBtn =
-      document.getElementById("googleSignupBtn");
+signupBtn.style.display =
+"block";
 
-    const creator =
-      document.getElementById("creator");
+logoutBtn.style.display =
+"none";
 
-    const creatorLock =
-      document.getElementById("creatorLock");
 
-    const creatorStatus =
-      document.getElementById("creatorStatus");
+status.textContent =
+"مهمان";
 
-    const lockLoginBtn =
-      document.getElementById("lockLoginBtn");
+status.style.color =
+"#cbd5e1";
 
-    const ideaInput =
-      document.getElementById("ideaInput");
 
-    const generateButton =
-      document.getElementById("generateButton");
+generate.classList.add(
+"locked"
+);
 
+generate.textContent =
+"🔒 ساخت پرامپت حرفه‌ای";
 
-    /* =========================================
-       LOADER
-    ========================================= */
+}
 
-    window.addEventListener(
-      "load",
-      () => {
+}
 
-        setTimeout(() => {
 
-          siteLoader.classList.add("hide");
+/* CHECK CURRENT USER */
 
-        }, 500);
+async function checkUser(){
 
-      }
-    );
+const {data,error} =
+await sb.auth.getUser();
 
+if(error){
 
-    /* =========================================
-       AUTH MESSAGE
-    ========================================= */
+updateUI(null);
 
-    function showMessage(
-      message,
-      isError = false
-    ) {
+return;
 
-      authMessage.textContent =
-        message;
+}
 
-      authMessage.classList.add("show");
+updateUI(
+data?.user || null
+);
 
-      authMessage.classList.toggle(
-        "error",
-        isError
-      );
+}
 
-    }
 
+/* AUTH STATE */
 
-    function clearMessage() {
+sb.auth.onAuthStateChange(
+(event,session)=>{
 
-      authMessage.textContent = "";
+updateUI(
+session?.user || null
+);
 
-      authMessage.classList.remove(
-        "show",
-        "error"
-      );
+}
+);
 
-    }
 
+/* INITIAL */
 
-    /* =========================================
-       OPEN MODAL
-    ========================================= */
+checkUser();
 
-    function openAuthModal(
-      mode = "login"
-    ) {
 
-      authModal.classList.add("show");
+/* GENERATE BUTTON */
 
-      document.body.classList.add(
-        "modal-open"
-      );
+generate.onclick =
+async function(){
 
-      clearMessage();
+const {data} =
+await sb.auth.getUser();
 
-      switchAuthMode(mode);
 
-    }
+/* USER NOT LOGGED IN */
 
+if(!data?.user){
 
-    /* =========================================
-       CLOSE MODAL
-    ========================================= */
+notice.classList.add(
+"show"
+);
 
-    function closeAuthModal() {
+notice.scrollIntoView({
+behavior:"smooth",
+block:"nearest"
+});
 
-      authModal.classList.remove(
-        "show"
-      );
+return;
 
-      document.body.classList.remove(
-        "modal-open"
-      );
+}
 
-      clearMessage();
 
-    }
+/* USER IS LOGGED IN */
 
+const idea =
+ideaInput.value.trim();
 
-    /* =========================================
-       SWITCH LOGIN / SIGNUP
-    ========================================= */
 
-    function switchAuthMode(
-      mode
-    ) {
+if(!idea){
 
-      clearMessage();
+ideaInput.focus();
 
-      if (mode === "signup") {
+ideaInput.placeholder =
+"لطفاً ابتدا ایده خود را بنویسید.";
 
-        loginTab.classList.remove(
-          "active"
-        );
+return;
 
-        signupTab.classList.add(
-          "active"
-        );
+}
 
-        loginForm.classList.remove(
-          "active"
-        );
 
-        signupForm.classList.add(
-          "active"
-        );
+generate.disabled = true;
 
-      } else {
+generate.textContent =
+"در حال آماده‌سازی...";
 
-        signupTab.classList.remove(
-          "active"
-        );
 
-        loginTab.classList.add(
-          "active"
-        );
+/*
+فعلاً موتور واقعی هوش مصنوعی
+در مرحله بعد متصل می‌شود.
+*/
 
-        signupForm.classList.remove(
-          "active"
-        );
+setTimeout(function(){
 
-        loginForm.classList.add(
-          "active"
-        );
+generate.disabled = false;
 
-      }
+generate.textContent =
+"✦ ساخت پرامپت حرفه‌ای";
 
-    }
+alert(
+"اتصال موتور واقعی هوش مصنوعی را در مرحله بعد انجام می‌دهیم."
+);
 
+},900);
 
-    /* =========================================
-       HEADER BUTTONS
-    ========================================= */
+};
 
-    loginBtn.addEventListener(
-      "click",
-      () => {
 
-        openAuthModal("login");
+/* CLOSE MODAL BY CLICKING OUTSIDE */
 
-      }
-    );
+modal.addEventListener(
+"click",
+function(e){
 
+if(e.target === modal){
 
-    signupBtn.addEventListener(
-      "click",
-      () => {
+modal.classList.remove(
+"show"
+);
 
-        openAuthModal("signup");
+}
 
-      }
-    );
+});
 
-
-    lockLoginBtn.addEventListener(
-      "click",
-      () => {
-
-        openAuthModal("login");
-
-      }
-    );
-
-
-    authCloseBtn.addEventListener(
-      "click",
-      closeAuthModal
-    );
-
-
-    authModal.addEventListener(
-      "click",
-      (event) => {
-
-        if (
-          event.target === authModal
-        ) {
-
-          closeAuthModal();
-
-        }
-
-      }
-    );
-
-
-    loginTab.addEventListener(
-      "click",
-      () => {
-
-        switchAuthMode("login");
-
-      }
-    );
-
-
-    signupTab.addEventListener(
-      "click",
-      () => {
-
-        switchAuthMode("signup");
-
-      }
-    );
-
-
-    /* =========================================
-       GOOGLE LOGIN
-    ========================================= */
-
-    async function loginWithGoogle() {
-
-      clearMessage();
-
-      const {
-        error
-      } =
-        await supabaseClient.auth.signInWithOAuth({
-
-          provider: "google",
-
-          options: {
-
-            redirectTo:
-              window.location.origin
-
-          }
-
-        });
-
-
-      if (error) {
-
-        showMessage(
-          "ورود با Google انجام نشد: " +
-          error.message,
-          true
-        );
-
-      }
-
-    }
-
-
-    googleLoginBtn.addEventListener(
-      "click",
-      loginWithGoogle
-    );
-
-
-    googleSignupBtn.addEventListener(
-      "click",
-      loginWithGoogle
-    );
-
-
-    /* =========================================
-       EMAIL LOGIN
-    ========================================= */
-
-    loginForm.addEventListener(
-      "submit",
-      async (event) => {
-
-        event.preventDefault();
-
-        clearMessage();
-
-        const email =
-          document
-            .getElementById("loginEmail")
-            .value
-            .trim();
-
-        const password =
-          document
-            .getElementById("loginPassword")
-            .value;
-
-
-        const submitButton =
-          document.getElementById(
-            "loginSubmit"
-          );
-
-
-        submitButton.disabled =
-          true;
-
-        submitButton.textContent =
-          "در حال ورود...";
-
-
-        const {
-          data,
-          error
-        } =
-          await supabaseClient.auth.signInWithPassword({
-
-            email: email,
-
-            password: password
-
-          });
-
-
-        submitButton.disabled =
-          false;
-
-        submitButton.textContent =
-          "ورود به حساب";
-
-
-        if (error) {
-
-          showMessage(
-            "ورود انجام نشد: " +
-            error.message,
-            true
-          );
-
-          return;
-
-        }
-
-
-        if (data.user) {
-
-          closeAuthModal();
-
-          updateUserInterface(
-            data.user
-          );
-
-        }
-
-      }
-    );
-
-
-    /* =========================================
-       EMAIL SIGNUP
-    ========================================= */
-
-    signupForm.addEventListener(
-      "submit",
-      async (event) => {
-
-        event.preventDefault();
-
-        clearMessage();
-
-        const name =
-          document
-            .getElementById("signupName")
-            .value
-            .trim();
-
-        const email =
-          document
-            .getElementById("signupEmail")
-            .value
-            .trim();
-
-        const password =
-          document
-            .getElementById("signupPassword")
-            .value;
-
-
-        const submitButton =
-          document.getElementById(
-            "signupSubmit"
-          );
-
-
-        submitButton.disabled =
-          true;
-
-        submitButton.textContent =
-          "در حال ساخت حساب...";
-
-
-        const {
-          data,
-          error
-        } =
-          await supabaseClient.auth.signUp({
-
-            email: email,
-
-            password: password,
-
-            options: {
-
-              data: {
-
-                full_name: name
-
-              },
-
-              emailRedirectTo:
-                window.location.origin
-
-            }
-
-          });
-
-
-        submitButton.disabled =
-          false;
-
-        submitButton.textContent =
-          "ایجاد حساب";
-
-
-        if (error) {
-
-          showMessage(
-            "ثبت‌نام انجام نشد: " +
-            error.message,
-            true
-          );
-
-          return;
-
-        }
-
-
-        /*
-         * چون Confirm Email در Supabase روشن است،
-         * ممکن است session بلافاصله ساخته نشود.
-         */
-
-        if (
-          data.user &&
-          !data.session
-        ) {
-
-          showMessage(
-            "ثبت‌نام انجام شد. لطفاً ایمیل خود را باز کنید و لینک تأیید را بزنید."
-          );
-
-          return;
-
-        }
-
-
-        if (data.user) {
-
-          closeAuthModal();
-
-          updateUserInterface(
-            data.user
-          );
-
-        }
-
-      }
-    );
-
-
-    /* =========================================
-       UPDATE USER INTERFACE
-    ========================================= */
-
-    function updateUserInterface(
-      user
-    ) {
-
-      if (user) {
-
-        const name =
-          user.user_metadata?.full_name ||
-          user.user_metadata?.name ||
-          user.email ||
-          "کاربر";
-
-
-        userInfo.textContent =
-          "👤 " + name;
-
-
-        userInfo.classList.add(
-          "show"
-        );
-
-
-        loginBtn.style.display =
-          "none";
-
-
-        signupBtn.style.display =
-          "none";
-
-
-        logoutBtn.style.display =
-          "block";
-
-
-        /* فعال کردن ابزار */
-
-        creatorLock.classList.remove(
-          "show"
-        );
-
-
-        creator.classList.remove(
-          "locked"
-        );
-
-
-        creatorStatus.textContent =
-          "● آماده";
-
-
-        creatorStatus.classList.remove(
-          "locked-status"
-        );
-
-
-        ideaInput.disabled =
-          false;
-
-
-        generateButton.disabled =
-          false;
-
-
-        generateButton.textContent =
-          "✦ ساخت پرامپت حرفه‌ای";
-
-      } else {
-
-        userInfo.textContent =
-          "";
-
-        userInfo.classList.remove(
-          "show"
-        );
-
-
-        loginBtn.style.display =
-          "block";
-
-
-        signupBtn.style.display =
-          "block";
-
-
-        logoutBtn.style.display =
-          "none";
-
-
-        /* قفل کردن ابزار */
-
-        creatorLock.classList.add(
-          "show"
-        );
-
-
-        creator.classList.add(
-          "locked"
-        );
-
-
-        creatorStatus.textContent =
-          "🔒 ورود لازم است";
-
-
-        creatorStatus.classList.add(
-          "locked-status"
-        );
-
-
-        ideaInput.disabled =
-          true;
-
-
-        generateButton.disabled =
-          true;
-
-
-        generateButton.textContent =
-          "🔒 ابتدا وارد حساب شوید";
-
-      }
-
-    }
-
-
-    /* =========================================
-       CHECK CURRENT USER
-    ========================================= */
-
-    async function checkCurrentUser() {
-
-      try {
-
-        const {
-          data
-        } =
-          await supabaseClient.auth.getUser();
-
-
-        updateUserInterface(
-          data?.user || null
-        );
-
-      } catch (error) {
-
-        console.error(
-          "Auth check error:",
-          error
-        );
-
-        updateUserInterface(
-          null
-        );
-
-      }
-
-    }
-
-
-    /* =========================================
-       AUTH STATE CHANGE
-    ========================================= */
-
-    supabaseClient.auth.onAuthStateChange(
-      (
-        event,
-        session
-      ) => {
-
-        updateUserInterface(
-          session?.user || null
-        );
-
-      }
-    );
-
-
-    /* =========================================
-       LOGOUT
-    ========================================= */
-
-    logoutBtn.addEventListener(
-      "click",
-      async () => {
-
-        logoutBtn.disabled =
-          true;
-
-
-        const {
-          error
-        } =
-          await supabaseClient.auth.signOut();
-
-
-        logoutBtn.disabled =
-          false;
-
-
-        if (error) {
-
-          alert(
-            "خروج از حساب انجام نشد."
-          );
-
-          return;
-
-        }
-
-
-        updateUserInterface(
-          null
-        );
-
-      }
-    );
-
-
-    /* =========================================
-       GENERATE BUTTON
-    ========================================= */
-
-    generateButton.addEventListener(
-      "click",
-      async () => {
-
-        /*
-         * یک بررسی امنیتی سمت کلاینت
-         * برای جلوگیری از استفاده کاربر مهمان.
-         */
-
-        const {
-          data
-        } =
-          await supabaseClient.auth.getUser();
-
-
-        if (!data?.user) {
-
-          openAuthModal("login");
-
-          return;
-
-        }
-
-
-        const idea =
-          ideaInput.value.trim();
-
-
-        if (!idea) {
-
-          ideaInput.focus();
-
-          ideaInput.placeholder =
-            "لطفاً ابتدا ایده خود را بنویسید.";
-
-          return;
-
-        }
-
-
-        generateButton.disabled =
-          true;
-
-        generateButton.textContent =
-          "در حال آماده‌سازی...";
-
-
-        /*
-         * موتور واقعی AI را در مرحله بعد
-         * به Supabase Edge Function متصل می‌کنیم.
-         */
-
-        setTimeout(() => {
-
-          generateButton.disabled =
-            false;
-
-          generateButton.textContent =
-            "✦ ساخت پرامپت حرفه‌ای";
-
-
-          alert(
-            "حساب شما با موفقیت شناسایی شد.\n\nاتصال موتور واقعی هوش مصنوعی را در مرحله بعد انجام می‌دهیم."
-          );
-
-        }, 900);
-
-      }
-    );
-
-
-    /* =========================================
-       START
-    ========================================= */
-
-    checkCurrentUser();
-
-  </script>
+</script>
 
 </body>
-
 </html>

@@ -2,13 +2,16 @@
 <html lang="fa" dir="rtl">
 <head>
 
-  <!-- =========================
-       SUPABASE
-  ========================== -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- =====================================================
+       BASIC
+  ====================================================== -->
 
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>ابزارک AI | از ایده تا تصویر حرفه‌ای</title>
 
@@ -17,9 +20,25 @@
     content="ابزارک AI؛ ایده خود را به پرامپت حرفه‌ای، تصویر خلاقانه و خروجی باکیفیت تبدیل کنید."
   >
 
-  <!-- فونت فارسی -->
+
+  <!-- =====================================================
+       SUPABASE
+  ====================================================== -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+  <!-- =====================================================
+       GOOGLE FONT
+  ====================================================== -->
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
 
   <link
     href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap"
@@ -27,11 +46,11 @@
   >
 
 
-  <style>
+  <!-- =====================================================
+       STYLE
+  ====================================================== -->
 
-    /* =====================================================
-       RESET
-    ====================================================== */
+  <style>
 
     * {
       box-sizing: border-box;
@@ -39,9 +58,11 @@
       padding: 0;
     }
 
+
     html {
       scroll-behavior: smooth;
     }
+
 
     body {
       font-family:
@@ -63,13 +84,17 @@
         );
 
       color: #f5f7fb;
+
       min-height: 100vh;
+
       line-height: 1.8;
     }
+
 
     body.modal-open {
       overflow: hidden;
     }
+
 
     button,
     textarea,
@@ -77,9 +102,11 @@
       font-family: inherit;
     }
 
+
     button {
       cursor: pointer;
     }
+
 
     a {
       color: inherit;
@@ -88,7 +115,7 @@
 
 
     /* =====================================================
-       LOADING SCREEN
+       PAGE LOADER
     ====================================================== */
 
     #pageLoader {
@@ -105,48 +132,55 @@
 
       justify-content: center;
 
-      flex-direction: column;
-
       background:
         radial-gradient(
-          circle at 50% 40%,
-          rgba(124,58,237,.16),
-          transparent 32%
-        ),
-        radial-gradient(
-          circle at 50% 100%,
-          rgba(37,99,235,.10),
-          transparent 45%
-        ),
-        #05070c;
+          circle at center,
+          #111827 0%,
+          #05070c 65%
+        );
 
       opacity: 1;
 
       visibility: visible;
 
       transition:
-        opacity .7s ease,
-        visibility .7s ease;
+        opacity .5s ease,
+        visibility .5s ease;
     }
 
+
     #pageLoader.hide {
+
       opacity: 0;
+
       visibility: hidden;
+
       pointer-events: none;
     }
 
+
+    .loader-box {
+
+      text-align: center;
+
+      width: 180px;
+    }
+
+
     .loader-logo {
 
-      position: relative;
+      width: 72px;
 
-      width: 86px;
-      height: 86px;
+      height: 72px;
+
+      margin:
+        0 auto 20px;
 
       display: grid;
 
       place-items: center;
 
-      border-radius: 27px;
+      border-radius: 22px;
 
       background:
         linear-gradient(
@@ -155,181 +189,99 @@
           #2563eb
         );
 
-      box-shadow:
-        0 0 35px rgba(124,58,237,.35),
-        0 0 70px rgba(37,99,235,.16);
+      font-size: 34px;
 
-      animation:
-        loaderFloat 2s ease-in-out infinite;
-    }
-
-    .loader-logo::before {
-
-      content: "";
-
-      position: absolute;
-
-      inset: -7px;
-
-      border-radius: 31px;
-
-      border: 2px solid transparent;
-
-      border-top-color: #a78bfa;
-      border-right-color: #60a5fa;
-
-      animation:
-        loaderSpin 1.5s linear infinite;
-    }
-
-    .loader-logo::after {
-
-      content: "";
-
-      position: absolute;
-
-      inset: -18px;
-
-      border-radius: 38px;
-
-      border:
-        1px solid rgba(139,92,246,.14);
+      font-weight: 900;
 
       box-shadow:
-        0 0 35px rgba(124,58,237,.12);
-    }
-
-    .loader-star {
-
-      color: #fff;
-
-      font-size: 38px;
-
-      line-height: 1;
-
-      text-shadow:
-        0 0 18px rgba(255,255,255,.55);
+        0 0 45px rgba(124,58,237,.45);
 
       animation:
         loaderPulse 1.5s ease-in-out infinite;
     }
 
+
     .loader-title {
 
-      margin-top: 28px;
-
-      font-size: 22px;
+      font-size: 19px;
 
       font-weight: 900;
+
+      margin-bottom: 13px;
+    }
+
+
+    .loader-text {
+
+      color: #8992a4;
+
+      font-size: 12px;
+
+      margin-bottom: 15px;
+    }
+
+
+    .loader-line {
+
+      width: 100%;
+
+      height: 4px;
+
+      overflow: hidden;
+
+      border-radius: 20px;
+
+      background:
+        rgba(255,255,255,.08);
+    }
+
+
+    .loader-line::after {
+
+      content: "";
+
+      display: block;
+
+      width: 45%;
+
+      height: 100%;
+
+      border-radius: inherit;
 
       background:
         linear-gradient(
           90deg,
-          #a78bfa,
-          #60a5fa,
-          #c084fc
+          #7c3aed,
+          #60a5fa
         );
 
-      -webkit-background-clip: text;
-      background-clip: text;
-
-      color: transparent;
-    }
-
-    .loader-text {
-
-      margin-top: 5px;
-
-      color: #8992a3;
-
-      font-size: 12px;
-    }
-
-    .loader-dots {
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      gap: 6px;
-
-      margin-top: 17px;
-    }
-
-    .loader-dots span {
-
-      width: 6px;
-      height: 6px;
-
-      border-radius: 50%;
-
-      background: #8b5cf6;
-
       animation:
-        loaderDots 1.2s ease-in-out infinite;
+        loaderMove 1.2s ease-in-out infinite;
     }
 
-    .loader-dots span:nth-child(2) {
-      animation-delay: .15s;
-    }
-
-    .loader-dots span:nth-child(3) {
-      animation-delay: .30s;
-    }
-
-    @keyframes loaderSpin {
-
-      from {
-        transform: rotate(0deg);
-      }
-
-      to {
-        transform: rotate(360deg);
-      }
-
-    }
-
-    @keyframes loaderFloat {
-
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-7px);
-      }
-
-    }
 
     @keyframes loaderPulse {
 
       0%,
       100% {
         transform: scale(1);
-        opacity: .9;
       }
 
       50% {
         transform: scale(1.08);
-        opacity: 1;
       }
 
     }
 
-    @keyframes loaderDots {
 
-      0%,
-      100% {
-        transform: translateY(0);
-        opacity: .35;
+    @keyframes loaderMove {
+
+      0% {
+        transform: translateX(220%);
       }
 
-      50% {
-        transform: translateY(-4px);
-        opacity: 1;
+      100% {
+        transform: translateX(-220%);
       }
 
     }
@@ -362,6 +314,7 @@
         1px solid rgba(255,255,255,.07);
     }
 
+
     .nav {
 
       width:
@@ -380,6 +333,7 @@
       gap: 20px;
     }
 
+
     .logo {
 
       display: flex;
@@ -393,9 +347,11 @@
       font-weight: 900;
     }
 
+
     .logo-icon {
 
       width: 42px;
+
       height: 42px;
 
       display: grid;
@@ -417,6 +373,7 @@
       font-size: 21px;
     }
 
+
     .nav-actions {
 
       display: flex;
@@ -426,9 +383,11 @@
       gap: 9px;
     }
 
+
     .nav-btn {
 
-      padding: 9px 16px;
+      padding:
+        9px 16px;
 
       border-radius: 12px;
 
@@ -445,6 +404,7 @@
       transition: .25s;
     }
 
+
     .nav-btn:hover {
 
       background:
@@ -453,6 +413,7 @@
       transform:
         translateY(-1px);
     }
+
 
     .nav-btn.primary {
 
@@ -466,6 +427,7 @@
         );
     }
 
+
     .user-info {
 
       display: none;
@@ -476,7 +438,8 @@
 
       max-width: 190px;
 
-      padding: 7px 11px;
+      padding:
+        7px 11px;
 
       border-radius: 12px;
 
@@ -490,477 +453,16 @@
 
       color: #cbd5e1;
 
+      white-space: nowrap;
+
       overflow: hidden;
 
       text-overflow: ellipsis;
-
-      white-space: nowrap;
     }
+
 
     .user-info.show {
       display: flex;
-    }
-
-
-    /* =====================================================
-       AUTH MODAL
-    ====================================================== */
-
-    .auth-modal {
-
-      position: fixed;
-
-      inset: 0;
-
-      z-index: 9000;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      padding: 20px;
-
-      background:
-        rgba(0,0,0,.72);
-
-      backdrop-filter:
-        blur(12px);
-
-      -webkit-backdrop-filter:
-        blur(12px);
-
-      opacity: 0;
-
-      visibility: hidden;
-
-      pointer-events: none;
-
-      transition:
-        opacity .25s ease,
-        visibility .25s ease;
-    }
-
-    .auth-modal.active {
-
-      opacity: 1;
-
-      visibility: visible;
-
-      pointer-events: auto;
-    }
-
-    .auth-box {
-
-      position: relative;
-
-      width:
-        min(430px,100%);
-
-      padding: 30px;
-
-      border-radius: 28px;
-
-      border:
-        1px solid rgba(255,255,255,.10);
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(18,23,35,.98),
-          rgba(8,11,18,.98)
-        );
-
-      box-shadow:
-        0 35px 100px rgba(0,0,0,.65);
-
-      transform:
-        translateY(15px)
-        scale(.97);
-
-      transition:
-        transform .3s ease;
-    }
-
-    .auth-modal.active .auth-box {
-
-      transform:
-        translateY(0)
-        scale(1);
-    }
-
-    .auth-close {
-
-      position: absolute;
-
-      top: 15px;
-
-      left: 15px;
-
-      width: 34px;
-      height: 34px;
-
-      display: grid;
-
-      place-items: center;
-
-      border-radius: 10px;
-
-      border:
-        1px solid rgba(255,255,255,.08);
-
-      background:
-        rgba(255,255,255,.04);
-
-      color: #cbd5e1;
-
-      font-size: 19px;
-
-      transition: .2s;
-    }
-
-    .auth-close:hover {
-
-      background:
-        rgba(255,255,255,.09);
-
-      color: #fff;
-    }
-
-    .auth-logo {
-
-      width: 58px;
-      height: 58px;
-
-      margin: 0 auto 18px;
-
-      display: grid;
-
-      place-items: center;
-
-      border-radius: 18px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #7c3aed,
-          #2563eb
-        );
-
-      box-shadow:
-        0 12px 35px rgba(79,70,229,.28);
-
-      font-size: 27px;
-    }
-
-    .auth-title {
-
-      text-align: center;
-
-      font-size: 23px;
-
-      font-weight: 900;
-    }
-
-    .auth-subtitle {
-
-      margin-top: 5px;
-
-      text-align: center;
-
-      color: #858e9f;
-
-      font-size: 12px;
-    }
-
-    .auth-tabs {
-
-      display: grid;
-
-      grid-template-columns: 1fr 1fr;
-
-      gap: 5px;
-
-      margin:
-        24px 0 20px;
-
-      padding: 4px;
-
-      border-radius: 14px;
-
-      background:
-        rgba(255,255,255,.04);
-    }
-
-    .auth-tab {
-
-      padding: 9px;
-
-      border: none;
-
-      border-radius: 10px;
-
-      background: transparent;
-
-      color: #7f8999;
-
-      font-size: 13px;
-
-      transition: .2s;
-    }
-
-    .auth-tab.active {
-
-      background:
-        rgba(124,58,237,.18);
-
-      color: #fff;
-
-      box-shadow:
-        0 4px 15px rgba(0,0,0,.15);
-    }
-
-    .auth-form {
-
-      display: none;
-    }
-
-    .auth-form.active {
-      display: block;
-    }
-
-    .field {
-
-      margin-bottom: 14px;
-    }
-
-    .field label {
-
-      display: block;
-
-      margin-bottom: 7px;
-
-      color: #cbd5e1;
-
-      font-size: 12px;
-
-      font-weight: 600;
-    }
-
-    .field input {
-
-      width: 100%;
-
-      height: 48px;
-
-      padding:
-        0 14px;
-
-      border-radius: 13px;
-
-      border:
-        1px solid rgba(255,255,255,.09);
-
-      outline: none;
-
-      background:
-        rgba(0,0,0,.24);
-
-      color: #fff;
-
-      font-size: 13px;
-
-      transition:
-        border-color .2s,
-        box-shadow .2s;
-    }
-
-    .field input:focus {
-
-      border-color:
-        rgba(139,92,246,.65);
-
-      box-shadow:
-        0 0 0 3px rgba(124,58,237,.10);
-    }
-
-    .field input::placeholder {
-      color: #525c6d;
-    }
-
-    .auth-submit {
-
-      width: 100%;
-
-      height: 48px;
-
-      margin-top: 4px;
-
-      border: none;
-
-      border-radius: 13px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #7c3aed,
-          #2563eb
-        );
-
-      color: #fff;
-
-      font-size: 13px;
-
-      font-weight: 800;
-
-      box-shadow:
-        0 12px 30px rgba(79,70,229,.22);
-
-      transition: .2s;
-    }
-
-    .auth-submit:hover {
-
-      transform:
-        translateY(-1px);
-
-      box-shadow:
-        0 15px 35px rgba(79,70,229,.30);
-    }
-
-    .auth-submit:disabled {
-
-      opacity: .6;
-
-      cursor: wait;
-
-      transform: none;
-    }
-
-    .divider {
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 10px;
-
-      margin:
-        19px 0;
-    }
-
-    .divider::before,
-    .divider::after {
-
-      content: "";
-
-      flex: 1;
-
-      height: 1px;
-
-      background:
-        rgba(255,255,255,.08);
-    }
-
-    .divider span {
-
-      color: #626c7c;
-
-      font-size: 11px;
-    }
-
-    .google-btn {
-
-      width: 100%;
-
-      height: 48px;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      gap: 10px;
-
-      border-radius: 13px;
-
-      border:
-        1px solid rgba(255,255,255,.10);
-
-      background:
-        rgba(255,255,255,.045);
-
-      color: #fff;
-
-      font-size: 13px;
-
-      font-weight: 600;
-
-      transition: .2s;
-    }
-
-    .google-btn:hover {
-
-      background:
-        rgba(255,255,255,.08);
-    }
-
-    .google-icon {
-
-      width: 19px;
-      height: 19px;
-
-      display: grid;
-
-      place-items: center;
-
-      border-radius: 50%;
-
-      background: #fff;
-
-      color: #4285f4;
-
-      font-size: 12px;
-
-      font-weight: 900;
-    }
-
-    .auth-message {
-
-      min-height: 20px;
-
-      margin-top: 13px;
-
-      padding: 0 2px;
-
-      text-align: center;
-
-      font-size: 11px;
-
-      line-height: 1.8;
-    }
-
-    .auth-message.error {
-      color: #fca5a5;
-    }
-
-    .auth-message.success {
-      color: #86efac;
-    }
-
-    .auth-note {
-
-      margin-top: 15px;
-
-      text-align: center;
-
-      color: #596273;
-
-      font-size: 10px;
-
-      line-height: 1.8;
     }
 
 
@@ -981,6 +483,7 @@
       text-align: center;
     }
 
+
     .badge {
 
       display: inline-flex;
@@ -989,7 +492,8 @@
 
       gap: 9px;
 
-      padding: 7px 15px;
+      padding:
+        7px 15px;
 
       border-radius: 50px;
 
@@ -1006,9 +510,11 @@
       margin-bottom: 22px;
     }
 
+
     .badge-dot {
 
       width: 8px;
+
       height: 8px;
 
       border-radius: 50%;
@@ -1018,6 +524,7 @@
       box-shadow:
         0 0 14px #8b5cf6;
     }
+
 
     .hero h1 {
 
@@ -1032,6 +539,7 @@
 
       font-weight: 900;
     }
+
 
     .hero h1 span {
 
@@ -1050,6 +558,7 @@
       color: transparent;
     }
 
+
     .hero-description {
 
       max-width: 720px;
@@ -1061,6 +570,7 @@
 
       font-size: 16px;
     }
+
 
     .hero-button {
 
@@ -1117,6 +627,7 @@
       gap: 13px;
     }
 
+
     .showcase-card {
 
       position: relative;
@@ -1136,12 +647,14 @@
         0 20px 60px rgba(0,0,0,.30);
     }
 
+
     .showcase-card.large {
 
       min-height: 475px;
 
       grid-row: span 2;
     }
+
 
     .showcase-card img {
 
@@ -1153,6 +666,7 @@
 
       object-fit: cover;
     }
+
 
     .showcase-overlay {
 
@@ -1173,9 +687,11 @@
         );
     }
 
+
     .showcase-overlay h3 {
       font-size: 18px;
     }
+
 
     .showcase-overlay p {
 
@@ -1197,12 +713,14 @@
       margin: auto;
     }
 
+
     .section-title {
 
       text-align: center;
 
       margin-bottom: 38px;
     }
+
 
     .section-title small {
 
@@ -1211,12 +729,14 @@
       font-weight: 800;
     }
 
+
     .section-title h2 {
 
       margin-top: 6px;
 
       font-size: 40px;
     }
+
 
     .section-title p {
 
@@ -1240,11 +760,13 @@
       gap: 14px;
     }
 
+
     .step {
 
       min-height: 270px;
 
-      padding: 23px 20px;
+      padding:
+        23px 20px;
 
       border-radius: 22px;
 
@@ -1259,6 +781,7 @@
         );
     }
 
+
     .step-icon {
 
       font-size: 27px;
@@ -1266,9 +789,11 @@
       margin-bottom: 10px;
     }
 
+
     .step-number {
 
       width: 43px;
+
       height: 43px;
 
       display: grid;
@@ -1289,12 +814,14 @@
       font-weight: 900;
     }
 
+
     .step h3 {
 
       margin-bottom: 9px;
 
       font-size: 17px;
     }
+
 
     .step p {
 
@@ -1330,6 +857,7 @@
         0 30px 100px rgba(0,0,0,.35);
     }
 
+
     .app-head {
 
       display: flex;
@@ -1341,9 +869,11 @@
       margin-bottom: 23px;
     }
 
+
     .app-head h2 {
       font-size: 22px;
     }
+
 
     .app-head p {
 
@@ -1352,9 +882,11 @@
       font-size: 12px;
     }
 
+
     .status {
 
-      padding: 5px 11px;
+      padding:
+        5px 11px;
 
       border-radius: 20px;
 
@@ -1365,6 +897,7 @@
 
       font-size: 11px;
     }
+
 
     textarea {
 
@@ -1392,9 +925,21 @@
       line-height: 2;
     }
 
+
+    textarea:focus {
+
+      border-color:
+        rgba(124,58,237,.55);
+
+      box-shadow:
+        0 0 0 3px rgba(124,58,237,.08);
+    }
+
+
     textarea::placeholder {
       color: #596171;
     }
+
 
     .generate {
 
@@ -1420,11 +965,12 @@
       font-weight: 800;
     }
 
+
     .generate:disabled {
 
-      opacity: .65;
+      opacity: .6;
 
-      cursor: wait;
+      cursor: not-allowed;
     }
 
 
@@ -1448,6 +994,7 @@
       gap: 14px;
     }
 
+
     .account-card {
 
       padding: 25px;
@@ -1461,9 +1008,11 @@
         rgba(255,255,255,.025);
     }
 
+
     .account-card h3 {
       margin-bottom: 9px;
     }
+
 
     .account-card p {
 
@@ -1493,6 +1042,7 @@
         rgba(0,0,0,.28);
     }
 
+
     .footer-name {
 
       color: #e5e7eb;
@@ -1504,6 +1054,7 @@
       letter-spacing: 1px;
     }
 
+
     .footer-description {
 
       margin-top: 7px;
@@ -1512,6 +1063,7 @@
 
       font-size: 12px;
     }
+
 
     .footer-copy {
 
@@ -1524,14 +1076,496 @@
 
 
     /* =====================================================
+       AUTH MODAL
+    ====================================================== */
+
+    .auth-overlay {
+
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 5000;
+
+      display: none;
+
+      align-items: center;
+
+      justify-content: center;
+
+      padding: 20px;
+
+      background:
+        rgba(0,0,0,.76);
+
+      backdrop-filter:
+        blur(12px);
+
+      -webkit-backdrop-filter:
+        blur(12px);
+    }
+
+
+    .auth-overlay.show {
+      display: flex;
+    }
+
+
+    .auth-modal {
+
+      position: relative;
+
+      width:
+        min(430px,100%);
+
+      max-height:
+        calc(100vh - 40px);
+
+      overflow-y: auto;
+
+      padding: 30px;
+
+      border-radius: 27px;
+
+      border:
+        1px solid rgba(255,255,255,.10);
+
+      background:
+        linear-gradient(
+          145deg,
+          #111827,
+          #080b12
+        );
+
+      box-shadow:
+        0 35px 100px rgba(0,0,0,.65);
+
+      animation:
+        modalIn .25s ease;
+    }
+
+
+    @keyframes modalIn {
+
+      from {
+        opacity: 0;
+        transform:
+          translateY(15px) scale(.97);
+      }
+
+      to {
+        opacity: 1;
+        transform:
+          translateY(0) scale(1);
+      }
+
+    }
+
+
+    .auth-close {
+
+      position: absolute;
+
+      top: 15px;
+
+      left: 15px;
+
+      width: 35px;
+
+      height: 35px;
+
+      display: grid;
+
+      place-items: center;
+
+      border: none;
+
+      border-radius: 50%;
+
+      background:
+        rgba(255,255,255,.06);
+
+      color: #cbd5e1;
+
+      font-size: 19px;
+    }
+
+
+    .auth-logo {
+
+      width: 58px;
+
+      height: 58px;
+
+      margin:
+        0 auto 17px;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 18px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #7c3aed,
+          #2563eb
+        );
+
+      font-size: 26px;
+
+      box-shadow:
+        0 12px 35px rgba(79,70,229,.32);
+    }
+
+
+    .auth-title {
+
+      text-align: center;
+
+      font-size: 23px;
+
+      font-weight: 900;
+
+      margin-bottom: 5px;
+    }
+
+
+    .auth-subtitle {
+
+      text-align: center;
+
+      color: #818999;
+
+      font-size: 12px;
+
+      margin-bottom: 24px;
+    }
+
+
+    .auth-tabs {
+
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 6px;
+
+      padding: 5px;
+
+      margin-bottom: 21px;
+
+      border-radius: 14px;
+
+      background:
+        rgba(255,255,255,.04);
+    }
+
+
+    .auth-tab {
+
+      padding:
+        10px;
+
+      border: none;
+
+      border-radius: 10px;
+
+      background: transparent;
+
+      color: #8d96a7;
+
+      font-size: 13px;
+    }
+
+
+    .auth-tab.active {
+
+      background:
+        rgba(124,58,237,.20);
+
+      color: #fff;
+
+      font-weight: 800;
+    }
+
+
+    .auth-form {
+
+      display: none;
+    }
+
+
+    .auth-form.active {
+      display: block;
+    }
+
+
+    .field {
+
+      margin-bottom: 14px;
+    }
+
+
+    .field label {
+
+      display: block;
+
+      margin-bottom: 6px;
+
+      color: #cbd5e1;
+
+      font-size: 12px;
+
+      font-weight: 600;
+    }
+
+
+    .field input {
+
+      width: 100%;
+
+      padding:
+        12px 14px;
+
+      border-radius: 13px;
+
+      border:
+        1px solid rgba(255,255,255,.09);
+
+      outline: none;
+
+      background:
+        rgba(0,0,0,.25);
+
+      color: #fff;
+
+      font-size: 13px;
+
+      direction: ltr;
+
+      text-align: left;
+
+      transition: .2s;
+    }
+
+
+    .field input:focus {
+
+      border-color:
+        rgba(124,58,237,.65);
+
+      box-shadow:
+        0 0 0 3px rgba(124,58,237,.09);
+    }
+
+
+    .auth-submit {
+
+      width: 100%;
+
+      padding:
+        13px;
+
+      margin-top: 4px;
+
+      border: none;
+
+      border-radius: 14px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #7c3aed,
+          #2563eb
+        );
+
+      color: #fff;
+
+      font-weight: 800;
+
+      font-size: 13px;
+    }
+
+
+    .auth-submit:disabled {
+
+      opacity: .6;
+
+      cursor: not-allowed;
+    }
+
+
+    .divider {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      margin:
+        20px 0;
+    }
+
+
+    .divider::before,
+    .divider::after {
+
+      content: "";
+
+      flex: 1;
+
+      height: 1px;
+
+      background:
+        rgba(255,255,255,.08);
+    }
+
+
+    .divider span {
+
+      color: #687181;
+
+      font-size: 11px;
+    }
+
+
+    .google-btn {
+
+      width: 100%;
+
+      padding:
+        12px;
+
+      border-radius: 14px;
+
+      border:
+        1px solid rgba(255,255,255,.10);
+
+      background:
+        rgba(255,255,255,.045);
+
+      color: #fff;
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 10px;
+
+      transition: .2s;
+    }
+
+
+    .google-btn:hover {
+
+      background:
+        rgba(255,255,255,.08);
+    }
+
+
+    .google-icon {
+
+      width: 20px;
+
+      height: 20px;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 50%;
+
+      background: #fff;
+
+      color: #4285f4;
+
+      font-size: 12px;
+
+      font-weight: 900;
+    }
+
+
+    .auth-message {
+
+      display: none;
+
+      margin-top: 13px;
+
+      padding:
+        10px 12px;
+
+      border-radius: 12px;
+
+      font-size: 11px;
+
+      line-height: 1.8;
+    }
+
+
+    .auth-message.show {
+      display: block;
+    }
+
+
+    .auth-message.error {
+
+      background:
+        rgba(239,68,68,.09);
+
+      color: #fca5a5;
+
+      border:
+        1px solid rgba(239,68,68,.15);
+    }
+
+
+    .auth-message.success {
+
+      background:
+        rgba(34,197,94,.09);
+
+      color: #86efac;
+
+      border:
+        1px solid rgba(34,197,94,.15);
+    }
+
+
+    .auth-note {
+
+      margin-top: 15px;
+
+      color: #596171;
+
+      font-size: 10px;
+
+      text-align: center;
+
+      line-height: 1.9;
+    }
+
+
+    /* =====================================================
        MOBILE
     ====================================================== */
 
     @media(max-width:800px) {
 
       .showcase {
-        grid-template-columns: 1fr 1fr;
+
+        grid-template-columns:
+          1fr 1fr;
       }
+
 
       .showcase-card.large {
 
@@ -1542,11 +1576,13 @@
         min-height: 320px;
       }
 
+
       .workflow {
 
         grid-template-columns:
           1fr 1fr;
       }
+
 
       .account {
 
@@ -1560,14 +1596,18 @@
     @media(max-width:520px) {
 
       .logo {
+
         font-size: 17px;
       }
+
 
       .logo-icon {
 
         width: 36px;
+
         height: 36px;
       }
+
 
       .nav-btn {
 
@@ -1577,21 +1617,30 @@
         font-size: 12px;
       }
 
+
       .hero {
+
         padding-top: 45px;
       }
 
+
       .hero-description {
+
         font-size: 14px;
       }
 
+
       .showcase {
+
         gap: 9px;
       }
 
+
       .showcase-card.large {
+
         min-height: 280px;
       }
+
 
       .showcase-card {
 
@@ -1600,17 +1649,24 @@
         border-radius: 17px;
       }
 
+
       .showcase-overlay {
+
         padding: 13px;
       }
 
+
       .showcase-overlay h3 {
+
         font-size: 13px;
       }
 
+
       .showcase-overlay p {
+
         display: none;
       }
+
 
       .workflow {
 
@@ -1618,9 +1674,12 @@
           1fr;
       }
 
+
       .step {
+
         min-height: auto;
       }
+
 
       .app {
 
@@ -1629,32 +1688,19 @@
         border-radius: 21px;
       }
 
+
       .user-info {
-        display: none !important;
+
+        max-width: 100px;
+
+        font-size: 10px;
       }
 
-      .loader-logo {
 
-        width: 76px;
-        height: 76px;
-
-        border-radius: 24px;
-      }
-
-      .loader-title {
-        font-size: 20px;
-      }
-
-      .auth-box {
+      .auth-modal {
 
         padding:
-          27px 20px;
-
-        border-radius: 24px;
-      }
-
-      .auth-title {
-        font-size: 21px;
+          24px 19px;
       }
 
     }
@@ -1668,262 +1714,26 @@
 
 
   <!-- =====================================================
-       LOADING SCREEN
+       PAGE LOADER
   ====================================================== -->
 
   <div id="pageLoader">
 
-    <div class="loader-logo">
+    <div class="loader-box">
 
-      <span class="loader-star">
-        ✦
-      </span>
-
-    </div>
-
-    <div class="loader-title">
-      ابزارک AI
-    </div>
-
-    <div class="loader-text">
-      در حال آماده‌سازی...
-    </div>
-
-    <div class="loader-dots">
-
-      <span></span>
-      <span></span>
-      <span></span>
-
-    </div>
-
-  </div>
-
-
-  <!-- =====================================================
-       AUTH MODAL
-  ====================================================== -->
-
-  <div
-    class="auth-modal"
-    id="authModal"
-  >
-
-    <div class="auth-box">
-
-
-      <button
-        type="button"
-        class="auth-close"
-        id="authClose"
-        aria-label="بستن"
-      >
-        ×
-      </button>
-
-
-      <div class="auth-logo">
+      <div class="loader-logo">
         ✦
       </div>
 
-
-      <h2
-        class="auth-title"
-        id="authTitle"
-      >
-        ورود به ابزارک AI
-      </h2>
-
-
-      <p class="auth-subtitle">
-        برای ادامه، وارد حساب کاربری خود شوید.
-      </p>
-
-
-      <!-- TABS -->
-
-      <div class="auth-tabs">
-
-        <button
-          type="button"
-          class="auth-tab active"
-          id="loginTab"
-        >
-          ورود
-        </button>
-
-
-        <button
-          type="button"
-          class="auth-tab"
-          id="signupTab"
-        >
-          ثبت‌نام
-        </button>
-
+      <div class="loader-title">
+        ابزارک AI
       </div>
 
-
-      <!-- =========================
-           LOGIN FORM
-      ========================== -->
-
-      <form
-        class="auth-form active"
-        id="loginForm"
-      >
-
-        <div class="field">
-
-          <label for="loginEmail">
-            ایمیل
-          </label>
-
-          <input
-            type="email"
-            id="loginEmail"
-            placeholder="example@email.com"
-            autocomplete="email"
-            required
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label for="loginPassword">
-            رمز عبور
-          </label>
-
-          <input
-            type="password"
-            id="loginPassword"
-            placeholder="رمز عبور خود را وارد کنید"
-            autocomplete="current-password"
-            required
-          >
-
-        </div>
-
-
-        <button
-          type="submit"
-          class="auth-submit"
-          id="loginSubmit"
-        >
-          ورود به حساب
-        </button>
-
-      </form>
-
-
-      <!-- =========================
-           SIGNUP FORM
-      ========================== -->
-
-      <form
-        class="auth-form"
-        id="signupForm"
-      >
-
-        <div class="field">
-
-          <label for="signupEmail">
-            ایمیل
-          </label>
-
-          <input
-            type="email"
-            id="signupEmail"
-            placeholder="example@email.com"
-            autocomplete="email"
-            required
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label for="signupPassword">
-            رمز عبور
-          </label>
-
-          <input
-            type="password"
-            id="signupPassword"
-            placeholder="حداقل ۶ کاراکتر"
-            autocomplete="new-password"
-            minlength="6"
-            required
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label for="signupPasswordConfirm">
-            تکرار رمز عبور
-          </label>
-
-          <input
-            type="password"
-            id="signupPasswordConfirm"
-            placeholder="رمز عبور را دوباره وارد کنید"
-            autocomplete="new-password"
-            minlength="6"
-            required
-          >
-
-        </div>
-
-
-        <button
-          type="submit"
-          class="auth-submit"
-          id="signupSubmit"
-        >
-          ساخت حساب کاربری
-        </button>
-
-      </form>
-
-
-      <!-- GOOGLE -->
-
-      <div class="divider">
-        <span>یا</span>
+      <div class="loader-text">
+        در حال آماده‌سازی سایت...
       </div>
 
-
-      <button
-        type="button"
-        class="google-btn"
-        id="googleBtn"
-      >
-
-        <span class="google-icon">
-          G
-        </span>
-
-        ادامه با Google
-
-      </button>
-
-
-      <!-- MESSAGE -->
-
-      <div
-        class="auth-message"
-        id="authMessage"
-      ></div>
-
-
-      <div class="auth-note">
-        با ادامه دادن، حساب کاربری شما در ابزارک AI ایجاد یا وارد می‌شود.
-      </div>
+      <div class="loader-line"></div>
 
     </div>
 
@@ -1937,7 +1747,6 @@
   <header>
 
     <nav class="nav">
-
 
       <a
         href="#"
@@ -1957,7 +1766,6 @@
 
       <div class="nav-actions">
 
-
         <span
           class="user-info"
           id="userInfo"
@@ -1968,6 +1776,7 @@
           class="nav-btn"
           id="logoutBtn"
           style="display:none;"
+          type="button"
         >
           خروج
         </button>
@@ -1976,6 +1785,7 @@
         <button
           class="nav-btn"
           id="loginBtn"
+          type="button"
         >
           ورود
         </button>
@@ -1984,10 +1794,10 @@
         <button
           class="nav-btn primary"
           id="signupBtn"
+          type="button"
         >
           ثبت‌نام
         </button>
-
 
       </div>
 
@@ -2006,7 +1816,6 @@
     <!-- HERO -->
 
     <section class="hero">
-
 
       <div class="badge">
 
@@ -2050,11 +1859,12 @@
 
       </a>
 
-
     </section>
 
 
-    <!-- SHOWCASE -->
+    <!-- =====================================================
+         SHOWCASE
+    ====================================================== -->
 
     <section class="showcase">
 
@@ -2065,7 +1875,6 @@
           src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=85"
           alt="فناوری و هوش مصنوعی"
         >
-
 
         <figcaption class="showcase-overlay">
 
@@ -2093,7 +1902,6 @@
           alt="پرامپت حرفه‌ای"
         >
 
-
         <figcaption class="showcase-overlay">
 
           <div>
@@ -2119,7 +1927,6 @@
           src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=900&q=85"
           alt="هنر دیجیتال"
         >
-
 
         <figcaption class="showcase-overlay">
 
@@ -2147,7 +1954,6 @@
           alt="ویرایش تصویر"
         >
 
-
         <figcaption class="showcase-overlay">
 
           <div>
@@ -2174,7 +1980,6 @@
           alt="خروجی باکیفیت"
         >
 
-
         <figcaption class="showcase-overlay">
 
           <div>
@@ -2193,14 +1998,14 @@
 
       </figure>
 
-
     </section>
 
 
-    <!-- WORKFLOW -->
+    <!-- =====================================================
+         WORKFLOW
+    ====================================================== -->
 
     <section class="section">
-
 
       <div class="section-title">
 
@@ -2208,11 +2013,9 @@
           چهار مرحله اصلی
         </small>
 
-
         <h2>
           از ایده تا خروجی نهایی
         </h2>
-
 
         <p>
           همه مراحل در یک مسیر ساده
@@ -2307,19 +2110,19 @@
 
         </article>
 
-
       </div>
 
     </section>
 
 
-    <!-- CREATOR -->
+    <!-- =====================================================
+         CREATOR
+    ====================================================== -->
 
     <section
       id="creator"
       class="app"
     >
-
 
       <div class="app-head">
 
@@ -2357,11 +2160,12 @@
         ✦ ساخت پرامپت حرفه‌ای
       </button>
 
-
     </section>
 
 
-    <!-- ACCOUNT -->
+    <!-- =====================================================
+         ACCOUNT
+    ====================================================== -->
 
     <section class="account">
 
@@ -2371,7 +2175,6 @@
         <h3>
           👤 حساب کاربری
         </h3>
-
 
         <p>
           برای ذخیره پروژه‌ها و ادامه کار،
@@ -2387,52 +2190,264 @@
           ☁️ پروژه‌های من
         </h3>
 
-
         <p>
           پروژه‌های شما در حساب کاربری ذخیره خواهند شد.
         </p>
 
       </div>
 
-
     </section>
-
 
   </main>
 
 
-  <!-- FOOTER -->
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
 
   <footer>
-
 
     <div class="footer-name">
       Vahid.Hemmati
     </div>
 
-
     <div class="footer-description">
       ابزارک AI؛ مسیری ساده برای تبدیل ایده‌های شما به تصاویر خلاقانه و حرفه‌ای.
     </div>
-
 
     <div class="footer-copy">
       © 2026 ابزارک AI — تمامی حقوق محفوظ است.
     </div>
 
-
   </footer>
 
 
   <!-- =====================================================
+       AUTH MODAL
+  ====================================================== -->
+
+  <div
+    class="auth-overlay"
+    id="authOverlay"
+  >
+
+    <div class="auth-modal">
+
+
+      <button
+        type="button"
+        class="auth-close"
+        id="authClose"
+      >
+        ×
+      </button>
+
+
+      <div class="auth-logo">
+        ✦
+      </div>
+
+
+      <h2 class="auth-title">
+        خوش آمدید
+      </h2>
+
+
+      <p class="auth-subtitle">
+        برای ادامه وارد حساب ابزارک AI شوید
+      </p>
+
+
+      <!-- TABS -->
+
+      <div class="auth-tabs">
+
+        <button
+          type="button"
+          class="auth-tab active"
+          id="loginTab"
+        >
+          ورود
+        </button>
+
+
+        <button
+          type="button"
+          class="auth-tab"
+          id="signupTab"
+        >
+          ثبت‌نام
+        </button>
+
+      </div>
+
+
+      <!-- =================================================
+           LOGIN FORM
+      ================================================== -->
+
+      <form
+        class="auth-form active"
+        id="loginForm"
+      >
+
+        <div class="field">
+
+          <label>
+            ایمیل
+          </label>
+
+          <input
+            type="email"
+            id="loginEmail"
+            placeholder="example@email.com"
+            autocomplete="email"
+            required
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            رمز عبور
+          </label>
+
+          <input
+            type="password"
+            id="loginPassword"
+            placeholder="رمز عبور"
+            autocomplete="current-password"
+            required
+          >
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="auth-submit"
+          id="loginSubmit"
+        >
+          ورود به حساب
+        </button>
+
+      </form>
+
+
+      <!-- =================================================
+           SIGNUP FORM
+      ================================================== -->
+
+      <form
+        class="auth-form"
+        id="signupForm"
+      >
+
+        <div class="field">
+
+          <label>
+            ایمیل
+          </label>
+
+          <input
+            type="email"
+            id="signupEmail"
+            placeholder="example@email.com"
+            autocomplete="email"
+            required
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            رمز عبور
+          </label>
+
+          <input
+            type="password"
+            id="signupPassword"
+            placeholder="حداقل ۶ کاراکتر"
+            autocomplete="new-password"
+            minlength="6"
+            required
+          >
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="auth-submit"
+          id="signupSubmit"
+        >
+          ایجاد حساب
+        </button>
+
+      </form>
+
+
+      <!-- DIVIDER -->
+
+      <div class="divider">
+
+        <span>
+          یا
+        </span>
+
+      </div>
+
+
+      <!-- GOOGLE -->
+
+      <button
+        type="button"
+        class="google-btn"
+        id="googleBtn"
+      >
+
+        <span class="google-icon">
+          G
+        </span>
+
+        ادامه با Google
+
+      </button>
+
+
+      <!-- MESSAGE -->
+
+      <div
+        class="auth-message"
+        id="authMessage"
+      ></div>
+
+
+      <div class="auth-note">
+        با ورود یا ثبت‌نام، حساب شما به سرویس ابزارک AI متصل می‌شود.
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
        JAVASCRIPT
+       ONLY ONE SUPABASE CONNECTION
   ====================================================== -->
 
   <script>
 
+    "use strict";
+
 
     /* =====================================================
-       1. SUPABASE SETTINGS
+       SUPABASE CONFIG
     ====================================================== */
 
     const SUPABASE_URL =
@@ -2443,64 +2458,103 @@
       "sb_publishable_vIHPwgfpXl56LSYjYXLBCQ_V7Axq7eB";
 
 
+    let supabaseClient = null;
+
+
     /* =====================================================
-       2. SUPABASE CONNECTION
+       PAGE LOADER
     ====================================================== */
 
-    const supabaseClient =
-      window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
+    const pageLoader =
+      document.getElementById("pageLoader");
+
+
+    function hidePageLoader() {
+
+      if (!pageLoader) {
+        return;
+      }
+
+      pageLoader.classList.add("hide");
+
+    }
+
+
+    /*
+     * مهم:
+     * حتی اگر مشکلی در اتصال Supabase وجود داشته باشد،
+     * لودر بیشتر از 6 ثانیه روی صفحه نمی‌ماند.
+     */
+
+    const loaderSafetyTimer =
+      setTimeout(
+        hidePageLoader,
+        6000
       );
 
 
     /* =====================================================
-       3. ELEMENTS
+       ELEMENTS
     ====================================================== */
 
     const loginBtn =
       document.getElementById("loginBtn");
 
+
     const signupBtn =
       document.getElementById("signupBtn");
 
+
     const logoutBtn =
       document.getElementById("logoutBtn");
+
 
     const userInfo =
       document.getElementById("userInfo");
 
 
-    const authModal =
-      document.getElementById("authModal");
+    const authOverlay =
+      document.getElementById("authOverlay");
+
 
     const authClose =
       document.getElementById("authClose");
 
+
     const loginTab =
       document.getElementById("loginTab");
+
 
     const signupTab =
       document.getElementById("signupTab");
 
+
     const loginForm =
       document.getElementById("loginForm");
+
 
     const signupForm =
       document.getElementById("signupForm");
 
+
     const googleBtn =
       document.getElementById("googleBtn");
 
-    const authTitle =
-      document.getElementById("authTitle");
 
     const authMessage =
       document.getElementById("authMessage");
 
 
+    const loginSubmit =
+      document.getElementById("loginSubmit");
+
+
+    const signupSubmit =
+      document.getElementById("signupSubmit");
+
+
     /* =====================================================
-       4. AUTH MESSAGE
+       AUTH MESSAGE
     ====================================================== */
 
     function showAuthMessage(
@@ -2512,7 +2566,7 @@
         message;
 
       authMessage.className =
-        "auth-message " + type;
+        "auth-message show " + type;
 
     }
 
@@ -2528,41 +2582,41 @@
 
 
     /* =====================================================
-       5. OPEN AUTH MODAL
+       OPEN MODAL
     ====================================================== */
 
     function openAuthModal(
       mode = "login"
     ) {
 
-      authModal.classList.add(
-        "active"
-      );
+      authOverlay.classList.add("show");
 
-      document.body.classList.add(
-        "modal-open"
-      );
+      document.body.classList.add("modal-open");
 
       clearAuthMessage();
 
-      switchAuthMode(mode);
+      if (mode === "signup") {
+
+        switchAuthTab("signup");
+
+      } else {
+
+        switchAuthTab("login");
+
+      }
 
     }
 
 
     /* =====================================================
-       6. CLOSE AUTH MODAL
+       CLOSE MODAL
     ====================================================== */
 
     function closeAuthModal() {
 
-      authModal.classList.remove(
-        "active"
-      );
+      authOverlay.classList.remove("show");
 
-      document.body.classList.remove(
-        "modal-open"
-      );
+      document.body.classList.remove("modal-open");
 
       clearAuthMessage();
 
@@ -2570,58 +2624,33 @@
 
 
     /* =====================================================
-       7. SWITCH LOGIN / SIGNUP
+       SWITCH AUTH TABS
     ====================================================== */
 
-    function switchAuthMode(
-      mode
-    ) {
+    function switchAuthTab(mode) {
 
       clearAuthMessage();
 
 
       if (mode === "signup") {
 
-        loginTab.classList.remove(
-          "active"
-        );
+        loginTab.classList.remove("active");
 
-        signupTab.classList.add(
-          "active"
-        );
+        signupTab.classList.add("active");
 
-        loginForm.classList.remove(
-          "active"
-        );
+        loginForm.classList.remove("active");
 
-        signupForm.classList.add(
-          "active"
-        );
-
-        authTitle.textContent =
-          "ساخت حساب در ابزارک AI";
-
+        signupForm.classList.add("active");
 
       } else {
 
-        signupTab.classList.remove(
-          "active"
-        );
+        signupTab.classList.remove("active");
 
-        loginTab.classList.add(
-          "active"
-        );
+        loginTab.classList.add("active");
 
-        signupForm.classList.remove(
-          "active"
-        );
+        signupForm.classList.remove("active");
 
-        loginForm.classList.add(
-          "active"
-        );
-
-        authTitle.textContent =
-          "ورود به ابزارک AI";
+        loginForm.classList.add("active");
 
       }
 
@@ -2629,378 +2658,138 @@
 
 
     /* =====================================================
-       8. HEADER BUTTONS
+       INITIALIZE SUPABASE
     ====================================================== */
 
-    loginBtn.addEventListener(
-      "click",
-      () => {
+    function initializeSupabase() {
 
-        openAuthModal("login");
-
-      }
-    );
-
-
-    signupBtn.addEventListener(
-      "click",
-      () => {
-
-        openAuthModal("signup");
-
-      }
-    );
-
-
-    loginTab.addEventListener(
-      "click",
-      () => {
-
-        switchAuthMode("login");
-
-      }
-    );
-
-
-    signupTab.addEventListener(
-      "click",
-      () => {
-
-        switchAuthMode("signup");
-
-      }
-    );
-
-
-    authClose.addEventListener(
-      "click",
-      closeAuthModal
-    );
-
-
-    /* =====================================================
-       9. CLOSE BY BACKDROP
-    ====================================================== */
-
-    authModal.addEventListener(
-      "click",
-      (event) => {
+      try {
 
         if (
-          event.target ===
-          authModal
+          !window.supabase ||
+          !window.supabase.createClient
         ) {
-
-          closeAuthModal();
-
-        }
-
-      }
-    );
-
-
-    /* =====================================================
-       10. ESC KEY
-    ====================================================== */
-
-    document.addEventListener(
-      "keydown",
-      (event) => {
-
-        if (
-          event.key === "Escape" &&
-          authModal.classList.contains(
-            "active"
-          )
-        ) {
-
-          closeAuthModal();
-
-        }
-
-      }
-    );
-
-
-    /* =====================================================
-       11. LOGIN WITH EMAIL
-    ====================================================== */
-
-    loginForm.addEventListener(
-      "submit",
-      async (event) => {
-
-        event.preventDefault();
-
-
-        const email =
-          document
-            .getElementById("loginEmail")
-            .value
-            .trim();
-
-
-        const password =
-          document
-            .getElementById("loginPassword")
-            .value;
-
-
-        const submitButton =
-          document.getElementById(
-            "loginSubmit"
-          );
-
-
-        if (
-          !email ||
-          !password
-        ) {
-
-          showAuthMessage(
-            "لطفاً ایمیل و رمز عبور را وارد کنید."
-          );
-
-          return;
-
-        }
-
-
-        submitButton.disabled =
-          true;
-
-        submitButton.textContent =
-          "در حال ورود...";
-
-
-        const {
-          error
-        } =
-          await supabaseClient.auth.signInWithPassword({
-
-            email:
-              email,
-
-            password:
-              password
-
-          });
-
-
-        submitButton.disabled =
-          false;
-
-        submitButton.textContent =
-          "ورود به حساب";
-
-
-        if (error) {
 
           console.error(
-            "Login Error:",
-            error
+            "Supabase library was not loaded."
           );
 
-
-          showAuthMessage(
-            getAuthErrorMessage(
-              error.message
-            )
-          );
-
-          return;
-
+          return false;
         }
 
 
-        showAuthMessage(
-          "ورود با موفقیت انجام شد.",
-          "success"
-        );
-
-
-        setTimeout(() => {
-
-          closeAuthModal();
-
-        }, 700);
-
-      }
-    );
-
-
-    /* =====================================================
-       12. SIGN UP WITH EMAIL
-    ====================================================== */
-
-    signupForm.addEventListener(
-      "submit",
-      async (event) => {
-
-        event.preventDefault();
-
-
-        const email =
-          document
-            .getElementById("signupEmail")
-            .value
-            .trim();
-
-
-        const password =
-          document
-            .getElementById("signupPassword")
-            .value;
-
-
-        const confirmPassword =
-          document
-            .getElementById(
-              "signupPasswordConfirm"
-            )
-            .value;
-
-
-        const submitButton =
-          document.getElementById(
-            "signupSubmit"
+        supabaseClient =
+          window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_PUBLISHABLE_KEY
           );
 
 
-        if (
-          password !==
-          confirmPassword
-        ) {
+        return true;
 
-          showAuthMessage(
-            "رمز عبور و تکرار آن یکسان نیست."
-          );
+      } catch (error) {
 
-          return;
-
-        }
-
-
-        if (
-          password.length < 6
-        ) {
-
-          showAuthMessage(
-            "رمز عبور باید حداقل ۶ کاراکتر باشد."
-          );
-
-          return;
-
-        }
-
-
-        submitButton.disabled =
-          true;
-
-        submitButton.textContent =
-          "در حال ساخت حساب...";
-
-
-        const {
-          data,
+        console.error(
+          "Supabase initialization error:",
           error
-        } =
-          await supabaseClient.auth.signUp({
-
-            email:
-              email,
-
-            password:
-              password
-
-          });
-
-
-        submitButton.disabled =
-          false;
-
-        submitButton.textContent =
-          "ساخت حساب کاربری";
-
-
-        if (error) {
-
-          console.error(
-            "Signup Error:",
-            error
-          );
-
-
-          showAuthMessage(
-            getAuthErrorMessage(
-              error.message
-            )
-          );
-
-          return;
-
-        }
-
-
-        /*
-         * چون Confirm email در Supabase
-         * روشن است، ممکن است کاربر نیاز
-         * داشته باشد ایمیل خود را تأیید کند.
-         */
-
-        if (
-          data.user &&
-          !data.session
-        ) {
-
-          showAuthMessage(
-            "حساب ساخته شد. لطفاً ایمیل خود را برای تأیید حساب بررسی کنید.",
-            "success"
-          );
-
-          return;
-
-        }
-
-
-        showAuthMessage(
-          "حساب شما با موفقیت ساخته شد.",
-          "success"
         );
 
-
-        setTimeout(() => {
-
-          closeAuthModal();
-
-        }, 700);
+        return false;
 
       }
-    );
+
+    }
 
 
     /* =====================================================
-       13. GOOGLE LOGIN
+       UPDATE USER INTERFACE
     ====================================================== */
 
-    googleBtn.addEventListener(
-      "click",
-      async () => {
+    function updateUserInterface(user) {
 
-        googleBtn.disabled =
-          true;
+      if (user) {
 
-        googleBtn.textContent =
-          "در حال اتصال به Google...";
+        const name =
+          user.user_metadata?.full_name ||
+          user.user_metadata?.name ||
+          user.email ||
+          "کاربر";
 
+
+        userInfo.textContent =
+          "👤 " + name;
+
+
+        userInfo.classList.add("show");
+
+
+        loginBtn.style.display =
+          "none";
+
+
+        signupBtn.style.display =
+          "none";
+
+
+        logoutBtn.style.display =
+          "block";
+
+
+      } else {
+
+        userInfo.textContent =
+          "";
+
+
+        userInfo.classList.remove("show");
+
+
+        loginBtn.style.display =
+          "block";
+
+
+        signupBtn.style.display =
+          "block";
+
+
+        logoutBtn.style.display =
+          "none";
+
+      }
+
+    }
+
+
+    /* =====================================================
+       GOOGLE LOGIN
+    ====================================================== */
+
+    async function loginWithGoogle() {
+
+      if (!supabaseClient) {
+
+        showAuthMessage(
+          "اتصال به سرویس ورود برقرار نشده است."
+        );
+
+        return;
+      }
+
+
+      googleBtn.disabled = true;
+
+      googleBtn.textContent =
+        "در حال اتصال به Google...";
+
+
+      try {
 
         const {
           error
         } =
           await supabaseClient.auth.signInWithOAuth({
 
-            provider:
-              "google",
+            provider: "google",
 
             options: {
 
@@ -3015,37 +2804,331 @@
         if (error) {
 
           console.error(
-            "Google Login Error:",
+            "Google login error:",
             error
           );
 
 
-          googleBtn.disabled =
-            false;
+          showAuthMessage(
+            "ورود با Google انجام نشد. لطفاً دوباره تلاش کنید."
+          );
+
+
+          googleBtn.disabled = false;
 
           googleBtn.innerHTML =
             '<span class="google-icon">G</span> ادامه با Google';
 
+        }
+
+      } catch (error) {
+
+        console.error(
+          "Google exception:",
+          error
+        );
+
+
+        showAuthMessage(
+          "خطایی هنگام اتصال به Google رخ داد."
+        );
+
+
+        googleBtn.disabled = false;
+
+        googleBtn.innerHTML =
+          '<span class="google-icon">G</span> ادامه با Google';
+
+      }
+
+    }
+
+
+    /* =====================================================
+       EMAIL LOGIN
+    ====================================================== */
+
+    async function loginWithEmail(
+      event
+    ) {
+
+      event.preventDefault();
+
+
+      if (!supabaseClient) {
+
+        showAuthMessage(
+          "اتصال به سرویس ورود برقرار نشده است."
+        );
+
+        return;
+      }
+
+
+      const email =
+        document
+          .getElementById("loginEmail")
+          .value
+          .trim();
+
+
+      const password =
+        document
+          .getElementById("loginPassword")
+          .value;
+
+
+      if (!email || !password) {
+
+        showAuthMessage(
+          "لطفاً ایمیل و رمز عبور را وارد کنید."
+        );
+
+        return;
+      }
+
+
+      loginSubmit.disabled = true;
+
+      loginSubmit.textContent =
+        "در حال ورود...";
+
+
+      clearAuthMessage();
+
+
+      try {
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient.auth.signInWithPassword({
+
+            email: email,
+
+            password: password
+
+          });
+
+
+        if (error) {
+
+          console.error(
+            "Email login error:",
+            error
+          );
+
 
           showAuthMessage(
-            getAuthErrorMessage(
-              error.message
-            )
+            "ایمیل یا رمز عبور صحیح نیست."
+          );
+
+
+          loginSubmit.disabled = false;
+
+          loginSubmit.textContent =
+            "ورود به حساب";
+
+          return;
+        }
+
+
+        if (data?.user) {
+
+          showAuthMessage(
+            "ورود با موفقیت انجام شد ✓",
+            "success"
+          );
+
+
+          setTimeout(
+            closeAuthModal,
+            700
           );
 
         }
 
+      } catch (error) {
+
+        console.error(
+          "Login exception:",
+          error
+        );
+
+
+        showAuthMessage(
+          "خطایی هنگام ورود رخ داد."
+        );
+
       }
-    );
+
+
+      loginSubmit.disabled = false;
+
+      loginSubmit.textContent =
+        "ورود به حساب";
+
+    }
 
 
     /* =====================================================
-       14. LOGOUT
+       EMAIL SIGN UP
     ====================================================== */
 
-    logoutBtn.addEventListener(
-      "click",
-      async () => {
+    async function signupWithEmail(
+      event
+    ) {
+
+      event.preventDefault();
+
+
+      if (!supabaseClient) {
+
+        showAuthMessage(
+          "اتصال به سرویس ثبت‌نام برقرار نشده است."
+        );
+
+        return;
+      }
+
+
+      const email =
+        document
+          .getElementById("signupEmail")
+          .value
+          .trim();
+
+
+      const password =
+        document
+          .getElementById("signupPassword")
+          .value;
+
+
+      if (!email || !password) {
+
+        showAuthMessage(
+          "لطفاً ایمیل و رمز عبور را وارد کنید."
+        );
+
+        return;
+      }
+
+
+      if (password.length < 6) {
+
+        showAuthMessage(
+          "رمز عبور باید حداقل ۶ کاراکتر باشد."
+        );
+
+        return;
+      }
+
+
+      signupSubmit.disabled = true;
+
+      signupSubmit.textContent =
+        "در حال ایجاد حساب...";
+
+
+      clearAuthMessage();
+
+
+      try {
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient.auth.signUp({
+
+            email: email,
+
+            password: password,
+
+            options: {
+
+              emailRedirectTo:
+                window.location.origin
+
+            }
+
+          });
+
+
+        if (error) {
+
+          console.error(
+            "Signup error:",
+            error
+          );
+
+
+          showAuthMessage(
+            error.message ||
+            "ثبت‌نام انجام نشد."
+          );
+
+
+          signupSubmit.disabled = false;
+
+          signupSubmit.textContent =
+            "ایجاد حساب";
+
+          return;
+        }
+
+
+        /*
+         * چون Confirm Email در Supabase روشن است،
+         * معمولاً بعد از ثبت‌نام باید ایمیل کاربر تأیید شود.
+         */
+
+        if (data?.user) {
+
+          showAuthMessage(
+            "حساب ساخته شد. لطفاً ایمیل خود را برای تأیید حساب بررسی کنید.",
+            "success"
+          );
+
+        }
+
+      } catch (error) {
+
+        console.error(
+          "Signup exception:",
+          error
+        );
+
+
+        showAuthMessage(
+          "خطایی هنگام ثبت‌نام رخ داد."
+        );
+
+      }
+
+
+      signupSubmit.disabled = false;
+
+      signupSubmit.textContent =
+        "ایجاد حساب";
+
+    }
+
+
+    /* =====================================================
+       LOGOUT
+    ====================================================== */
+
+    async function logout() {
+
+      if (!supabaseClient) {
+        return;
+      }
+
+
+      try {
 
         const {
           error
@@ -3055,85 +3138,27 @@
 
         if (error) {
 
+          console.error(
+            "Logout error:",
+            error
+          );
+
           alert(
-            "خطا در خروج از حساب:\n" +
-            error.message
+            "خروج از حساب انجام نشد."
           );
 
           return;
-
         }
 
 
-        updateUserInterface(
-          null
+        updateUserInterface(null);
+
+      } catch (error) {
+
+        console.error(
+          "Logout exception:",
+          error
         );
-
-      }
-    );
-
-
-    /* =====================================================
-       15. UPDATE USER INTERFACE
-    ====================================================== */
-
-    function updateUserInterface(
-      user
-    ) {
-
-      if (user) {
-
-
-        const name =
-          user.user_metadata?.full_name ||
-          user.user_metadata?.name ||
-          user.email ||
-          "کاربر";
-
-
-        userInfo.textContent =
-          "👤 " + name;
-
-
-        userInfo.classList.add(
-          "show"
-        );
-
-
-        loginBtn.style.display =
-          "none";
-
-
-        signupBtn.style.display =
-          "none";
-
-
-        logoutBtn.style.display =
-          "block";
-
-
-      } else {
-
-
-        userInfo.textContent =
-          "";
-
-
-        userInfo.classList.remove(
-          "show"
-        );
-
-
-        loginBtn.style.display =
-          "block";
-
-
-        signupBtn.style.display =
-          "block";
-
-
-        logoutBtn.style.display =
-          "none";
 
       }
 
@@ -3141,142 +3166,79 @@
 
 
     /* =====================================================
-       16. CURRENT USER
+       CHECK CURRENT USER
     ====================================================== */
 
     async function checkCurrentUser() {
 
-      const {
-        data,
-        error
-      } =
-        await supabaseClient.auth.getUser();
+      if (!supabaseClient) {
 
-
-      if (error) {
-
-        updateUserInterface(
-          null
-        );
+        updateUserInterface(null);
 
         return;
 
       }
 
 
-      updateUserInterface(
-        data.user
+      try {
+
+        const {
+          data
+        } =
+          await supabaseClient.auth.getUser();
+
+
+        updateUserInterface(
+          data?.user || null
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          "Get user error:",
+          error
+        );
+
+
+        updateUserInterface(null);
+
+      }
+
+    }
+
+
+    /* =====================================================
+       AUTH STATE LISTENER
+    ====================================================== */
+
+    function setupAuthListener() {
+
+      if (!supabaseClient) {
+        return;
+      }
+
+
+      supabaseClient.auth.onAuthStateChange(
+
+        (
+          event,
+          session
+        ) => {
+
+          updateUserInterface(
+            session?.user || null
+          );
+
+        }
+
       );
 
     }
 
 
     /* =====================================================
-       17. AUTH STATE CHANGE
-    ====================================================== */
-
-    supabaseClient.auth.onAuthStateChange(
-      (event, session) => {
-
-        updateUserInterface(
-          session?.user || null
-        );
-
-      }
-    );
-
-
-    /* =====================================================
-       18. AUTH ERROR TRANSLATION
-    ====================================================== */
-
-    function getAuthErrorMessage(
-      message
-    ) {
-
-      const text =
-        String(message || "")
-          .toLowerCase();
-
-
-      if (
-        text.includes(
-          "invalid login credentials"
-        )
-      ) {
-
-        return:
-          "ایمیل یا رمز عبور اشتباه است.";
-
-      }
-
-
-      if (
-        text.includes(
-          "email not confirmed"
-        )
-      ) {
-
-        return:
-          "ابتدا ایمیل خود را تأیید کنید.";
-
-      }
-
-
-      if (
-        text.includes(
-          "user already registered"
-        )
-      ) {
-
-        return:
-          "این ایمیل قبلاً ثبت‌نام کرده است. وارد حساب شوید.";
-
-      }
-
-
-      if (
-        text.includes(
-          "password"
-        ) &&
-        text.includes(
-          "6"
-        )
-      ) {
-
-        return:
-          "رمز عبور باید حداقل ۶ کاراکتر باشد.";
-
-      }
-
-
-      if (
-        text.includes(
-          "rate limit"
-        )
-      ) {
-
-        return:
-          "تعداد درخواست‌ها زیاد است. کمی بعد دوباره تلاش کنید.";
-
-      }
-
-
-      return:
-        "عملیات انجام نشد. لطفاً دوباره تلاش کنید.";
-
-    }
-
-
-    /* =====================================================
-       19. CHECK CURRENT USER
-    ====================================================== */
-
-    checkCurrentUser();
-
-
-    /* =====================================================
-       20. GENERATE PROMPT
+       GENERATOR
     ====================================================== */
 
     const generateButton =
@@ -3294,7 +3256,6 @@
     generateButton.addEventListener(
       "click",
       async () => {
-
 
         const idea =
           ideaInput.value.trim();
@@ -3320,56 +3281,196 @@
           "در حال آماده‌سازی...";
 
 
-        setTimeout(() => {
+        setTimeout(
+          () => {
+
+            generateButton.disabled =
+              false;
 
 
-          generateButton.disabled =
-            false;
+            generateButton.textContent =
+              "✦ ساخت پرامپت حرفه‌ای";
 
 
-          generateButton.textContent =
-            "✦ ساخت پرامپت حرفه‌ای";
+            alert(
+              "اتصال موتور واقعی هوش مصنوعی را در مرحله بعد انجام می‌دهیم."
+            );
 
-
-          alert(
-            "اتصال موتور واقعی هوش مصنوعی را در مرحله بعد انجام می‌دهیم."
-          );
-
-
-        }, 900);
+          },
+          900
+        );
 
       }
     );
 
 
     /* =====================================================
-       21. HIDE LOADER
+       EVENT LISTENERS
     ====================================================== */
 
-    window.addEventListener(
-      "load",
-      () => {
-
-        setTimeout(() => {
-
-          const loader =
-            document.getElementById(
-              "pageLoader"
-            );
+    loginBtn.addEventListener(
+      "click",
+      () => openAuthModal("login")
+    );
 
 
-          if (loader) {
+    signupBtn.addEventListener(
+      "click",
+      () => openAuthModal("signup")
+    );
 
-            loader.classList.add(
-              "hide"
-            );
 
-          }
+    authClose.addEventListener(
+      "click",
+      closeAuthModal
+    );
 
-        }, 500);
+
+    loginTab.addEventListener(
+      "click",
+      () => switchAuthTab("login")
+    );
+
+
+    signupTab.addEventListener(
+      "click",
+      () => switchAuthTab("signup")
+    );
+
+
+    googleBtn.addEventListener(
+      "click",
+      loginWithGoogle
+    );
+
+
+    loginForm.addEventListener(
+      "submit",
+      loginWithEmail
+    );
+
+
+    signupForm.addEventListener(
+      "submit",
+      signupWithEmail
+    );
+
+
+    logoutBtn.addEventListener(
+      "click",
+      logout
+    );
+
+
+    /* =====================================================
+       CLOSE MODAL BY CLICKING OUTSIDE
+    ====================================================== */
+
+    authOverlay.addEventListener(
+      "click",
+      (event) => {
+
+        if (
+          event.target ===
+          authOverlay
+        ) {
+
+          closeAuthModal();
+
+        }
 
       }
     );
+
+
+    /* =====================================================
+       ESC KEY
+    ====================================================== */
+
+    document.addEventListener(
+      "keydown",
+      (event) => {
+
+        if (
+          event.key === "Escape" &&
+          authOverlay.classList.contains("show")
+        ) {
+
+          closeAuthModal();
+
+        }
+
+      }
+    );
+
+
+    /* =====================================================
+       START APPLICATION
+    ====================================================== */
+
+    async function startApplication() {
+
+      try {
+
+        const initialized =
+          initializeSupabase();
+
+
+        if (initialized) {
+
+          setupAuthListener();
+
+          await checkCurrentUser();
+
+        } else {
+
+          updateUserInterface(null);
+
+        }
+
+      } catch (error) {
+
+        console.error(
+          "Application startup error:",
+          error
+        );
+
+
+        updateUserInterface(null);
+
+      } finally {
+
+        clearTimeout(
+          loaderSafetyTimer
+        );
+
+
+        hidePageLoader();
+
+      }
+
+    }
+
+
+    /* =====================================================
+       START
+    ====================================================== */
+
+    if (
+      document.readyState ===
+      "loading"
+    ) {
+
+      document.addEventListener(
+        "DOMContentLoaded",
+        startApplication
+      );
+
+    } else {
+
+      startApplication();
+
+    }
 
 
   </script>

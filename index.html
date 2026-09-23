@@ -17,7 +17,12 @@ content="ابزارک AI؛ ایده خود را به پرامپت حرفه‌ا�
 
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
+
 <style>
+
+/* =====================================================
+   RESET
+===================================================== */
 
 *{
 box-sizing:border-box;
@@ -78,9 +83,9 @@ text-decoration:none;
 }
 
 
-/* =========================
-HEADER
-========================= */
+/* =====================================================
+   HEADER
+===================================================== */
 
 header{
 position:sticky;
@@ -200,9 +205,9 @@ rgba(255,255,255,.06);
 }
 
 
-/* =========================
-HERO
-========================= */
+/* =====================================================
+   HERO
+===================================================== */
 
 .hero{
 width:min(900px,92%);
@@ -284,9 +289,9 @@ font-size:15px;
 }
 
 
-/* =========================
-SHOWCASE
-========================= */
+/* =====================================================
+   SHOWCASE
+===================================================== */
 
 .showcase{
 width:min(1050px,92%);
@@ -353,9 +358,9 @@ font-size:16px;
 }
 
 
-/* =========================
-SECTION
-========================= */
+/* =====================================================
+   SECTION
+===================================================== */
 
 .section{
 width:min(1050px,92%);
@@ -383,9 +388,9 @@ margin-top:5px;
 }
 
 
-/* =========================
-WORKFLOW
-========================= */
+/* =====================================================
+   WORKFLOW
+===================================================== */
 
 .workflow{
 display:grid;
@@ -449,9 +454,9 @@ margin-top:6px;
 }
 
 
-/* =========================
-APP
-========================= */
+/* =====================================================
+   APP
+===================================================== */
 
 .app{
 width:min(850px,92%);
@@ -581,9 +586,9 @@ color:#737b89;
 }
 
 
-/* =========================
-LOGIN NOTICE
-========================= */
+/* =====================================================
+   LOGIN NOTICE
+===================================================== */
 
 .notice{
 display:none;
@@ -681,9 +686,9 @@ transform:translateY(0);
 }
 
 
-/* =========================
-PROMPT RESULT
-========================= */
+/* =====================================================
+   PROMPT RESULT
+===================================================== */
 
 .result{
 display:none;
@@ -801,9 +806,178 @@ transform:translateY(0);
 }
 
 
-/* =========================
-ACCOUNT
-========================= */
+/* =====================================================
+   IMAGE GENERATION
+===================================================== */
+
+.image-section{
+display:none;
+
+margin-top:20px;
+
+padding:20px;
+
+border-radius:20px;
+
+background:
+linear-gradient(
+145deg,
+rgba(37,99,235,.08),
+rgba(5,5,8,.96)
+);
+
+border:
+1px solid rgba(96,165,250,.18);
+
+animation:
+resultIn .3s ease;
+}
+
+.image-section.show{
+display:block;
+}
+
+.image-head{
+display:flex;
+
+align-items:center;
+justify-content:space-between;
+
+gap:12px;
+
+margin-bottom:15px;
+}
+
+.image-head h3{
+font-size:16px;
+}
+
+.image-head span{
+font-size:11px;
+
+color:#8b96a8;
+}
+
+.generate-image{
+width:100%;
+
+padding:14px;
+
+border:0;
+
+border-radius:13px;
+
+background:
+linear-gradient(
+135deg,
+#2563eb,
+#7c3aed
+);
+
+color:#fff;
+
+font-size:14px;
+
+font-weight:800;
+
+transition:.2s;
+}
+
+.generate-image:hover:not(:disabled){
+transform:translateY(-1px);
+}
+
+.generate-image:disabled{
+opacity:.65;
+}
+
+.image-message{
+margin-top:12px;
+
+padding:12px;
+
+border-radius:12px;
+
+background:
+rgba(255,255,255,.04);
+
+color:#a5b4fc;
+
+font-size:12px;
+
+text-align:center;
+}
+
+.generated-image{
+display:none;
+
+width:100%;
+
+margin-top:15px;
+
+border-radius:16px;
+
+border:
+1px solid rgba(255,255,255,.10);
+
+overflow:hidden;
+}
+
+.generated-image.show{
+display:block;
+}
+
+.generated-image img{
+display:block;
+
+width:100%;
+
+height:auto;
+
+max-height:700px;
+
+object-fit:contain;
+
+background:#000;
+}
+
+.image-actions{
+display:none;
+
+gap:8px;
+
+margin-top:12px;
+}
+
+.image-actions.show{
+display:flex;
+}
+
+.image-actions a,
+.image-actions button{
+flex:1;
+
+padding:10px;
+
+border-radius:10px;
+
+border:
+1px solid rgba(255,255,255,.10);
+
+background:
+rgba(255,255,255,.06);
+
+color:#fff;
+
+font-size:12px;
+
+text-align:center;
+}
+
+
+/* =====================================================
+   ACCOUNT
+===================================================== */
 
 .account{
 width:min(850px,92%);
@@ -842,9 +1016,9 @@ font-size:13px;
 }
 
 
-/* =========================
-MODAL
-========================= */
+/* =====================================================
+   MODAL
+===================================================== */
 
 .modal{
 display:none;
@@ -967,9 +1141,9 @@ margin-top:10px;
 }
 
 
-/* =========================
-LUXURY FOOTER
-========================= */
+/* =====================================================
+   FOOTER
+===================================================== */
 
 footer{
 position:relative;
@@ -1071,6 +1245,7 @@ width:420px;
 height:250px;
 
 left:-180px;
+
 bottom:-160px;
 
 background:
@@ -1123,9 +1298,9 @@ font-size:11px;
 }
 
 
-/* =========================
-LOADING SCREEN
-========================= */
+/* =====================================================
+   LOADING SCREEN
+===================================================== */
 
 #pageLoader{
 position:fixed;
@@ -1253,9 +1428,9 @@ transform:translateY(-4px);
 }
 
 
-/* =========================
-MOBILE
-========================= */
+/* =====================================================
+   MOBILE
+===================================================== */
 
 @media(max-width:800px){
 
@@ -1349,11 +1524,22 @@ padding:18px;
 
 .result-head{
 align-items:flex-start;
+
 flex-direction:column;
 }
 
 .copy-btn{
 width:100%;
+}
+
+.image-head{
+align-items:flex-start;
+
+flex-direction:column;
+}
+
+.image-actions{
+flex-direction:column;
 }
 
 footer{
@@ -1384,9 +1570,9 @@ right:-300px;
 <body>
 
 
-<!-- =========================
-PAGE LOADER
-========================= -->
+<!-- =====================================================
+     PAGE LOADER
+===================================================== -->
 
 <div id="pageLoader">
 
@@ -1411,9 +1597,9 @@ PAGE LOADER
 </div>
 
 
-<!-- =========================
-HEADER
-========================= -->
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
 <header>
 
@@ -1464,9 +1650,9 @@ style="display:none">
 </header>
 
 
-<!-- =========================
-MAIN
-========================= -->
+<!-- =====================================================
+     MAIN
+===================================================== -->
 
 <main>
 
@@ -1500,7 +1686,9 @@ MAIN
 </section>
 
 
-<!-- SHOWCASE -->
+<!-- =====================================================
+     SHOWCASE
+===================================================== -->
 
 <section class="showcase">
 
@@ -1592,7 +1780,9 @@ alt="خروجی باکیفیت">
 </section>
 
 
-<!-- WORKFLOW -->
+<!-- =====================================================
+     WORKFLOW
+===================================================== -->
 
 <section class="section">
 
@@ -1700,7 +1890,9 @@ alt="خروجی باکیفیت">
 </section>
 
 
-<!-- CREATOR -->
+<!-- =====================================================
+     CREATOR
+===================================================== -->
 
 <section
 class="app"
@@ -1749,7 +1941,9 @@ id="generateButton">
 </button>
 
 
-<!-- LOGIN NOTICE -->
+<!-- =====================================================
+     LOGIN NOTICE
+===================================================== -->
 
 <div
 class="notice"
@@ -1789,7 +1983,9 @@ id="noticeSignup">
 </div>
 
 
-<!-- PROMPT RESULT -->
+<!-- =====================================================
+     PROMPT RESULT
+===================================================== -->
 
 <div
 class="result"
@@ -1807,14 +2003,17 @@ class="copy-btn"
 id="copyPrompt">
 
 کپی پرامپت
+
 </button>
 
 </div>
+
 
 <div
 class="prompt-text"
 id="promptResult">
 </div>
+
 
 <div
 class="result-message"
@@ -1823,10 +2022,92 @@ id="resultMessage">
 
 </div>
 
+
+<!-- =====================================================
+     IMAGE GENERATION
+===================================================== -->
+
+<div
+class="image-section"
+id="imageSection">
+
+<div class="image-head">
+
+<div>
+
+<h3>
+🎨 تولید تصویر
+</h3>
+
+<span>
+پرامپت بالا برای ساخت تصویر استفاده می‌شود.
+</span>
+
+</div>
+
+</div>
+
+
+<button
+type="button"
+class="generate-image"
+id="generateImageButton">
+
+🎨 تولید تصویر با این پرامپت
+
+</button>
+
+
+<div
+class="image-message"
+id="imageMessage">
+</div>
+
+
+<div
+class="generated-image"
+id="generatedImage">
+
+<img
+id="generatedImageElement"
+src=""
+alt="تصویر تولیدشده با هوش مصنوعی">
+
+</div>
+
+
+<div
+class="image-actions"
+id="imageActions">
+
+<a
+id="openImage"
+href="#"
+target="_blank"
+rel="noopener">
+
+مشاهده تصویر
+
+</a>
+
+<button
+type="button"
+id="downloadImage">
+
+دانلود تصویر
+
+</button>
+
+</div>
+
+</div>
+
 </section>
 
 
-<!-- ACCOUNT -->
+<!-- =====================================================
+     ACCOUNT
+===================================================== -->
 
 <section class="account">
 
@@ -1861,7 +2142,9 @@ id="resultMessage">
 </main>
 
 
-<!-- FOOTER -->
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
 <footer>
 
@@ -1878,8 +2161,7 @@ Vahid.Hemmati
 
 </div>
 
-<div
-class="footer-copy">
+<div class="footer-copy">
 
 © 2026 ابزارک AI — تمامی حقوق محفوظ است.
 
@@ -1888,7 +2170,9 @@ class="footer-copy">
 </footer>
 
 
-<!-- LOGIN MODAL -->
+<!-- =====================================================
+     LOGIN MODAL
+===================================================== -->
 
 <div
 class="modal"
@@ -1981,743 +2265,4 @@ const userInfo =
 document.getElementById("userInfo");
 
 const status =
-document.getElementById("status");
-
-const generate =
-document.getElementById("generateButton");
-
-const notice =
-document.getElementById("notice");
-
-const ideaInput =
-document.getElementById("ideaInput");
-
-const modal =
-document.getElementById("modal");
-
-const modalTitle =
-document.getElementById("modalTitle");
-
-const email =
-document.getElementById("email");
-
-const password =
-document.getElementById("password");
-
-const emailAction =
-document.getElementById("emailAction");
-
-const googleAction =
-document.getElementById("googleAction");
-
-const closeModal =
-document.getElementById("closeModal");
-
-const msg =
-document.getElementById("msg");
-
-const resultBox =
-document.getElementById("resultBox");
-
-const promptResult =
-document.getElementById("promptResult");
-
-const resultMessage =
-document.getElementById("resultMessage");
-
-const copyPrompt =
-document.getElementById("copyPrompt");
-
-const pageLoader =
-document.getElementById("pageLoader");
-
-let mode="login";
-
-
-/* =====================================================
-   MODAL
-===================================================== */
-
-function openModal(type){
-
-mode=type;
-
-modalTitle.textContent=
-type==="login"
-?
-"ورود به ابزارک AI"
-:
-"ساخت حساب کاربری";
-
-emailAction.textContent=
-type==="login"
-?
-"ورود با ایمیل"
-:
-"ثبت‌نام با ایمیل";
-
-msg.textContent="";
-
-email.value="";
-password.value="";
-
-modal.classList.add("show");
-
-}
-
-
-/* =====================================================
-   HEADER BUTTONS
-===================================================== */
-
-loginBtn.onclick=()=>{
-openModal("login");
-};
-
-signupBtn.onclick=()=>{
-openModal("signup");
-};
-
-
-/* =====================================================
-   NOTICE BUTTONS
-===================================================== */
-
-document.getElementById(
-"noticeLogin"
-).onclick=()=>{
-openModal("login");
-};
-
-document.getElementById(
-"noticeSignup"
-).onclick=()=>{
-openModal("signup");
-};
-
-
-/* =====================================================
-   CLOSE MODAL
-===================================================== */
-
-closeModal.onclick=()=>{
-modal.classList.remove("show");
-};
-
-
-/* =====================================================
-   GOOGLE LOGIN
-===================================================== */
-
-googleAction.onclick=
-async function(){
-
-msg.textContent=
-"در حال انتقال به Google...";
-
-googleAction.disabled=true;
-
-const {error}=
-await sb.auth.signInWithOAuth({
-
-provider:"google",
-
-options:{
-redirectTo:
-window.location.origin
-}
-
-});
-
-if(error){
-
-console.error(error);
-
-msg.textContent=
-"ورود با Google انجام نشد.";
-
-googleAction.disabled=false;
-
-}
-
-};
-
-
-/* =====================================================
-   EMAIL LOGIN / SIGNUP
-===================================================== */
-
-emailAction.onclick=
-async function(){
-
-const e=
-email.value.trim();
-
-const p=
-password.value;
-
-if(!e||!p){
-
-msg.textContent=
-"لطفاً ایمیل و رمز عبور را وارد کنید.";
-
-return;
-
-}
-
-if(p.length<6){
-
-msg.textContent=
-"رمز عبور باید حداقل ۶ کاراکتر باشد.";
-
-return;
-
-}
-
-emailAction.disabled=true;
-
-emailAction.textContent=
-"در حال بررسی...";
-
-
-/* SIGN UP */
-
-if(mode==="signup"){
-
-const {data,error}=
-await sb.auth.signUp({
-
-email:e,
-
-password:p
-
-});
-
-
-if(error){
-
-console.error(error);
-
-msg.textContent=
-error.message;
-
-emailAction.disabled=false;
-
-emailAction.textContent=
-"ثبت‌نام با ایمیل";
-
-return;
-
-}
-
-
-/*
-اگر Confirm Email روشن باشد،
-Supabase معمولاً session را بلافاصله
-برنمی‌گرداند.
-*/
-
-if(!data.session){
-
-msg.textContent=
-"ثبت‌نام انجام شد. لطفاً ایمیل خود را برای تأیید حساب بررسی کنید.";
-
-emailAction.disabled=false;
-
-emailAction.textContent=
-"ثبت‌نام با ایمیل";
-
-return;
-
-}
-
-modal.classList.remove("show");
-
-}
-
-
-/* LOGIN */
-
-else{
-
-const {error}=
-await sb.auth.signInWithPassword({
-
-email:e,
-
-password:p
-
-});
-
-
-if(error){
-
-console.error(error);
-
-msg.textContent=
-error.message;
-
-emailAction.disabled=false;
-
-emailAction.textContent=
-"ورود با ایمیل";
-
-return;
-
-}
-
-modal.classList.remove("show");
-
-}
-
-emailAction.disabled=false;
-
-};
-
-
-/* =====================================================
-   LOGOUT
-===================================================== */
-
-logoutBtn.onclick=
-async function(){
-
-const {error}=
-await sb.auth.signOut();
-
-if(error){
-
-console.error(error);
-
-}
-
-};
-
-
-/* =====================================================
-   UPDATE USER INTERFACE
-===================================================== */
-
-function updateUI(user){
-
-if(user){
-
-const name=
-user.user_metadata?.full_name ||
-user.user_metadata?.name ||
-user.email ||
-"کاربر";
-
-userInfo.textContent=
-"👤 "+name;
-
-userInfo.style.display=
-"flex";
-
-loginBtn.style.display=
-"none";
-
-signupBtn.style.display=
-"none";
-
-logoutBtn.style.display=
-"block";
-
-status.textContent=
-"● فعال";
-
-status.style.color=
-"#86efac";
-
-generate.classList.remove(
-"locked"
-);
-
-generate.textContent=
-"✦ ساخت پرامپت حرفه‌ای";
-
-notice.classList.remove(
-"show"
-);
-
-}else{
-
-userInfo.style.display=
-"none";
-
-loginBtn.style.display=
-"block";
-
-signupBtn.style.display=
-"block";
-
-logoutBtn.style.display=
-"none";
-
-status.textContent=
-"مهمان";
-
-status.style.color=
-"#cbd5e1";
-
-generate.classList.add(
-"locked"
-);
-
-generate.textContent=
-"🔒 ساخت پرامپت حرفه‌ای";
-
-}
-
-}
-
-
-/* =====================================================
-   CHECK USER
-===================================================== */
-
-async function checkUser(){
-
-const {data,error}=
-await sb.auth.getUser();
-
-if(error){
-
-updateUI(null);
-
-return;
-
-}
-
-updateUI(
-data?.user||null
-);
-
-}
-
-
-/* =====================================================
-   AUTH STATE
-===================================================== */
-
-sb.auth.onAuthStateChange(
-(event,session)=>{
-
-updateUI(
-session?.user||null
-);
-
-}
-);
-
-
-/* =====================================================
-   START
-===================================================== */
-
-checkUser();
-
-
-/* =====================================================
-   GENERATE PROFESSIONAL PROMPT
-===================================================== */
-
-generate.onclick=
-async function(){
-
-/*
-بررسی دوباره کاربر
-تا حتی اگر دکمه از UI باز شده باشد،
-کاربر مهمان نتواند Function را اجرا کند.
-*/
-
-const {data:userData,error:userError}=
-await sb.auth.getUser();
-
-if(
-userError ||
-!userData?.user
-){
-
-notice.classList.add(
-"show"
-);
-
-notice.scrollIntoView({
-behavior:"smooth",
-block:"nearest"
-});
-
-return;
-
-}
-
-
-/* دریافت ایده */
-
-const idea=
-ideaInput.value.trim();
-
-if(!idea){
-
-ideaInput.focus();
-
-ideaInput.placeholder=
-"لطفاً ابتدا ایده خود را بنویسید.";
-
-return;
-
-}
-
-
-/* وضعیت پردازش */
-
-generate.disabled=true;
-
-generate.textContent=
-"✦ در حال ساخت پرامپت...";
-
-notice.classList.remove(
-"show"
-);
-
-resultBox.classList.remove(
-"show"
-);
-
-resultMessage.textContent="";
-
-
-try{
-
-/*
-اتصال مستقیم به Edge Function
-*/
-
-const {data,error}=
-await sb.functions.invoke(
-"generate-prompt",
-{
-body:{
-idea:idea
-}
-}
-);
-
-
-if(error){
-
-console.error(
-"Generate Prompt Error:",
-error
-);
-
-throw new Error(
-error.message ||
-"خطا در ارتباط با سرور"
-);
-
-}
-
-
-/*
-پشتیبانی از چند ساختار رایج
-برای پاسخ Function
-*/
-
-let generatedPrompt="";
-
-if(typeof data==="string"){
-
-generatedPrompt=data;
-
-}
-
-else if(data){
-
-generatedPrompt=
-data.prompt ||
-data.generatedPrompt ||
-data.result ||
-data.output ||
-data.text ||
-"";
-
-}
-
-
-/*
-اگر پاسخ داخل data قرار گرفته باشد
-*/
-
-if(
-!generatedPrompt &&
-data?.data
-){
-
-generatedPrompt=
-data.data.prompt ||
-data.data.generatedPrompt ||
-data.data.result ||
-data.data.output ||
-data.data.text ||
-"";
-
-}
-
-
-/*
-اگر Function پاسخ نامعتبر داده باشد
-*/
-
-if(!generatedPrompt){
-
-console.error(
-"Unexpected Function Response:",
-data
-);
-
-throw new Error(
-"پاسخ معتبری از موتور هوش مصنوعی دریافت نشد."
-);
-
-}
-
-
-/*
-نمایش نتیجه
-*/
-
-promptResult.textContent=
-generatedPrompt;
-
-resultMessage.textContent=
-"پرامپت حرفه‌ای با موفقیت ساخته شد.";
-
-resultBox.classList.add(
-"show"
-);
-
-resultBox.scrollIntoView({
-behavior:"smooth",
-block:"nearest"
-});
-
-
-}
-catch(error){
-
-console.error(error);
-
-resultBox.classList.add(
-"show"
-);
-
-promptResult.textContent=
-"";
-
-resultMessage.textContent=
-"متأسفانه در ساخت پرامپت خطایی رخ داد. لطفاً دوباره تلاش کنید.";
-
-}
-finally{
-
-generate.disabled=false;
-
-generate.textContent=
-"✦ ساخت پرامپت حرفه‌ای";
-
-}
-
-};
-
-
-/* =====================================================
-   COPY PROMPT
-===================================================== */
-
-copyPrompt.onclick=
-async function(){
-
-const text=
-promptResult.textContent.trim();
-
-if(!text){
-
-return;
-
-}
-
-try{
-
-await navigator.clipboard.writeText(
-text
-);
-
-copyPrompt.textContent=
-"✓ کپی شد";
-
-setTimeout(()=>{
-
-copyPrompt.textContent=
-"کپی پرامپت";
-
-},1600);
-
-}
-catch(error){
-
-console.error(error);
-
-resultMessage.textContent=
-"کپی خودکار انجام نشد؛ متن را دستی انتخاب کنید.";
-
-}
-
-};
-
-
-/* =====================================================
-   CLOSE MODAL OUTSIDE
-===================================================== */
-
-modal.addEventListener(
-"click",
-function(e){
-
-if(e.target===modal){
-
-modal.classList.remove(
-"show"
-);
-
-}
-
-});
-
-
-/* =====================================================
-   PAGE LOADER
-===================================================== */
-
-window.addEventListener(
-"load",
-function(){
-
-setTimeout(
-function(){
-
-pageLoader.classList.add(
-"hide"
-);
-
-},
-450
-);
-
-});
-
-</script>
-
-</body>
-</html>
+document.getElementBy

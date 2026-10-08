@@ -1848,7 +1848,6 @@ async function(){
     return;
   }
 
-
   generateImageButton.disabled = true;
 
   generateImageButton.textContent =
@@ -1857,16 +1856,13 @@ async function(){
   resultMessage.textContent =
     "تصویر در حال تولید است؛ لطفاً صبر کنید.";
 
-  imageResult.classList.remove(
-    "show"
-  );
-
+  imageResult.classList.remove("show");
 
   try{
 
     const response =
       await fetch(
-        IMAGE_WORKER_URL,
+        "https://abzarak-ai-image.vahid-hemmati-1990.workers.dev",
         {
           method:"POST",
 
@@ -1881,49 +1877,36 @@ async function(){
         }
       );
 
-
     if(!response.ok){
 
-      let errorText = "";
-
-      try{
-        errorText =
-          await response.text();
-      }
-      catch(e){}
+      const errorText =
+        await response.text();
 
       console.error(
-        "Image Worker Error:",
+        "Worker Error:",
         errorText
       );
 
       throw new Error(
-        "Worker نتوانست تصویر را تولید کند."
+        "خطا از سمت Worker"
       );
     }
-
 
     const blob =
       await response.blob();
 
-
-    if(!blob.type.startsWith("image/")){
+    if(!blob || blob.size === 0){
 
       throw new Error(
-        "پاسخ Worker تصویر معتبر نیست."
+        "تصویر خالی دریافت شد."
       );
     }
 
-
-    const imageURL =
+    const imageUrl =
       URL.createObjectURL(blob);
 
-
-    generatedImage.src =
-      imageURL;
-
-    downloadImage.href =
-      imageURL;
+    imageResult.src =
+      imageUrl;
 
     imageResult.classList.add(
       "show"
@@ -1931,11 +1914,6 @@ async function(){
 
     resultMessage.textContent =
       "تصویر با موفقیت ساخته شد.";
-
-    imageResult.scrollIntoView({
-      behavior:"smooth",
-      block:"nearest"
-    });
 
   }
 
@@ -1955,6 +1933,7 @@ async function(){
 
     generateImageButton.textContent =
       "🎨 ساخت تصویر";
+
   }
 
 };

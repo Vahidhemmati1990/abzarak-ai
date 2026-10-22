@@ -3,273 +3,331 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#10151d">
-<title>باریسولان | اجرای تخصصی سقف کشسان</title>
-<meta name="description" content="باریسولان؛ معرفی خدمات اجرای سقف کشسان، سقف نورگذر، سقف براق و مات و طراحی نورپردازی مدرن. برای دریافت مشاوره و استعلام قیمت اقدام کنید.">
-<meta name="robots" content="index,follow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#10120f">
+<title>BARISOLAN | باریسولان | اجرای سقف کشسان</title>
+<meta name="description" content="باریسولان، اجرای تخصصی سقف کشسان، سقف نورگذر، براق، مات و چاپی. برای مشاوره و برآورد قیمت پروژه خود اقدام کنید.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg:#10151d; --panel:#181f2a; --gold:#d9b779;
-  --white:#f7f5f0; --muted:#b6bec9; --line:#303947;
+:root{
+ --bg:#10120f;--panel:#191c17;--gold:#d9b777;
+ --cream:#f4f0e7;--muted:#b9b9ad;--line:#34372e;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:90px}
-body{margin:0;background:var(--bg);color:var(--white);
-font-family:'Vazirmatn',Tahoma,sans-serif;line-height:1.9}
+html{scroll-behavior:smooth;scroll-padding-top:85px}
+body{margin:0;background:var(--bg);color:var(--cream);
+font-family:Vazirmatn,Tahoma,sans-serif;line-height:1.9}
 a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
 button,input,textarea,select{font:inherit}
-.container{width:min(1160px,92%);margin:auto}
-header{position:sticky;top:0;z-index:10;background:#10151df2;
-border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
-.nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-.logo{font-size:25px;font-weight:800;letter-spacing:1px}
-.logo span{color:var(--gold)}
-nav{display:flex;align-items:center;gap:24px;color:var(--muted);font-size:14px}
+.container{width:min(1180px,91%);margin:auto}
+header{position:sticky;top:0;z-index:20;
+background:#10120ff2;border-bottom:1px solid #ffffff12;
+backdrop-filter:blur(16px)}
+.nav{display:flex;align-items:center;justify-content:space-between;
+gap:18px;min-height:78px}
+.brand{font-size:22px;letter-spacing:2px;font-weight:800;white-space:nowrap}
+.brand span{color:var(--gold)}
+.brand small{display:block;font-size:9px;letter-spacing:3px;
+color:var(--muted);font-weight:400;line-height:1}
+nav{display:flex;gap:23px;font-size:13px;color:#d0d0c7}
 nav a:hover{color:var(--gold)}
-.btn{display:inline-flex;align-items:center;justify-content:center;
-padding:12px 21px;border-radius:9px;background:var(--gold);color:#171717;
-font-weight:700;border:1px solid var(--gold);cursor:pointer;transition:.2s}
-.btn:hover{transform:translateY(-2px);filter:brightness(1.06)}
-.btn-outline{background:transparent;color:var(--white);border-color:#626c79}
-.hero{padding:66px 0 55px}
-.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
-.eyebrow{color:var(--gold);font-size:14px;font-weight:700}
-h1{font-size:clamp(34px,4.5vw,57px);line-height:1.5;margin:12px 0 18px}
+.btn{display:inline-flex;justify-content:center;align-items:center;
+gap:8px;background:var(--gold);color:#15150f;border:1px solid var(--gold);
+padding:12px 21px;border-radius:3px;font-weight:800;cursor:pointer;
+transition:.25s}
+.btn:hover{transform:translateY(-3px);background:#edcf91}
+.btn.ghost{background:transparent;color:var(--cream);border-color:#77796b}
+.hero{min-height:590px;position:relative;display:flex;align-items:center;
+overflow:hidden;background:#171913}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+object-position:center;opacity:.66}
+.hero:after{content:"";position:absolute;inset:0;
+background:linear-gradient(270deg,#10120ff5 0%,#10120fce 39%,#10120f22 100%)}
+.hero-inner{position:relative;z-index:1;padding:75px 0 90px}
+.eyebrow{color:var(--gold);font-size:12px;font-weight:700;
+letter-spacing:1px;display:flex;align-items:center;gap:12px}
+.eyebrow:before{content:"";width:34px;height:1px;background:var(--gold)}
+h1{font-size:clamp(38px,5.7vw,72px);line-height:1.35;
+margin:18px 0;max-width:760px;font-weight:800}
 h1 span{color:var(--gold)}
-.lead{color:var(--muted);font-size:17px;max-width:550px}
+.hero p{max-width:540px;color:#e0ded5;font-size:16px}
 .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-.hero-image{height:430px;border-radius:20px;overflow:hidden;position:relative;
-border:1px solid #3b414b;background:#242b35}
-.hero-image img{width:100%;height:100%;object-fit:cover}
-.image-label{position:absolute;bottom:18px;right:18px;left:18px;
-padding:15px 18px;background:#10151ddd;border:1px solid #ffffff22;
-border-radius:12px}
-.image-label strong{display:block;color:var(--gold)}
-section{padding:64px 0}
-.section-head{text-align:center;max-width:700px;margin:0 auto 35px}
-.section-head h2{font-size:clamp(26px,3vw,36px);margin:0 0 10px}
-.section-head p{color:var(--muted);margin:0}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.card{background:var(--panel);border:1px solid var(--line);
-border-radius:15px;overflow:hidden;transition:.2s}
-.card:hover{transform:translateY(-4px);border-color:#8c7955}
-.card img{width:100%;height:215px;object-fit:cover;display:block}
-.card-content{padding:20px}
-.card h3{margin:0 0 8px;font-size:19px}
-.card p{color:var(--muted);font-size:14px;margin:0}
-.tag{display:inline-block;color:var(--gold);font-size:12px;margin-bottom:8px}
-.about{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-.about-image{width:100%;height:350px;object-fit:cover;border-radius:16px}
-.about h2{font-size:32px;line-height:1.6}
-.about p{color:var(--muted)}
-.points{padding:0;list-style:none}
-.points li{margin:10px 0}
-.points li::before{content:"✓";color:var(--gold);font-weight:bold;margin-left:10px}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.step{padding:23px;border:1px solid var(--line);border-radius:13px;background:#141b24}
-.step b{font-size:28px;color:var(--gold)}
-.step h3{margin:6px 0}
-.step p{font-size:14px;color:var(--muted);margin:0}
-.contact{background:linear-gradient(135deg,#202a37,#171c26);
-border:1px solid var(--line);border-radius:20px;padding:35px}
-.contact-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:35px}
-.contact p{color:var(--muted)}
-form{display:grid;grid-template-columns:1fr 1fr;gap:13px}
-form input,form select,form textarea{width:100%;padding:13px;
-background:#10151d;color:var(--white);border:1px solid #3a4553;
-border-radius:8px;min-width:0}
-form textarea{grid-column:1/-1;min-height:105px;resize:vertical}
+.hero-note{margin-top:35px;color:#d2c8b0;font-size:12px;
+border-right:2px solid var(--gold);padding-right:12px}
+.scroll-mark{position:absolute;bottom:18px;left:5%;z-index:2;
+font-size:10px;color:#ddd;letter-spacing:2px}
+.section{padding:88px 0}
+.section.light{background:var(--cream);color:#22251f}
+.section-head{display:flex;justify-content:space-between;align-items:end;
+gap:25px;margin-bottom:35px}
+.section-head h2{font-size:clamp(26px,3.5vw,43px);line-height:1.5;margin:8px 0}
+.section-head p{color:var(--muted);max-width:420px;font-size:14px;margin:0}
+.light .section-head p{color:#65675e}
+.services{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.service{position:relative;min-height:310px;overflow:hidden;background:#222;
+border:1px solid #ffffff17}
+.service img{width:100%;height:310px;object-fit:cover;transition:.6s}
+.service:hover img{transform:scale(1.06)}
+.service:after{content:"";position:absolute;inset:0;
+background:linear-gradient(0deg,#080a08f5,transparent 78%)}
+.service-info{position:absolute;z-index:1;bottom:18px;right:18px;left:15px}
+.service-info small{color:var(--gold)}
+.service-info h3{margin:5px 0;font-size:19px}
+.service-info p{font-size:12px;color:#d3d3ca;margin:0}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:55px;align-items:center}
+.about-photo{height:440px;width:100%;object-fit:cover}
+.about-copy h2{font-size:clamp(28px,3vw,42px);line-height:1.6;margin:15px 0}
+.about-copy>p{color:var(--muted);font-size:15px}
+.benefits{list-style:none;padding:0;margin:25px 0}
+.benefits li{padding:10px 0;border-bottom:1px solid var(--line);
+font-size:14px}
+.benefits li span{color:var(--gold);margin-left:10px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:25px}
+.stat{border:1px solid var(--line);padding:14px;text-align:center}
+.stat strong{display:block;color:var(--gold);font-size:19px}
+.stat span{font-size:11px;color:var(--muted)}
+.portfolio{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:13px}
+.portfolio figure{margin:0;position:relative;height:250px;overflow:hidden;background:#ddd}
+.portfolio figure:first-child{grid-row:span 2;height:513px}
+.portfolio img{width:100%;height:100%;object-fit:cover;transition:.5s}
+.portfolio figure:hover img{transform:scale(1.04)}
+.portfolio figcaption{position:absolute;bottom:0;right:0;left:0;
+padding:35px 16px 14px;color:white;font-weight:700;
+background:linear-gradient(transparent,#000c)}
+.process{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.process article{padding:24px;border-top:1px solid var(--gold);background:var(--panel)}
+.process .num{font-size:32px;color:var(--gold);font-weight:800}
+.process h3{margin:5px 0}
+.process p{font-size:13px;color:var(--muted);margin:0}
+.cta{padding:65px 0;background:
+radial-gradient(ellipse at 80% 20%,#51432b66,transparent 55%),#191c17}
+.cta-box{display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center}
+.cta h2{font-size:clamp(28px,4vw,43px);line-height:1.5;margin:12px 0}
+.cta p{color:var(--muted);font-size:14px}
+form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+input,select,textarea{width:100%;min-width:0;padding:13px;
+background:#10120f;color:var(--cream);border:1px solid #42453a;
+border-radius:2px;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--gold)}
+textarea{grid-column:1/-1;min-height:100px;resize:vertical}
 form button{grid-column:1/-1}
-.form-note{font-size:12px;color:var(--muted)}
-footer{margin-top:65px;border-top:1px solid var(--line);padding:28px 0;
-color:var(--muted);font-size:13px}
-.footer-row{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
-.footer-brand{color:var(--gold);font-weight:700}
-@media(max-width:800px){
- nav{gap:12px;font-size:12px}
- .nav{min-height:68px}
- .logo{font-size:21px}
- .nav>.btn{padding:9px 12px;font-size:12px}
- .hero{padding-top:35px}
- .hero-grid,.about,.contact-grid{grid-template-columns:1fr}
- .hero-grid{gap:25px}
- .hero-image{height:310px;grid-row:1}
- .cards{grid-template-columns:repeat(2,1fr)}
- .steps{grid-template-columns:1fr}
- section{padding:46px 0}
+.note{font-size:11px!important;color:#a7a99d!important}
+#message{font-size:12px;color:var(--gold)}
+footer{padding:35px 0 20px;background:#0a0c09;border-top:1px solid #33352b}
+.footer-top{display:flex;justify-content:space-between;gap:25px;flex-wrap:wrap}
+.footer-top p{color:var(--muted);font-size:12px;max-width:330px}
+.footer-links{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.copyright{border-top:1px solid #292b24;margin-top:24px;padding-top:15px;
+font-size:11px;color:#888b7f;display:flex;justify-content:space-between;gap:12px}
+.copyright b{color:var(--gold);font-weight:500}
+@media(max-width:850px){
+ .nav{min-height:68px}nav{gap:12px;font-size:12px}
+ .nav>.btn{font-size:11px;padding:9px 12px}
+ .services{grid-template-columns:repeat(2,1fr)}
+ .service,.service img{height:280px;min-height:280px}
+ .about-grid{gap:25px}
+ .portfolio{grid-template-columns:1fr 1fr}
+ .portfolio figure:first-child{grid-row:auto;height:260px}
+ .portfolio figure{height:220px}
+ .cta-box{gap:22px}
 }
-@media(max-width:520px){
- .container{width:91%}
- nav{gap:10px}
- nav a:nth-child(2){display:none}
- .nav>.btn{font-size:11px;padding:8px 10px}
- .logo{font-size:19px}
- h1{font-size:34px}
- .lead{font-size:15px}
- .hero-image{height:255px}
- .cards{grid-template-columns:1fr}
- .card img{height:225px}
- .about-image{height:250px}
- .contact{padding:22px 16px}
+@media(max-width:560px){
+ .container{width:90%}
+ .brand{font-size:18px;letter-spacing:1px}
+ .brand small{font-size:8px}
+ nav{gap:12px}
+ nav a:nth-child(2),nav a:nth-child(4){display:none}
+ .nav>.btn{padding:8px;font-size:10px}
+ .hero{min-height:560px}
+ .hero-bg{object-position:60% center}
+ .hero:after{background:linear-gradient(0deg,#10120ff5 0%,#10120fc9 65%,#10120f55)}
+ .hero-inner{padding:70px 0}
+ h1{font-size:39px}
+ .hero p{font-size:14px}
+ .actions .btn{flex:1;padding:11px 10px;font-size:12px}
+ .section{padding:57px 0}
+ .section-head{display:block;margin-bottom:25px}
+ .section-head p{margin-top:10px}
+ .services{gap:9px}
+ .service,.service img{height:240px;min-height:240px}
+ .service-info{right:10px;bottom:10px}
+ .service-info h3{font-size:15px}
+ .service-info p{font-size:10px}
+ .about-grid,.cta-box{grid-template-columns:1fr}
+ .about-photo{height:280px}
+ .about-copy h2{font-size:29px}
+ .stats{gap:7px}
+ .stat{padding:10px 4px}
+ .stat strong{font-size:16px}
+ .stat span{font-size:10px}
+ .portfolio{gap:8px}
+ .portfolio figure,.portfolio figure:first-child{height:180px}
+ .process{grid-template-columns:1fr;gap:12px}
+ .cta{padding:50px 0}
  form{grid-template-columns:1fr}
- form textarea,form button{grid-column:1}
- .actions .btn{width:100%}
+ textarea,form button{grid-column:1}
+ .footer-top{display:block}
+ .footer-links{margin-top:20px}
+ .copyright{display:block}
 }
 </style>
 </head>
 <body>
 <header>
-  <div class="container nav">
-    <a class="logo" href="#home">BARI<span>SOLAN</span></a>
-    <nav aria-label="منوی اصلی">
-      <a href="#home">صفحه اصلی</a>
-      <a href="#services">خدمات</a>
-      <a href="#projects">نمونه‌کارها</a>
-      <a href="#contact">تماس</a>
-    </nav>
-    <a class="btn" href="#contact">مشاوره و قیمت</a>
-  </div>
+ <div class="container nav">
+  <a class="brand" href="#home">BARI<span>SOLAN</span><small>STRETCH CEILING SOLUTIONS</small></a>
+  <nav>
+   <a href="#home">صفحه اصلی</a>
+   <a href="#services">خدمات</a>
+   <a href="#portfolio">نمونه‌کارها</a>
+   <a href="#about">درباره ما</a>
+   <a href="#contact">تماس</a>
+  </nav>
+  <a class="btn" href="#contact">درخواست مشاوره ↗</a>
+ </div>
 </header>
 
 <main>
 <section class="hero" id="home">
- <div class="container hero-grid">
-  <div>
-   <div class="eyebrow">طراحی مدرن، اجرای تخصصی</div>
-   <h1>سقف شما،<br><span>امضای زیبایی فضای شما</span></h1>
-   <p class="lead">با سقف‌های کشسان، فضای خانه، محل کار یا فروشگاه خود را به محیطی متفاوت تبدیل کنید. برای انتخاب طرح مناسب و بررسی هزینه اجرا مشاوره بگیرید.</p>
-   <div class="actions">
-    <a class="btn" href="#contact">درخواست مشاوره</a>
-    <a class="btn btn-outline" href="#services">مشاهده خدمات</a>
-   </div>
+ <img class="hero-bg" src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=2000&q=90" alt="فضای داخلی لوکس و نورپردازی معماری">
+ <div class="container hero-inner">
+  <div class="eyebrow">اجرای تخصصی سقف کشسان</div>
+  <h1>سقف شما،<br><span>فراتر از یک پوشش ساده</span></h1>
+  <p>با طراحی درست و اجرای دقیق سقف کشسان، به فضای خود جلوه‌ای متفاوت ببخشید؛ از سقف‌های نورگذر تا طرح‌های مدرن و سفارشی.</p>
+  <div class="actions">
+   <a class="btn" href="#contact">مشاوره و استعلام قیمت ↗</a>
+   <a class="btn ghost" href="#portfolio">مشاهده ایده‌ها ↓</a>
   </div>
-  <div class="hero-image">
-   <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1100&q=85" alt="طراحی داخلی مدرن با نورپردازی سقف" fetchpriority="high">
-   <div class="image-label"><strong>BARISOLAN | باریسولان</strong><span>زیبایی در جزئیات، تفاوت در اجرا</span></div>
-  </div>
+  <div class="hero-note">طراحی هماهنگ با فضا · انتخاب متریال · اجرای تخصصی</div>
  </div>
+ <div class="scroll-mark">BARISOLAN — DESIGN YOUR SPACE</div>
 </section>
 
-<section id="services">
+<section class="section light" id="services">
  <div class="container">
   <div class="section-head">
-   <div class="eyebrow">خدمات ما</div>
-   <h2>راهکارهایی برای سقف‌های مدرن</h2>
-   <p>انتخاب طرح و نوع سقف با توجه به کاربری فضا، نورپردازی و سلیقه شما.</p>
+   <div><div class="eyebrow">خدمات باریسولان</div><h2>هر سقف، یک امضای متفاوت</h2></div>
+   <p>با توجه به کاربری محیط، سبک دکوراسیون و نوع نورپردازی، گزینه مناسب فضای خود را انتخاب کنید.</p>
   </div>
-  <div class="cards">
-   <article class="card">
-    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80" alt="فضای داخلی مدرن" loading="lazy">
-    <div class="card-content"><span class="tag">01 / طراحی</span><h3>سقف کشسان براق و مات</h3><p>برای ایجاد نمایی یکدست و هماهنگ با سبک دکوراسیون فضا.</p></div>
+  <div class="services">
+   <article class="service">
+    <img loading="lazy" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=700&q=85" alt="طراحی داخلی مدرن">
+    <div class="service-info"><small>01 / GLOSS</small><h3>سقف براق</h3><p>جلوه‌ای درخشان و مدرن</p></div>
    </article>
-   <article class="card">
-    <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=800&q=80" alt="نورپردازی در فضای معماری" loading="lazy">
-    <div class="card-content"><span class="tag">02 / نور</span><h3>سقف نورگذر</h3><p>راهکاری برای ترکیب سطح سقف با نورپردازی و جلوه‌های روشنایی.</p></div>
+   <article class="service">
+    <img loading="lazy" src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=700&q=85" alt="فضای داخلی با نورپردازی">
+    <div class="service-info"><small>02 / LIGHT</small><h3>سقف نورگذر</h3><p>ترکیب سقف و نور</p></div>
    </article>
-   <article class="card">
-    <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=800&q=80" alt="طراحی لوکس فضای داخلی" loading="lazy">
-    <div class="card-content"><span class="tag">03 / دکوراسیون</span><h3>سقف چاپی و طرح‌دار</h3><p>برای فضاهایی که به طرحی خاص و هماهنگ با دکوراسیون نیاز دارند.</p></div>
+   <article class="service">
+    <img loading="lazy" src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=700&q=85" alt="فضای مینیمال">
+    <div class="service-info"><small>03 / MATTE</small><h3>سقف مات</h3><p>سادگی و هماهنگی بصری</p></div>
+   </article>
+   <article class="service">
+    <img loading="lazy" src="https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=700&q=85" alt="ایده دکوراسیون سقف">
+    <div class="service-info"><small>04 / PRINT</small><h3>سقف چاپی</h3><p>طرح متناسب با سلیقه شما</p></div>
    </article>
   </div>
  </div>
 </section>
 
-<section>
- <div class="container about">
-  <img class="about-image" src="https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=1000&q=80" alt="نمونه طراحی فضای داخلی" loading="lazy">
-  <div>
-   <div class="eyebrow">چرا باریسولان؟</div>
-   <h2>انتخاب درست، اجرای دقیق</h2>
-   <p>هدف ما ارائه اطلاعات روشن و کمک به انتخاب راهکار مناسب برای فضای شماست. جزئیات پروژه بررسی می‌شود تا درباره طرح، نورپردازی و هزینه اجرا تصمیم آگاهانه‌تری بگیرید.</p>
-   <ul class="points">
-    <li>بررسی نیاز و شرایط فضای پروژه</li>
-    <li>پیشنهاد طرح متناسب با کاربری</li>
-    <li>توضیح مراحل اجرا پیش از شروع کار</li>
-    <li>هماهنگی برای مشاوره و برآورد هزینه</li>
+<section class="section" id="about">
+ <div class="container about-grid">
+  <img class="about-photo" loading="lazy" src="https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=1000&q=85" alt="دکوراسیون مدرن و سقف نورپردازی شده">
+  <div class="about-copy">
+   <div class="eyebrow">نگاه باریسولان</div>
+   <h2>زیبایی در جزئیات است</h2>
+   <p>هر فضا ویژگی‌های خودش را دارد. انتخاب سقف مناسب باید با ابعاد محیط، طراحی داخلی، نور و نیاز واقعی پروژه هماهنگ باشد.</p>
+   <p>در باریسولان، هدف ما کمک به انتخاب آگاهانه و هماهنگی دقیق مراحل اجرای سقف کشسان است.</p>
+   <ul class="benefits">
+    <li><span>✦</span> بررسی شرایط و نیازهای پروژه</li>
+    <li><span>✦</span> راهنمایی درباره طرح و نورپردازی</li>
+    <li><span>✦</span> برآورد هزینه براساس جزئیات کار</li>
    </ul>
-   <a class="btn" href="#contact">شروع مشاوره</a>
+   <a class="btn" href="#contact">درباره پروژه‌تان صحبت کنیم ↗</a>
   </div>
  </div>
 </section>
 
-<section id="projects">
+<section class="section light" id="portfolio">
  <div class="container">
   <div class="section-head">
-   <div class="eyebrow">الهام برای فضای شما</div>
-   <h2>گالری ایده‌های طراحی</h2>
-   <p>تصاویر زیر نمونه‌های الهام‌بخش دکوراسیون هستند، نه لزوماً پروژه‌های اجراشده باریسولان.</p>
+   <div><div class="eyebrow">گالری الهام</div><h2>فضایی متفاوت تصور کنید</h2></div>
+   <p>چند ایده تصویری برای انتخاب سبک سقف و نورپردازی. این تصاویر نمونه الهام هستند و لزوماً پروژه‌های اجراشده باریسولان نیستند.</p>
   </div>
-  <div class="cards">
-   <article class="card"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80" alt="ایده طراحی فضای نشیمن" loading="lazy"><div class="card-content"><h3>فضای مسکونی</h3><p>هماهنگی سقف و نور با دکوراسیون خانه</p></div></article>
-   <article class="card"><img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=800&q=80" alt="ایده نورپردازی مدرن" loading="lazy"><div class="card-content"><h3>نورپردازی مدرن</h3><p>توجه به نور و حال‌وهوای محیط</p></div></article>
-   <article class="card"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=800&q=80" alt="ایده دکوراسیون لوکس" loading="lazy"><div class="card-content"><h3>دکوراسیون خاص</h3><p>انتخاب متریال متناسب با طرح داخلی</p></div></article>
+  <div class="portfolio">
+   <figure><img loading="lazy" src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1000&q=85" alt="ایده دکوراسیون نشیمن"><figcaption>فضای نشیمن مدرن</figcaption></figure>
+   <figure><img loading="lazy" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=85" alt="ایده طراحی داخلی"><figcaption>هماهنگی سقف و دکور</figcaption></figure>
+   <figure><img loading="lazy" src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=800&q=85" alt="ایده نورپردازی"><figcaption>نورپردازی معماری</figcaption></figure>
+   <figure><img loading="lazy" src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=800&q=85" alt="طراحی مینیمال"><figcaption>سبک مینیمال</figcaption></figure>
+   <figure><img loading="lazy" src="https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=800&q=85" alt="ایده فضای لوکس"><figcaption>فضای لوکس</figcaption></figure>
   </div>
  </div>
 </section>
 
-<section>
+<section class="section">
  <div class="container">
   <div class="section-head">
-   <div class="eyebrow">مراحل همکاری</div>
-   <h2>از ایده تا اجرای سقف</h2>
+   <div><div class="eyebrow">مراحل همکاری</div><h2>از مشاوره تا اجرا</h2></div>
+   <p>یک مسیر روشن برای بررسی نیازهای پروژه و هماهنگی اجرای کار.</p>
   </div>
-  <div class="steps">
-   <div class="step"><b>۰۱</b><h3>ثبت درخواست</h3><p>نوع فضا و نیاز خود را برای ما توضیح دهید.</p></div>
-   <div class="step"><b>۰۲</b><h3>مشاوره و بررسی</h3><p>طرح، شرایط پروژه و عوامل مؤثر بر هزینه بررسی می‌شوند.</p></div>
-   <div class="step"><b>۰۳</b><h3>هماهنگی اجرا</h3><p>پس از توافق درباره جزئیات، زمان و مراحل اجرا مشخص می‌شود.</p></div>
+  <div class="process">
+   <article><div class="num">01</div><h3>ثبت درخواست</h3><p>نوع فضا، شهر و نیاز اولیه خود را بیان کنید.</p></article>
+   <article><div class="num">02</div><h3>بررسی و برآورد</h3><p>طرح پیشنهادی و عوامل مؤثر بر هزینه بررسی می‌شوند.</p></article>
+   <article><div class="num">03</div><h3>هماهنگی اجرا</h3><p>پس از توافق درباره جزئیات، مراحل کار هماهنگ می‌شود.</p></article>
   </div>
  </div>
 </section>
 
-<section id="contact">
- <div class="container contact">
-  <div class="contact-grid">
-   <div>
-    <div class="eyebrow">با ما در ارتباط باشید</div>
-    <h2>برای پروژه‌تان مشاوره بگیرید</h2>
-    <p>اطلاعات اولیه را وارد کنید. این فرم در نسخه آزمایشی است و هنوز به سامانه دریافت درخواست متصل نشده است.</p>
-    <p>برای دریافت قیمت دقیق، ابعاد تقریبی، نوع فضا و طرح موردنظر اهمیت دارند.</p>
-   </div>
-   <div>
-    <form id="contactForm">
-     <input name="name" placeholder="نام شما" aria-label="نام شما" required>
-     <input name="phone" type="tel" placeholder="شماره تماس" aria-label="شماره تماس" required>
-     <select name="service" aria-label="نوع خدمت" required>
-      <option value="">نوع خدمت موردنظر</option>
-      <option>سقف کشسان براق یا مات</option>
-      <option>سقف نورگذر</option>
-      <option>سقف چاپی و طرح‌دار</option>
-      <option>مشاوره و انتخاب طرح</option>
-     </select>
-     <input name="city" placeholder="شهر محل پروژه" aria-label="شهر محل پروژه">
-     <textarea name="details" placeholder="توضیحات پروژه، ابعاد تقریبی یا پرسش شما" aria-label="توضیحات پروژه"></textarea>
-     <button class="btn" type="submit">بررسی فرم آزمایشی</button>
-    </form>
-    <p class="form-note">این فرم فعلاً اطلاعات را ارسال یا ذخیره نمی‌کند. پیش از انتشار عمومی باید راه ارتباطی واقعی به آن متصل شود.</p>
-    <p id="formMessage" role="status" aria-live="polite"></p>
-   </div>
+<section class="cta" id="contact">
+ <div class="container cta-box">
+  <div>
+   <div class="eyebrow">پروژه بعدی شما</div>
+   <h2>بیایید سقف ایده‌آل شما را طراحی کنیم.</h2>
+   <p>اطلاعات اولیه پروژه را وارد کنید تا بتوانیم درباره نیازها و هزینه‌های احتمالی راهنمایی‌تان کنیم.</p>
+   <p>برای برآورد دقیق‌تر، ابعاد تقریبی، نوع فضا و محل پروژه اهمیت دارند.</p>
+  </div>
+  <div>
+   <form id="requestForm">
+    <input name="name" placeholder="نام شما" aria-label="نام شما" required>
+    <input name="phone" type="tel" placeholder="شماره تماس" aria-label="شماره تماس" required>
+    <select name="service" aria-label="نوع سقف موردنظر" required>
+     <option value="">نوع سقف موردنظر</option>
+     <option>سقف براق</option><option>سقف مات</option>
+     <option>سقف نورگذر</option><option>سقف چاپی</option>
+     <option>نیاز به مشاوره دارم</option>
+    </select>
+    <input name="city" placeholder="شهر محل پروژه" aria-label="شهر محل پروژه">
+    <textarea name="details" placeholder="توضیحات پروژه یا ابعاد تقریبی" aria-label="توضیحات پروژه"></textarea>
+    <button class="btn" type="submit">بررسی درخواست ↗</button>
+   </form>
+   <p class="note">نسخه آزمایشی: این فرم هنوز به شماره تماس، ایمیل یا سامانه ثبت درخواست متصل نیست و اطلاعات را ارسال نمی‌کند.</p>
+   <p id="message" role="status" aria-live="polite"></p>
   </div>
  </div>
 </section>
 </main>
 
 <footer>
- <div class="container footer-row">
-  <span><span class="footer-brand">BARISOLAN</span> | اجرای سقف کشسان</span>
-  <span>برای اطلاعات و هماهنگی پروژه با ما تماس بگیرید.</span>
-  <span>© باریسولان</span>
+ <div class="container">
+  <div class="footer-top">
+   <div><a class="brand" href="#home">BARI<span>SOLAN</span><small>STRETCH CEILING SOLUTIONS</small></a>
+    <p>باریسولان؛ معرفی خدمات اجرای سقف کشسان و راهکارهای مدرن برای طراحی داخلی.</p>
+   </div>
+   <div class="footer-links">
+    <a href="#home">صفحه اصلی</a><a href="#services">خدمات</a>
+    <a href="#portfolio">گالری</a><a href="#contact">درخواست مشاوره</a>
+   </div>
+  </div>
+  <div class="copyright"><span>© باریسولان — تمامی حقوق محفوظ است.</span><span>طراحی با <b>BARISOLAN</b></span></div>
  </div>
 </footer>
-
 <script>
-document.getElementById('contactForm').addEventListener('submit',function(event){
- event.preventDefault();
- document.getElementById('formMessage').textContent =
- 'فرم آزمایشی است و اطلاعات ارسال نشد. برای فعال‌سازی دریافت درخواست، باید راه ارتباطی واقعی تنظیم شود.';
+document.getElementById('requestForm').addEventListener('submit',function(e){
+ e.preventDefault();
+ document.getElementById('message').textContent=
+ 'این فرم هنوز به سامانه ارسال متصل نیست؛ اطلاعات شما ارسال یا ذخیره نشد.';
 });
 </script>
 </body>

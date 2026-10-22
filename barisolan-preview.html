@@ -4,134 +4,98 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#10120f">
-<title>BARISOLAN | باریسولان | اجرای سقف کشسان</title>
-<meta name="description" content="باریسولان، اجرای تخصصی سقف کشسان، سقف نورگذر، براق، مات و چاپی. برای مشاوره و برآورد قیمت پروژه خود اقدام کنید.">
+<meta name="theme-color" content="#10110f">
+<title>باریسولان | اجرای تخصصی سقف کشسان</title>
+<meta name="description" content="باریسولان؛ اجرای سقف کشسان براق، مات، نورگذر و چاپی. برای مشاوره و برآورد هزینه سقف کشسان با ما در ارتباط باشید.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{
- --bg:#10120f;--panel:#191c17;--gold:#d9b777;
- --cream:#f4f0e7;--muted:#b9b9ad;--line:#34372e;
-}
+:root{--bg:#10110f;--panel:#1b1d18;--gold:#d8b777;--cream:#f6f1e7;--muted:#b9b9ae;--line:#383a30}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:85px}
-body{margin:0;background:var(--bg);color:var(--cream);
-font-family:Vazirmatn,Tahoma,sans-serif;line-height:1.9}
+body{margin:0;background:var(--bg);color:var(--cream);font-family:Vazirmatn,Tahoma,sans-serif;line-height:1.9}
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
-button,input,textarea,select{font:inherit}
-.container{width:min(1180px,91%);margin:auto}
-header{position:sticky;top:0;z-index:20;
-background:#10120ff2;border-bottom:1px solid #ffffff12;
-backdrop-filter:blur(16px)}
-.nav{display:flex;align-items:center;justify-content:space-between;
-gap:18px;min-height:78px}
-.brand{font-size:22px;letter-spacing:2px;font-weight:800;white-space:nowrap}
+.container{width:min(1160px,91%);margin:auto}
+header{position:sticky;top:0;z-index:10;background:#10110ff2;border-bottom:1px solid #ffffff15;backdrop-filter:blur(14px)}
+.nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{font-size:22px;font-weight:800;letter-spacing:2px;white-space:nowrap}
 .brand span{color:var(--gold)}
-.brand small{display:block;font-size:9px;letter-spacing:3px;
-color:var(--muted);font-weight:400;line-height:1}
-nav{display:flex;gap:23px;font-size:13px;color:#d0d0c7}
+.brand small{display:block;font-size:9px;letter-spacing:2px;color:var(--muted);font-weight:400;line-height:1.5}
+nav{display:flex;gap:22px;font-size:13px;color:#d6d5cc}
 nav a:hover{color:var(--gold)}
-.btn{display:inline-flex;justify-content:center;align-items:center;
-gap:8px;background:var(--gold);color:#15150f;border:1px solid var(--gold);
-padding:12px 21px;border-radius:3px;font-weight:800;cursor:pointer;
-transition:.25s}
-.btn:hover{transform:translateY(-3px);background:#edcf91}
-.btn.ghost{background:transparent;color:var(--cream);border-color:#77796b}
-.hero{min-height:590px;position:relative;display:flex;align-items:center;
-overflow:hidden;background:#171913}
-.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-object-position:center;opacity:.66}
-.hero:after{content:"";position:absolute;inset:0;
-background:linear-gradient(270deg,#10120ff5 0%,#10120fce 39%,#10120f22 100%)}
-.hero-inner{position:relative;z-index:1;padding:75px 0 90px}
-.eyebrow{color:var(--gold);font-size:12px;font-weight:700;
-letter-spacing:1px;display:flex;align-items:center;gap:12px}
-.eyebrow:before{content:"";width:34px;height:1px;background:var(--gold)}
-h1{font-size:clamp(38px,5.7vw,72px);line-height:1.35;
-margin:18px 0;max-width:760px;font-weight:800}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 20px;background:var(--gold);color:#15150f;border:1px solid var(--gold);font-weight:800;border-radius:3px;cursor:pointer;transition:.25s}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.btn-outline{background:transparent;color:var(--cream);border-color:#77796c}
+.hero{min-height:610px;position:relative;display:flex;align-items:center;overflow:hidden;background:#171914}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:.68}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(270deg,#10110ff5 0%,#10110fd9 36%,#10110f32 100%)}
+.hero-inner{position:relative;z-index:1;padding:80px 0}
+.eyebrow{color:var(--gold);font-size:12px;font-weight:700;display:flex;align-items:center;gap:10px}
+.eyebrow:before{content:"";width:32px;height:1px;background:var(--gold)}
+h1{font-size:clamp(35px,5.3vw,66px);line-height:1.55;margin:18px 0;font-weight:800;max-width:790px}
 h1 span{color:var(--gold)}
-.hero p{max-width:540px;color:#e0ded5;font-size:16px}
+.hero p{max-width:550px;color:#e0ded5;font-size:16px}
 .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-.hero-note{margin-top:35px;color:#d2c8b0;font-size:12px;
-border-right:2px solid var(--gold);padding-right:12px}
-.scroll-mark{position:absolute;bottom:18px;left:5%;z-index:2;
-font-size:10px;color:#ddd;letter-spacing:2px}
-.section{padding:88px 0}
-.section.light{background:var(--cream);color:#22251f}
-.section-head{display:flex;justify-content:space-between;align-items:end;
-gap:25px;margin-bottom:35px}
-.section-head h2{font-size:clamp(26px,3.5vw,43px);line-height:1.5;margin:8px 0}
-.section-head p{color:var(--muted);max-width:420px;font-size:14px;margin:0}
-.light .section-head p{color:#65675e}
+.hero-note{margin-top:32px;border-right:2px solid var(--gold);padding-right:12px;font-size:12px;color:#d6c9ad}
+.section{padding:82px 0}
+.section.light{background:var(--cream);color:#24251f}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:25px;margin-bottom:32px}
+.section-head h2{font-size:clamp(27px,3.5vw,42px);line-height:1.5;margin:8px 0}
+.section-head p{color:var(--muted);font-size:14px;max-width:440px;margin:0}
+.light .section-head p{color:#68695f}
 .services{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.service{position:relative;min-height:310px;overflow:hidden;background:#222;
-border:1px solid #ffffff17}
-.service img{width:100%;height:310px;object-fit:cover;transition:.6s}
+.service{position:relative;height:310px;overflow:hidden;background:#222}
+.service img{width:100%;height:100%;object-fit:cover;transition:.5s}
 .service:hover img{transform:scale(1.06)}
-.service:after{content:"";position:absolute;inset:0;
-background:linear-gradient(0deg,#080a08f5,transparent 78%)}
-.service-info{position:absolute;z-index:1;bottom:18px;right:18px;left:15px}
-.service-info small{color:var(--gold)}
-.service-info h3{margin:5px 0;font-size:19px}
-.service-info p{font-size:12px;color:#d3d3ca;margin:0}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:55px;align-items:center}
-.about-photo{height:440px;width:100%;object-fit:cover}
-.about-copy h2{font-size:clamp(28px,3vw,42px);line-height:1.6;margin:15px 0}
-.about-copy>p{color:var(--muted);font-size:15px}
-.benefits{list-style:none;padding:0;margin:25px 0}
-.benefits li{padding:10px 0;border-bottom:1px solid var(--line);
-font-size:14px}
-.benefits li span{color:var(--gold);margin-left:10px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:25px}
-.stat{border:1px solid var(--line);padding:14px;text-align:center}
-.stat strong{display:block;color:var(--gold);font-size:19px}
-.stat span{font-size:11px;color:var(--muted)}
-.portfolio{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:13px}
-.portfolio figure{margin:0;position:relative;height:250px;overflow:hidden;background:#ddd}
-.portfolio figure:first-child{grid-row:span 2;height:513px}
+.service:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#090a08ed,transparent 75%)}
+.service-info{position:absolute;bottom:16px;right:16px;left:12px;z-index:1}
+.service-info small{color:var(--gold);font-size:11px}
+.service-info h3{font-size:18px;margin:4px 0}
+.service-info p{font-size:12px;color:#ddd;margin:0}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.about-photo{width:100%;height:430px;object-fit:cover}
+.about-copy h2{font-size:clamp(29px,3vw,41px);line-height:1.6;margin:14px 0}
+.about-copy p{color:var(--muted);font-size:14px}
+.benefits{list-style:none;padding:0;margin:23px 0}
+.benefits li{padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+.benefits li span{color:var(--gold);margin-left:9px}
+.portfolio{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:12px}
+.portfolio figure{position:relative;margin:0;height:245px;overflow:hidden;background:#ddd}
+.portfolio figure:first-child{grid-row:span 2;height:502px}
 .portfolio img{width:100%;height:100%;object-fit:cover;transition:.5s}
 .portfolio figure:hover img{transform:scale(1.04)}
-.portfolio figcaption{position:absolute;bottom:0;right:0;left:0;
-padding:35px 16px 14px;color:white;font-weight:700;
-background:linear-gradient(transparent,#000c)}
-.process{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.process article{padding:24px;border-top:1px solid var(--gold);background:var(--panel)}
-.process .num{font-size:32px;color:var(--gold);font-weight:800}
+.portfolio figcaption{position:absolute;bottom:0;right:0;left:0;padding:35px 15px 12px;color:white;font-weight:700;background:linear-gradient(transparent,#000d)}
+.process{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.process article{padding:24px;background:var(--panel);border-top:1px solid var(--gold)}
+.process .num{font-size:30px;color:var(--gold);font-weight:800}
 .process h3{margin:5px 0}
 .process p{font-size:13px;color:var(--muted);margin:0}
-.cta{padding:65px 0;background:
-radial-gradient(ellipse at 80% 20%,#51432b66,transparent 55%),#191c17}
-.cta-box{display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center}
-.cta h2{font-size:clamp(28px,4vw,43px);line-height:1.5;margin:12px 0}
-.cta p{color:var(--muted);font-size:14px}
+.cta{padding:65px 0;background:radial-gradient(ellipse at 80% 20%,#59462b55,transparent 55%),#191c17}
+.cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center}
+.cta h2{font-size:clamp(28px,3.8vw,43px);line-height:1.6;margin:12px 0}
+.cta p{font-size:14px;color:var(--muted)}
 form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-input,select,textarea{width:100%;min-width:0;padding:13px;
-background:#10120f;color:var(--cream);border:1px solid #42453a;
-border-radius:2px;outline:none}
-input:focus,select:focus,textarea:focus{border-color:var(--gold)}
-textarea{grid-column:1/-1;min-height:100px;resize:vertical}
-form button{grid-column:1/-1}
-.note{font-size:11px!important;color:#a7a99d!important}
+input,select,textarea{width:100%;min-width:0;padding:13px;background:#10110f;color:var(--cream);border:1px solid #42443a;border-radius:2px;font:inherit}
+textarea{grid-column:1/-1;min-height:95px;resize:vertical}
+form button{grid-column:1/-1;font:inherit}
+.note{font-size:11px!important}
 #message{font-size:12px;color:var(--gold)}
-footer{padding:35px 0 20px;background:#0a0c09;border-top:1px solid #33352b}
+footer{padding:30px 0 18px;background:#090b08;border-top:1px solid #33352b}
 .footer-top{display:flex;justify-content:space-between;gap:25px;flex-wrap:wrap}
-.footer-top p{color:var(--muted);font-size:12px;max-width:330px}
+.footer-top p{font-size:12px;color:var(--muted);max-width:330px}
 .footer-links{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
-.copyright{border-top:1px solid #292b24;margin-top:24px;padding-top:15px;
-font-size:11px;color:#888b7f;display:flex;justify-content:space-between;gap:12px}
-.copyright b{color:var(--gold);font-weight:500}
+.copyright{border-top:1px solid #292b24;margin-top:22px;padding-top:14px;font-size:11px;color:#888b7f;display:flex;justify-content:space-between;gap:12px}
+.copyright b{color:var(--gold)}
 @media(max-width:850px){
  .nav{min-height:68px}nav{gap:12px;font-size:12px}
- .nav>.btn{font-size:11px;padding:9px 12px}
+ .nav>.btn{font-size:11px;padding:9px 11px}
  .services{grid-template-columns:repeat(2,1fr)}
- .service,.service img{height:280px;min-height:280px}
  .about-grid{gap:25px}
  .portfolio{grid-template-columns:1fr 1fr}
- .portfolio figure:first-child{grid-row:auto;height:260px}
+ .portfolio figure:first-child{grid-row:auto;height:240px}
  .portfolio figure{height:220px}
- .cta-box{gap:22px}
+ .cta-grid{gap:22px}
 }
 @media(max-width:560px){
  .container{width:90%}
@@ -140,36 +104,32 @@ font-size:11px;color:#888b7f;display:flex;justify-content:space-between;gap:12px
  nav{gap:12px}
  nav a:nth-child(2),nav a:nth-child(4){display:none}
  .nav>.btn{padding:8px;font-size:10px}
- .hero{min-height:560px}
+ .hero{min-height:565px}
  .hero-bg{object-position:60% center}
- .hero:after{background:linear-gradient(0deg,#10120ff5 0%,#10120fc9 65%,#10120f55)}
- .hero-inner{padding:70px 0}
- h1{font-size:39px}
+ .hero:after{background:linear-gradient(0deg,#10110ff5 0%,#10110fcf 66%,#10110f66)}
+ .hero-inner{padding:65px 0}
+ h1{font-size:37px}
  .hero p{font-size:14px}
- .actions .btn{flex:1;padding:11px 10px;font-size:12px}
- .section{padding:57px 0}
- .section-head{display:block;margin-bottom:25px}
+ .actions .btn{flex:1;padding:11px 8px;font-size:12px}
+ .section{padding:55px 0}
+ .section-head{display:block}
  .section-head p{margin-top:10px}
  .services{gap:9px}
- .service,.service img{height:240px;min-height:240px}
+ .service{height:230px}
  .service-info{right:10px;bottom:10px}
  .service-info h3{font-size:15px}
  .service-info p{font-size:10px}
- .about-grid,.cta-box{grid-template-columns:1fr}
- .about-photo{height:280px}
+ .about-grid,.cta-grid{grid-template-columns:1fr}
+ .about-photo{height:275px}
  .about-copy h2{font-size:29px}
- .stats{gap:7px}
- .stat{padding:10px 4px}
- .stat strong{font-size:16px}
- .stat span{font-size:10px}
  .portfolio{gap:8px}
- .portfolio figure,.portfolio figure:first-child{height:180px}
+ .portfolio figure,.portfolio figure:first-child{height:175px}
  .process{grid-template-columns:1fr;gap:12px}
- .cta{padding:50px 0}
+ .cta{padding:48px 0}
  form{grid-template-columns:1fr}
  textarea,form button{grid-column:1}
  .footer-top{display:block}
- .footer-links{margin-top:20px}
+ .footer-links{margin-top:18px}
  .copyright{display:block}
 }
 </style>
@@ -178,54 +138,53 @@ font-size:11px;color:#888b7f;display:flex;justify-content:space-between;gap:12px
 <header>
  <div class="container nav">
   <a class="brand" href="#home">BARI<span>SOLAN</span><small>STRETCH CEILING SOLUTIONS</small></a>
-  <nav>
-   <a href="#home">صفحه اصلی</a>
+  <nav aria-label="منوی اصلی">
+   <a href="#home">خانه</a>
    <a href="#services">خدمات</a>
-   <a href="#portfolio">نمونه‌کارها</a>
+   <a href="#portfolio">گالری</a>
    <a href="#about">درباره ما</a>
    <a href="#contact">تماس</a>
   </nav>
-  <a class="btn" href="#contact">درخواست مشاوره ↗</a>
+  <a class="btn" href="#contact">مشاوره و قیمت ↗</a>
  </div>
 </header>
 
 <main>
 <section class="hero" id="home">
- <img class="hero-bg" src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=2000&q=90" alt="فضای داخلی لوکس و نورپردازی معماری">
+ <img class="hero-bg" src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=2000&q=90" alt="دکوراسیون داخلی مدرن و نورپردازی سقف">
  <div class="container hero-inner">
-  <div class="eyebrow">اجرای تخصصی سقف کشسان</div>
-  <h1>سقف شما،<br><span>فراتر از یک پوشش ساده</span></h1>
-  <p>با طراحی درست و اجرای دقیق سقف کشسان، به فضای خود جلوه‌ای متفاوت ببخشید؛ از سقف‌های نورگذر تا طرح‌های مدرن و سفارشی.</p>
+  <div class="eyebrow">طراحی مدرن · اجرای تخصصی</div>
+  <h1>زیبایی، نور و آرامش<br><span>در سقف‌های مدرن باریسول</span></h1>
+  <p>با سقف‌های کشسان، جلوه‌ای متفاوت به خانه، محل کار و فضای تجاری خود ببخشید؛ ترکیبی از طراحی چشم‌نواز، نورپردازی و اجرای دقیق.</p>
   <div class="actions">
-   <a class="btn" href="#contact">مشاوره و استعلام قیمت ↗</a>
-   <a class="btn ghost" href="#portfolio">مشاهده ایده‌ها ↓</a>
+   <a class="btn" href="#contact">درخواست مشاوره ↗</a>
+   <a class="btn btn-outline" href="#services">کشف خدمات ↓</a>
   </div>
-  <div class="hero-note">طراحی هماهنگ با فضا · انتخاب متریال · اجرای تخصصی</div>
+  <div class="hero-note">سقف کشسان براق · مات · نورگذر · چاپی</div>
  </div>
- <div class="scroll-mark">BARISOLAN — DESIGN YOUR SPACE</div>
 </section>
 
 <section class="section light" id="services">
  <div class="container">
   <div class="section-head">
-   <div><div class="eyebrow">خدمات باریسولان</div><h2>هر سقف، یک امضای متفاوت</h2></div>
-   <p>با توجه به کاربری محیط، سبک دکوراسیون و نوع نورپردازی، گزینه مناسب فضای خود را انتخاب کنید.</p>
+   <div><div class="eyebrow">خدمات باریسولان</div><h2>سقف مناسب، امضای فضای شما</h2></div>
+   <p>با توجه به نوع فضا، سبک دکوراسیون و نیاز نوری، گزینه مناسب پروژه خود را انتخاب کنید.</p>
   </div>
   <div class="services">
    <article class="service">
-    <img loading="lazy" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=700&q=85" alt="طراحی داخلی مدرن">
-    <div class="service-info"><small>01 / GLOSS</small><h3>سقف براق</h3><p>جلوه‌ای درخشان و مدرن</p></div>
+    <img loading="lazy" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=750&q=85" alt="طراحی داخلی مدرن">
+    <div class="service-info"><small>01 / GLOSS</small><h3>سقف براق</h3><p>درخشندگی و جلوه مدرن</p></div>
    </article>
    <article class="service">
-    <img loading="lazy" src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=700&q=85" alt="فضای داخلی با نورپردازی">
-    <div class="service-info"><small>02 / LIGHT</small><h3>سقف نورگذر</h3><p>ترکیب سقف و نور</p></div>
+    <img loading="lazy" src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=750&q=85" alt="فضای داخلی با نورپردازی">
+    <div class="service-info"><small>02 / LIGHT</small><h3>سقف نورگذر</h3><p>ترکیب زیبا با نور</p></div>
    </article>
    <article class="service">
-    <img loading="lazy" src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=700&q=85" alt="فضای مینیمال">
-    <div class="service-info"><small>03 / MATTE</small><h3>سقف مات</h3><p>سادگی و هماهنگی بصری</p></div>
+    <img loading="lazy" src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=750&q=85" alt="دکوراسیون مینیمال">
+    <div class="service-info"><small>03 / MATTE</small><h3>سقف مات</h3><p>سادگی و هماهنگی</p></div>
    </article>
    <article class="service">
-    <img loading="lazy" src="https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=700&q=85" alt="ایده دکوراسیون سقف">
+    <img loading="lazy" src="https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=750&q=85" alt="ایده دکوراسیون سقف">
     <div class="service-info"><small>04 / PRINT</small><h3>سقف چاپی</h3><p>طرح متناسب با سلیقه شما</p></div>
    </article>
   </div>
@@ -234,18 +193,18 @@ font-size:11px;color:#888b7f;display:flex;justify-content:space-between;gap:12px
 
 <section class="section" id="about">
  <div class="container about-grid">
-  <img class="about-photo" loading="lazy" src="https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=1000&q=85" alt="دکوراسیون مدرن و سقف نورپردازی شده">
+  <img class="about-photo" loading="lazy" src="https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=1000&q=85" alt="دکوراسیون داخلی و نورپردازی مدرن">
   <div class="about-copy">
    <div class="eyebrow">نگاه باریسولان</div>
-   <h2>زیبایی در جزئیات است</h2>
-   <p>هر فضا ویژگی‌های خودش را دارد. انتخاب سقف مناسب باید با ابعاد محیط، طراحی داخلی، نور و نیاز واقعی پروژه هماهنگ باشد.</p>
-   <p>در باریسولان، هدف ما کمک به انتخاب آگاهانه و هماهنگی دقیق مراحل اجرای سقف کشسان است.</p>
+   <h2>جزئیاتی که فضای شما را متفاوت می‌کنند</h2>
+   <p>هر فضا ویژگی‌های خاص خود را دارد. انتخاب سقف مناسب باید با ابعاد محیط، طراحی داخلی، نورپردازی و نیاز واقعی پروژه هماهنگ باشد.</p>
+   <p>ما در اجرای سقف‌های کشسان به انتخاب آگاهانه طرح و هماهنگی دقیق مراحل کار اهمیت می‌دهیم.</p>
    <ul class="benefits">
-    <li><span>✦</span> بررسی شرایط و نیازهای پروژه</li>
+    <li><span>✦</span> بررسی نیازها و شرایط پروژه</li>
     <li><span>✦</span> راهنمایی درباره طرح و نورپردازی</li>
     <li><span>✦</span> برآورد هزینه براساس جزئیات کار</li>
    </ul>
-   <a class="btn" href="#contact">درباره پروژه‌تان صحبت کنیم ↗</a>
+   <a class="btn" href="#contact">برای پروژه‌تان مشاوره بگیرید ↗</a>
   </div>
  </div>
 </section>
@@ -253,11 +212,11 @@ font-size:11px;color:#888b7f;display:flex;justify-content:space-between;gap:12px
 <section class="section light" id="portfolio">
  <div class="container">
   <div class="section-head">
-   <div><div class="eyebrow">گالری الهام</div><h2>فضایی متفاوت تصور کنید</h2></div>
-   <p>چند ایده تصویری برای انتخاب سبک سقف و نورپردازی. این تصاویر نمونه الهام هستند و لزوماً پروژه‌های اجراشده باریسولان نیستند.</p>
+   <div><div class="eyebrow">گالری الهام</div><h2>ایده‌هایی برای سقف‌های مدرن</h2></div>
+   <p>نمونه‌هایی برای الهام گرفتن از طراحی داخلی و نورپردازی. این تصاویر لزوماً پروژه‌های اجراشده باریسولان نیستند.</p>
   </div>
   <div class="portfolio">
-   <figure><img loading="lazy" src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1000&q=85" alt="ایده دکوراسیون نشیمن"><figcaption>فضای نشیمن مدرن</figcaption></figure>
+   <figure><img loading="lazy" src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1000&q=85" alt="ایده طراحی نشیمن"><figcaption>فضای نشیمن مدرن</figcaption></figure>
    <figure><img loading="lazy" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=85" alt="ایده طراحی داخلی"><figcaption>هماهنگی سقف و دکور</figcaption></figure>
    <figure><img loading="lazy" src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=800&q=85" alt="ایده نورپردازی"><figcaption>نورپردازی معماری</figcaption></figure>
    <figure><img loading="lazy" src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=800&q=85" alt="طراحی مینیمال"><figcaption>سبک مینیمال</figcaption></figure>
@@ -269,24 +228,24 @@ font-size:11px;color:#888b7f;display:flex;justify-content:space-between;gap:12px
 <section class="section">
  <div class="container">
   <div class="section-head">
-   <div><div class="eyebrow">مراحل همکاری</div><h2>از مشاوره تا اجرا</h2></div>
-   <p>یک مسیر روشن برای بررسی نیازهای پروژه و هماهنگی اجرای کار.</p>
+   <div><div class="eyebrow">مراحل همکاری</div><h2>از ایده تا اجرای سقف</h2></div>
+   <p>مسیری روشن برای بررسی نیازهای پروژه و هماهنگی اجرای کار.</p>
   </div>
   <div class="process">
-   <article><div class="num">01</div><h3>ثبت درخواست</h3><p>نوع فضا، شهر و نیاز اولیه خود را بیان کنید.</p></article>
-   <article><div class="num">02</div><h3>بررسی و برآورد</h3><p>طرح پیشنهادی و عوامل مؤثر بر هزینه بررسی می‌شوند.</p></article>
-   <article><div class="num">03</div><h3>هماهنگی اجرا</h3><p>پس از توافق درباره جزئیات، مراحل کار هماهنگ می‌شود.</p></article>
+   <article><div class="num">01</div><h3>ثبت درخواست</h3><p>نوع فضا، شهر و نیاز اولیه خود را توضیح دهید.</p></article>
+   <article><div class="num">02</div><h3>مشاوره و بررسی</h3><p>طرح پیشنهادی و عوامل مؤثر بر هزینه بررسی می‌شوند.</p></article>
+   <article><div class="num">03</div><h3>هماهنگی اجرا</h3><p>پس از توافق درباره جزئیات، مراحل اجرا هماهنگ می‌شود.</p></article>
   </div>
  </div>
 </section>
 
 <section class="cta" id="contact">
- <div class="container cta-box">
+ <div class="container cta-grid">
   <div>
    <div class="eyebrow">پروژه بعدی شما</div>
-   <h2>بیایید سقف ایده‌آل شما را طراحی کنیم.</h2>
-   <p>اطلاعات اولیه پروژه را وارد کنید تا بتوانیم درباره نیازها و هزینه‌های احتمالی راهنمایی‌تان کنیم.</p>
-   <p>برای برآورد دقیق‌تر، ابعاد تقریبی، نوع فضا و محل پروژه اهمیت دارند.</p>
+   <h2>بیایید سقف ایده‌آل شما را بسازیم.</h2>
+   <p>اطلاعات اولیه پروژه را وارد کنید تا درباره انتخاب طرح، نوع سقف و عوامل مؤثر بر هزینه راهنمایی‌تان کنیم.</p>
+   <p>برای برآورد دقیق‌تر، ابعاد تقریبی، نوع فضا و شهر محل پروژه اهمیت دارند.</p>
   </div>
   <div>
    <form id="requestForm">
@@ -302,7 +261,7 @@ font-size:11px;color:#888b7f;display:flex;justify-content:space-between;gap:12px
     <textarea name="details" placeholder="توضیحات پروژه یا ابعاد تقریبی" aria-label="توضیحات پروژه"></textarea>
     <button class="btn" type="submit">بررسی درخواست ↗</button>
    </form>
-   <p class="note">نسخه آزمایشی: این فرم هنوز به شماره تماس، ایمیل یا سامانه ثبت درخواست متصل نیست و اطلاعات را ارسال نمی‌کند.</p>
+   <p class="note">این فرم در نسخه آزمایشی است و هنوز به سامانه ارسال درخواست متصل نیست؛ اطلاعات ارسال یا ذخیره نمی‌شود.</p>
    <p id="message" role="status" aria-live="polite"></p>
   </div>
  </div>
@@ -317,7 +276,7 @@ font-size:11px;color:#888b7f;display:flex;justify-content:space-between;gap:12px
    </div>
    <div class="footer-links">
     <a href="#home">صفحه اصلی</a><a href="#services">خدمات</a>
-    <a href="#portfolio">گالری</a><a href="#contact">درخواست مشاوره</a>
+    <a href="#portfolio">گالری</a><a href="#contact">مشاوره</a>
    </div>
   </div>
   <div class="copyright"><span>© باریسولان — تمامی حقوق محفوظ است.</span><span>طراحی با <b>BARISOLAN</b></span></div>
